@@ -49,6 +49,10 @@
             * accept incoming change: thay đỏi theo nhánh master
             * accept both: giữ lại cả 2
         + Chọn và xử lí conflict
+
+5. Khi bắt đầu làm 1 module thì tạo 1 nhánh mới để làm module đó
+6. Sau khi hoàn thành module thì create pull request với nhánh master
+
 ## Technology
 1. Html, SCSS, Typescript
 2. Framework: ReactJS
