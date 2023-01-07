@@ -44,3 +44,5 @@
 ## Technology
 1. Html, SCSS, Typescript
 2. Framework: ReactJS
+
+Sua doi boi master
