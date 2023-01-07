@@ -44,11 +44,7 @@
     - Tại nhánh xxx, muốn gộp với nhánh master thì
         + git branch kiểm tra đang ở nhánh xxx
         + git merge master
-        + Tại các đoạn code conflict thì xuất hiện các lựa chọn: 
-            > accept current change: giữ lại thay đổi ở nhánh hiện tại (nhánh xxx)
-            > accept incoming change: thay đỏi theo nhánh master
-            > accept both: giữ lại cả 2
-        + Chọn và xử lí conflict
+   ffdsafsafdafdsa
 ## Technology
 1. Html, SCSS, Typescript
 2. Framework: ReactJS
