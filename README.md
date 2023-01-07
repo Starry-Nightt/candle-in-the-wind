@@ -45,6 +45,8 @@
         + git branch kiểm tra đang ở nhánh xxx
         + git merge master
    ffdsafsafdafdsa
+
+abcxyz
 ## Technology
 1. Html, SCSS, Typescript
 2. Framework: ReactJS
