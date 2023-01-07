@@ -42,4 +42,4 @@
 
 ## Technology
 1. Html, SCSS, Typescript
-2. Framework: ReactJS, Bootstrap
+2. Framework: ReactJS, Tailwind CSS
