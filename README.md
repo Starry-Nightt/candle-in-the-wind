@@ -42,11 +42,25 @@
     - Gộp nhánh: git merge <branch_name>
     VD: 
     - Tại nhánh xxx, muốn gộp với nhánh master thì
+<<<<<<< HEAD
         + git branch kiểm tra đang ở nhánh xxx
         + git merge master
    ffdsafsafdafdsa
 
 abcxyz
+=======
+        + Chuyển sang nhánh master và pull về
+        + Chuyển sang nhánh xxx, git merge master
+        + Tại các đoạn code conflict thì xuất hiện các lựa chọn: 
+            * accept current change: giữ lại thay đổi ở nhánh hiện tại (nhánh xxx)
+            * accept incoming change: thay đỏi theo nhánh master
+            * accept both: giữ lại cả 2
+        + Chọn và xử lí conflict
+
+5. Khi bắt đầu làm 1 module thì tạo 1 nhánh mới để làm module đó
+6. Sau khi hoàn thành module thì create pull request với nhánh master
+
+>>>>>>> master
 ## Technology
 1. Html, SCSS, Typescript
 2. Framework: ReactJS
