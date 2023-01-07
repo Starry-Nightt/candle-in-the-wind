@@ -20,6 +20,7 @@
     - Đặt tên có nghĩa, tên biến là danh từ, tên hàm bắt đầu bằng động từ
     - Viết 1 hàm không nên quá dài, mỗi hàm chỉ làm một nhiệm vụ
     - Viết 1 components không nên quá dài, mỗi components đảm nhiệm 1 vai trò
+
 ## Git Instruction
 1. Push code (đẩy code lên)
     B1: Check branch 
@@ -36,8 +37,9 @@
     - Đổi branch: git checkout <branch_name>
     - Tạo branch: git checkout -b <branch_name>
     - Xóa branch: git branch -d <branch_name>
+
 4. Merge 
 
 ## Technology
 1. Html, SCSS, Typescript
-2. Framework: ReactJS
+2. Framework: ReactJS, Tailwind CSS
