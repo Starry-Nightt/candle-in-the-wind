@@ -5,10 +5,10 @@
 2. layout: chứa template của trang web: header, footer, main-layout, ...
 3. modules: chứa các trang, tính năng hiển thị ở main-layout
 4. shared: chứa các thành phần dùng chung cho toàn bộ app
-    > shared/components: chứa các components dùng chung
-    > shared/models: chứa các kiểu dữ liệu (entity)
-    > shared/services: chứa các services dùng để gọi API
-    > shared/utils: chứa các hàm dùng chung
+    - shared/components: chứa các components dùng chung
+    - shared/models: chứa các kiểu dữ liệu (entity)
+    - shared/services: chứa các services dùng để gọi API
+    - shared/utils: chứa các hàm dùng chung
     ...
 
 ## Code convention
