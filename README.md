@@ -37,6 +37,7 @@
     - Tạo branch: git checkout -b <branch_name>
     - Xóa branch: git branch -d <branch_name>
 4. Merge 
+    - Gộp nhánh: git merge <branch_name>
 
 ## Technology
 1. Html, SCSS, Typescript
