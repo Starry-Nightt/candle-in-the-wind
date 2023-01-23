@@ -54,5 +54,5 @@
 6. Sau khi hoàn thành module thì create pull request với nhánh master
 
 ## Technology
-1. Html, SCSS, Typescript
+1. Html, SCSS, Javascript
 2. Framework: ReactJS
