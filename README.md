@@ -50,8 +50,8 @@
             * accept both: giữ lại cả 2
         + Chọn và xử lí conflict
 
-5. Khi bắt đầu làm 1 module thì tạo 1 nhánh mới để làm module đó
-6. Sau khi hoàn thành module thì create pull request với nhánh master
+5. Khi bắt đầu làm 1 module thì tạo 1 nhánh mới để làm module đó: tên nhánh develop_<module_name> (VD: develop_home_page)
+6. Sau khi hoàn thành module thì create pull request với nhánh develop
 
 ## Technology
 1. Html, SCSS, Javascript
