@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "paths": {
+        "~/*": ["src/*"],
+        "@components": ["src/shared/components"],
+        "@components/*": ["src/shared/components/*"],
+        "@models": ["src/shared/models"],
+        "@models/*": ["src/shared/models/*"],
+        "@services": ["src/shared/services"],
+        "@services/*": ["src/shared/services/*"],
+        "@utils": ["src/shared/utils"],
+        "@utils/*": ["src/shared/utils/*"],
+        "@constants": ["src/shared/constants"],
+        "@constants/*": ["src/shared/constants/*"]
+      }
+    }
+  }
