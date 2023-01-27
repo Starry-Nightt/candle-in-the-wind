@@ -1,3 +1,5 @@
+@import 'variables.scss';
+
 * {
   margin: 0;
   padding: 0;
@@ -52,5 +54,167 @@ code {
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+// Color
+.bg-primary {
+  background-color: $primary-color;
+}
+
+.bg-secondary {
+  background-color: $secondary-color;
+}
+
+.bg-neutral {
+  background-color: $neutral-color;
+}
+
+.bg-success {
+  background-color: $success-color;
+}
+
+.bg-warn {
+  background-color: $warn-color;
+}
+
+.bg-info {
+  background-color: $info-color;
+}
+
+.bg-error {
+  background-color: $error-color;
+}
+
+.bg-white {
+  background-color: $white-color;
+}
+
+.bg-dim {
+  background-color: $dim-color;
+}
+
+.text-primary {
+  color: $primary-color;
+}
+
+.text-white {
+  color: $white-color;
+}
+
+.text-dim {
+  color: $dim-color;
+}
+
+.text-success {
+  color: $success-color;
+}
+
+.text-warn {
+  color: $warn-color;
+}
+
+.text-error {
+  color: $error-color;
+}
+
+.text-info {
+  color: $info-color;
+}
+
+.flex {
+  display: flex !important;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.space-between {
+  justify-content: space-between;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.text-xs {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+.text-sm {
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.text-base {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.text-lg {
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.text-xl {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.text-start {
+  text-align: start;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-end {
+  text-align: end;
+}
+
+.button {
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.button.primary-button {
+  background-color: $primary-color;
+  color: $white-color;
+
+  &:hover {
+    filter: brightness(0.9);
+  }
+}
+
+.button.flat-button {
+  background-color: $white-color;
+  color: $primary-color;
+
+  &:hover {
+    opacity: 0.9;
   }
 }
