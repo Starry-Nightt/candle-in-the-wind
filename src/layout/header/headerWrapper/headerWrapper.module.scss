@@ -1,0 +1,14 @@
+@import '../../../styles/variables.scss';
+
+.logo {
+    font-weight: 500;
+    font-size: 36px;
+    color: $primary-color;
+    margin-bottom: 12px;
+}
+
+
+.wrapper {
+    background-color: $white-color;
+    padding-top: 20px;
+}
