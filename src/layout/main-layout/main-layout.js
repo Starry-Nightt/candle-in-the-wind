@@ -1,10 +1,10 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { publicRoutes } from '~/Routes/routes';
+import { publicRoutes } from '~/routes/routes';
 
 function MainLayout() {
   return (
-    <div className="grid wide" style={{ padding: '32px 0' }}>
+    <div className="grid wide py-8">
       <Routes>
         <Route path="/" element={<Navigate to="home" />}></Route>
         {publicRoutes.map((route, idx) => {

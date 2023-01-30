@@ -4,7 +4,7 @@ import style from './ads.module.scss';
 function Ads() {
   const adsText = 'Đăng ký trở thành khách hàng thân thiết để nhận nhiều ưu đãi';
   return (
-    <section className={`${style.ads}`}>
+    <section className={`bg-light-primary py-2`}>
       <div className="grid wide text-center text-primary text-sm">
         <p>{adsText}</p>
       </div>

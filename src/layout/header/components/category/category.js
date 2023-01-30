@@ -28,7 +28,7 @@ function Category() {
 
   return (
     <div className="row">
-      <ul className="col l-o-2 flex">
+      <ul className="col l-o-2 l-10 m-o-2 m-10 c-12 flex flex-wrap py-1">
         {category &&
           category.length > 0 &&
           category.map((item, index) => {

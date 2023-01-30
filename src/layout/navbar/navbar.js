@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import avatar from '~/assets/images/avatar-default.jpg';
 import style from './navbar.module.scss';
+import User from './components/user/user';
 
 function Navbar() {
   const navLinks = [
@@ -16,6 +17,11 @@ function Navbar() {
   ];
   const [loggedIn, setLoggedIn] = useState(false);
   const [fixed, setFixed] = useState(false);
+
+  const user = {
+    username: 'Dang Minh Tien',
+    avatar,
+  };
 
   const handleLogin = () => {
     setLoggedIn(true);
@@ -37,33 +43,27 @@ function Navbar() {
   }, []);
 
   return (
-    <section
-      className={`bg-primary text-white text-sm ${style.navbar} ${fixed ? `${style.fixed}` : ''}`}
-    >
+    <section className={`${style.navbar} ${fixed ? `${style.fixed}` : ''}`}>
       <div className="grid wide flex space-between align-center">
-        <ul className={`${style.navbarLeft}`}>
+        <ul className={`${style.navbarLinks}`}>
           {navLinks &&
             navLinks.length > 0 &&
             navLinks.map((item, index) => {
               return (
-                <li key={item.index}>
+                <li key={index}>
                   <Link to={item.path}>{item.viewValue}</Link>
                 </li>
               );
             })}
         </ul>
-
-        <div className={`${style.navbarRight}`}>
+        <div className={`${style.navbarAuth}`}>
           {loggedIn ? (
-            <div className="flex align-center">
-              <div className={`${style.avatar}`}>
-                <img src={avatar}></img>
-              </div>
-              <p className={`${style.username}`}>Dang Minh Tien</p>
+            <>
+              <User user={user} />
               <button className="button flat-button" onClick={() => handleLogout()}>
                 Đăng xuất
               </button>
-            </div>
+            </>
           ) : (
             <>
               <button className="button primary-button" onClick={() => handleLogin()}>
