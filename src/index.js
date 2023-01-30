@@ -1,6 +1,7 @@
 import React from 'react';
 import './styles/global.scss';
 import './styles/grid.scss';
+import './styles/customize.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createRoot } from 'react-dom/client';
