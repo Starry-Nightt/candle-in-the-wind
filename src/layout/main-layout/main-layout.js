@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { publicRoutes } from '~/routes/routes';
+import publicRoutes from '~/routes/publicRoutes';
 
 function MainLayout() {
   return (
