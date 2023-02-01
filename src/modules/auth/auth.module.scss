@@ -1,0 +1,49 @@
+@import '../../styles/variables.scss';
+
+.tab {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    color: $dim-color;
+    background-color: $neutral-color;
+    
+    span {
+        font-size: 20px;
+        font-weight: 700;
+        position: relative;
+    }
+
+    &.active {
+        color: $black-color;
+        background-color: $white-color;
+        span::after {
+            content: '';
+            position: absolute;
+            height: 4px;
+            background-color: red;
+            top: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20%;
+            border-radius: 10px;
+
+        }
+    }
+}
+
+.form{
+    padding: 20px;
+    text-align: start;
+    .alert {
+        line-height: 1.4;
+        margin-top: 20px;
+        cursor: default;
+        span {
+            cursor: pointer;
+            color: $secondary-color;
+        }
+    }
+}

@@ -5,17 +5,23 @@ import { closeModal } from '~/redux/modal/modal.action';
 import style from './modal.module.scss';
 
 function Modal(props) {
-  const { children } = props;
+  const { component } = props;
   const { closeModal } = props;
   return (
     <div className={`${style.modal}`}>
       <button className={`${style.closeButton}`} onClick={() => closeModal()}>
         <i className="fa-solid fa-xmark"></i>
       </button>
-      {children}
+      {component}
     </div>
   );
 }
+
+const mapStateToProps = (state) => {
+  return {
+    component: state.modal.component,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -26,4 +32,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(Modal);
+export default connect(mapStateToProps, mapDispatchToProps)(Modal);

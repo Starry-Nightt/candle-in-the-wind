@@ -47,12 +47,12 @@
 4. Merge 
     - Gộp nhánh: git merge <branch_name>
     VD: 
-    - Tại nhánh xxx, muốn gộp với nhánh master thì
-        + Chuyển sang nhánh master và pull về
-        + Chuyển sang nhánh xxx, git merge master
+    - Tại nhánh xxx, muốn gộp với nhánh develop thì
+        + Chuyển sang nhánh develop và pull về
+        + Chuyển sang nhánh xxx, git merge develop
         + Tại các đoạn code conflict thì xuất hiện các lựa chọn: 
             * accept current change: giữ lại thay đổi ở nhánh hiện tại (nhánh xxx)
-            * accept incoming change: thay đỏi theo nhánh master
+            * accept incoming change: thay đỏi theo nhánh develop
             * accept both: giữ lại cả 2
         + Chọn và xử lí conflict
 
