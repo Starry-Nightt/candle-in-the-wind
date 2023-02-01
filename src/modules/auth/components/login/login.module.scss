@@ -2,6 +2,14 @@
 
 .form {
     padding: 20px 0;
+
+    .alert {
+        color: $error-color;
+        margin-top: 8px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+    
     .formGroup {
         margin: 20px 0;
         
@@ -20,7 +28,7 @@
         }
     }
     
-    .formSubmitButton {
+    .submitButton {
         width: 100%;
         padding: 16px;
         text-align: center;
@@ -31,5 +39,11 @@
         color: $white-color;
         margin-top: 20px;
         cursor: pointer;
+
+        &:disabled {
+            cursor: default;
+            filter: grayscale(0.5);
+            opacity: 0.5;
+        }
     }
 }

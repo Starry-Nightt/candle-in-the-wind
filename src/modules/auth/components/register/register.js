@@ -1,58 +1,63 @@
-import React, { useState } from 'react';
+import React from 'react';
 import style from './register.module.scss';
+import { useForm } from 'react-hook-form';
+import Input from '@components/input/input';
+import { requiredField, minLengthField, maxLengthField } from '@utils/validator';
 
 function Register() {
-  const [detail, setDetail] = useState({
-    username: '',
-    password: '',
-    confirmPassword: '',
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      username: '',
+      password: '',
+      confirmPassword: '',
+    },
   });
-  const onChangeUsernameField = (e) => {
-    setDetail({
-      ...detail,
-      username: e.target.value,
-    });
+
+  const onRegister = (data) => {
+    console.log(data);
   };
-  const onChangePasswordField = (e) => {
-    setDetail({
-      ...detail,
-      password: e.target.value,
-    });
-  };
-  const onChangeConfirmPasswordField = (e) => {
-    setDetail({
-      ...detail,
-      confirmPassword: e.target.value,
-    });
-  };
+
   return (
-    <form className={`${style.form}`} onSubmit={(e) => {}}>
+    <form className={`${style.form}`} onSubmit={handleSubmit((data) => onRegister(data))}>
       <h4>Đăng ký để Shop có cơ hội phục vụ bạn tốt hơn.</h4>
       <div className={`${style.formGroup}`}>
-        <input
-          type="text"
+        <Input
+          formControl="username"
           placeholder="Tên tài khoản"
-          value={detail.username}
-          onChange={(e) => onChangeUsernameField(e)}
+          register={register}
+          required={requiredField()}
+          minLength={minLengthField(6)}
+          maxLength={maxLengthField(15)}
+          error={errors.username}
         />
       </div>
       <div className={`${style.formGroup}`}>
-        <input
-          type="password"
+        <Input
+          formControl="password"
           placeholder="Mật khẩu"
-          value={detail.password}
-          onChange={(e) => onChangePasswordField(e)}
+          type="password"
+          register={register}
+          required={requiredField()}
+          minLength={minLengthField(6)}
+          error={errors.password}
         />
       </div>
       <div className={`${style.formGroup}`}>
-        <input
-          type="password"
+        <Input
+          formControl="confirmPassword"
           placeholder="Nhập lại mật khẩu"
-          value={detail.confirmPassword}
-          onChange={(e) => onChangeConfirmPasswordField(e)}
+          type="password"
+          register={register}
+          required={requiredField()}
+          minLength={minLengthField(6)}
+          error={errors.password}
         />
       </div>
-      <button type="submit" className={`${style.formSubmitButton}`}>
+      <button type="submit" className={`${style.submitButton}`}>
         Đăng ký
       </button>
     </form>

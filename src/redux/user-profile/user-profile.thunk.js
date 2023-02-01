@@ -17,7 +17,7 @@ const loginAccount = (authInfo) => {
         localStorage.setItem(tokenKey, res.data?.token);
         dispatch(fetchUserProfileSuccess(res.data));
       })
-      .catch((error) => dispatch(fetchUserProfileFailure(error.data)));
+      .catch((error) => dispatch(fetchUserProfileFailure(error.response?.data?.message)));
   };
 };
 

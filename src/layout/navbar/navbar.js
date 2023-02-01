@@ -24,9 +24,7 @@ function Navbar(props) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [fixed, setFixed] = useState(false);
   const dispatch = useDispatch();
-  const { user, openModal, isLoggedIn } = props;
-
-  console.log('Logged in: ', isLoggedIn);
+  const { user, openModal } = props;
 
   const handleLogout = () => {
     dispatch(logout());
