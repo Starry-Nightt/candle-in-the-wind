@@ -1,6 +1,6 @@
-import Home from '~/modules/home/home';
+import Home from '~/modules/Home/home';
 import NotFound from '~/modules/not-found/not-found';
-import Products from '~/modules/products/products';
+import Products from '~/modules/Products/products';
 
 const publicRoutes = [
   {
