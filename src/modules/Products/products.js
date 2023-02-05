@@ -34,10 +34,10 @@ function Products() {
         <div className={cx('product')}>
           {loading && <Spinner />}
           {error && <h3>Error</h3>}
+          {/* jsonserver tra ve  */}
           {product &&
-            product.products &&
-            product.products.length > 0 &&
-            product.products.map((item, index) =>
+            product.length > 0 &&
+            product.map((item, index) =>
               index < currentPage * 15 && index >= (currentPage - 1) * 15 ? (
                 <ProductItem key={item.id} data={item} />
               ) : null,

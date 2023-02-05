@@ -5,7 +5,9 @@ const loadProduct = () => {
   return function (dispatch) {
     dispatch(fetchProductRequest());
     ProductService.getAllProduct()
-      .then((response) => dispatch(fetchProductSuccess(response.data)))
+      .then((response) => {
+        dispatch(fetchProductSuccess(response.data));
+      })
       .catch((error) => dispatch(fetchProductFailure(error.data)));
   };
 };
