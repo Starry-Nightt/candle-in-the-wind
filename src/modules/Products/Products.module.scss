@@ -8,3 +8,8 @@
   flex: 1;
   margin: 0 -5px;
 }
+
+.page {
+  width: calc(100% * 5 / 6);
+  margin-left: calc(100% / 6);
+}
