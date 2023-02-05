@@ -1,3 +1,5 @@
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { connect } from 'react-redux';
 import { hideLayer } from '~/redux/layer/layer.action';
@@ -5,12 +7,11 @@ import { closeModal } from '~/redux/modal/modal.action';
 import style from './modal.module.scss';
 
 function Modal(props) {
-  const { component } = props;
-  const { closeModal } = props;
+  const { component, closeModal } = props;
   return (
     <div className={`${style.modal}`}>
       <button className={`${style.closeButton}`} onClick={() => closeModal()}>
-        <i className="fa-solid fa-xmark"></i>
+        <FontAwesomeIcon icon={faXmark} />
       </button>
       {component}
     </div>

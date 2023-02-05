@@ -4,7 +4,7 @@ import publicRoutes from '~/Routes/publicRoutes';
 
 function MainLayout() {
   return (
-    <div className="grid wide py-8">
+    <div className="grid wide py-8 ">
       <Routes>
         <Route path="/" element={<Navigate to="home" />}></Route>
         {publicRoutes.map((route, index) => {

@@ -95,7 +95,6 @@ function Navbar(props) {
 const mapStateToProps = (state) => {
   return {
     user: state.userProfile.user,
-    isLoggedIn: state.userProfile.isLoggedIn,
   };
 };
 

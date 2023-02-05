@@ -4,6 +4,10 @@ import { NavLink } from 'react-router-dom';
 
 export const categoryList = [
     {
+        path: 'allproducts',
+        viewValue: 'Tất cả',
+    },
+    {
         path: 'products',
         viewValue: 'Tinh dầu',
     },
