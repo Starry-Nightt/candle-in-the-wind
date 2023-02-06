@@ -44,10 +44,10 @@ function Login() {
       setErrorMsg('');
       return;
     }
-    const status = error?.response.status;
+    const status = error?.response?.status;
     if (status === 429) setErrorMsg('No server response');
     else if (status === 400) setErrorMsg('Tài khoản hoặc mật khẩu không đúng');
-    else setErrorMsg('Tài khoản không hợp lệ');
+    else setErrorMsg('Vui lòng kiểm tra kết nối internet');
   }, [error]);
 
   return (

@@ -1,24 +1,39 @@
 @import '../../../../styles/variables.scss';
 
 .navLink {
-    padding: 8px 20px;
+    padding: 12px 20px;
     position: relative;
+    min-width: 120px;
+    
     
     a {
         color: $primary-color;
+        font-weight: 500;
 
-        &.active {
-            font-weight: 500;
+        &::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            height: 3px;
+            width: 100%;
+            background-color: $primary-color;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: 0.3s ease;
+            border-radius: 8px;
+        }
+        &:hover {
             &::after {
-                content: '';
-                position: absolute;
-                left: 50%;
-                bottom: 0;
-                height: 3px;
-                width: 80%;
-                background-color: $secondary-color;
-                transform: translateX(-50%);
+                opacity: 1;
             }
         }
+
+        // &.active {
+            
+        //      &::after {
+        //         opacity: 1;
+        //      }
+        // }
     }
 }
