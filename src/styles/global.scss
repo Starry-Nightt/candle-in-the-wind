@@ -135,6 +135,22 @@ a {
   color: $info-color;
 }
 
+.font-bold {
+  font-weight: 700;
+}
+
+.font-semibold {
+  font-weight: 600;
+}
+
+.font-normal {
+  font-weight: 500;
+}
+
+.letter-spacing {
+  letter-spacing: 0.02em;
+}
+
 // Flex box
 .flex {
   display: flex !important;
@@ -436,6 +452,9 @@ a {
   margin-right: 40px !important;
 }
 
+.invisible {
+  visibility: hidden;
+}
 
 
 

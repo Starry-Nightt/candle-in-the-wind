@@ -10,14 +10,14 @@ const tokenKey = 'token';
 
 const loginAccount = (authInfo) => {
   return function (dispatch) {
-    dispatch(fetchUserProfileRequest);
+    dispatch(fetchUserProfileRequest());
     userService
       .login(authInfo)
       .then((res) => {
         localStorage.setItem(tokenKey, res.data?.token);
         dispatch(fetchUserProfileSuccess(res.data));
       })
-      .catch((error) => dispatch(fetchUserProfileFailure(error.response?.data?.message)));
+      .catch((error) => dispatch(fetchUserProfileFailure(error)));
   };
 };
 

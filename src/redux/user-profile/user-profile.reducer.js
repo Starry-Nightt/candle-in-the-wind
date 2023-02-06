@@ -10,6 +10,7 @@ const initialState = {
   user: null,
   error: '',
   isLoggedIn: false,
+  role: null,
 };
 
 const userProfileReducer = (state = initialState, action) => {
