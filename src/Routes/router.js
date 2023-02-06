@@ -5,7 +5,7 @@ import RequireAuth from '~/modules/auth/components/require-auth/require-auth';
 import publicRoutes from '~/routes/publicRoutes';
 import userRoutes from '~/routes/userRoutes';
 
-function RoutesBrowser() {
+function Router() {
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>
@@ -26,4 +26,4 @@ function RoutesBrowser() {
   );
 }
 
-export default RoutesBrowser;
+export default Router;

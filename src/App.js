@@ -3,14 +3,14 @@ import Header from './layout/header/header';
 import Layer from './modules/layer/layer';
 import { Provider } from 'react-redux';
 import store from './redux/store';
-import RoutesBrowser from './routes/routes-browser';
+import Router from './routes/router';
 
 function App() {
   return (
     <Provider store={store}>
       <div className="App">
         <Header />
-        <RoutesBrowser />
+        <Router />
         <Footer />
         <Layer />
       </div>
