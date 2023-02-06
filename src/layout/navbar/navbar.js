@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import avatar from '~/assets/images/avatar-default.jpg';
 import style from './navbar.module.scss';
 import User from './components/user/user';
 import { showLayer } from '~/redux/layer/layer.action';
-import Auth from '~/modules/auth/auth';
 import Modal from '~/modules/modal/modal';
 import { connect, useDispatch } from 'react-redux';
 import { openModal } from '~/redux/modal/modal.action';
@@ -24,18 +23,19 @@ function Navbar(props) {
   const [loggedIn, setLoggedIn] = useState(false);
   const [fixed, setFixed] = useState(false);
   const dispatch = useDispatch();
-  const { user, openModal } = props;
+  const { user } = props;
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     dispatch(logout());
   };
 
   const onLogin = () => {
-    openModal(<Auth />);
+    navigate('/login');
   };
 
   const onRegister = () => {
-    openModal(<Auth />);
+    navigate('/register');
   };
 
   useEffect(() => {
