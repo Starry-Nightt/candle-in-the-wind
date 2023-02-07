@@ -15,6 +15,8 @@ function Home() {
         >
           Learn React
         </a>
+
+        <br></br>
       </div>
     </>
   );
