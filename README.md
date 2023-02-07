@@ -10,6 +10,9 @@
     - shared/services: chứa các services dùng để gọi API
     - shared/utils: chứa các hàm dùng chung
     ...
+5. redux: Thư mục quản lí state và action của các module
+6. routes: Thư mục chứa các routes của trang web
+7. styles: Thư mục chứa các file customize css
 
 ## Code convention
 1. Đặt tên
@@ -20,6 +23,9 @@
     - Đặt tên có nghĩa, tên biến là danh từ, tên hàm bắt đầu bằng động từ
     - Viết 1 hàm không nên quá dài, mỗi hàm chỉ làm một nhiệm vụ
     - Viết 1 components không nên quá dài, mỗi components đảm nhiệm 1 vai trò
+
+## API 
+- Tạm thời sử dụng API bên dummyjson để xây dựng trang web trong lúc chờ bên backend hoàn thành
 
 ## Git Instruction
 1. Push code (đẩy code lên)
@@ -41,12 +47,12 @@
 4. Merge 
     - Gộp nhánh: git merge <branch_name>
     VD: 
-    - Tại nhánh xxx, muốn gộp với nhánh master thì
-        + Chuyển sang nhánh master và pull về
-        + Chuyển sang nhánh xxx, git merge master
+    - Tại nhánh xxx, muốn gộp với nhánh develop thì
+        + Chuyển sang nhánh develop và pull về
+        + Chuyển sang nhánh xxx, git merge develop
         + Tại các đoạn code conflict thì xuất hiện các lựa chọn: 
             * accept current change: giữ lại thay đổi ở nhánh hiện tại (nhánh xxx)
-            * accept incoming change: thay đỏi theo nhánh master
+            * accept incoming change: thay đỏi theo nhánh develop
             * accept both: giữ lại cả 2
         + Chọn và xử lí conflict
 
@@ -56,3 +62,4 @@
 ## Technology
 1. Html, SCSS, Javascript
 2. Framework: ReactJS
+3. Library: Redux

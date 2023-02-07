@@ -1,7 +1,11 @@
 @import '../../styles/variables.scss';
 
 .navbar {
-  .navbarLeft {
+  background-color: $primary-color;
+  color: $white-color;
+  font-size: 14px;
+
+  .navbarLinks {
     display: flex;
     padding: 5px 0;
 
@@ -31,9 +35,10 @@
     }
   }
 
-  .navbarRight {
+  .navbarAuth {
     display: flex;
     padding: 5px 0;
+    align-items: center;
     button {
       margin-left: 8px;
     }
