@@ -8,9 +8,7 @@ const override = {
   borderColor: 'red',
 };
 
-function Spinner({ loading }) {
-  const color = '#015394';
-
+function Spinner({ loading, size, color = 'white' }) {
   return (
     <>
       <div className={`${style.spinnerContainer}`}>
@@ -18,7 +16,7 @@ function Spinner({ loading }) {
           color={color}
           loading={loading}
           cssOverride={override}
-          size={8}
+          size={size}
           aria-label="Loading Spinner"
           data-testid="loader"
         />

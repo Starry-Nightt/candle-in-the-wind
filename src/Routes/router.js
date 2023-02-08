@@ -2,8 +2,8 @@ import React from 'react';
 import MainLayout from '~/layout/main-layout/main-layout';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import RequireAuth from '~/modules/auth/components/require-auth/require-auth';
-import publicRoutes from '~/routes/publicRoutes';
-import userRoutes from '~/routes/userRoutes';
+import publicRoutes from '~/Routes/publicRoutes';
+import userRoutes from '~/Routes/userRoutes';
 
 function Router() {
   return (
@@ -17,7 +17,6 @@ function Router() {
         <Route element={<RequireAuth />}>
           {userRoutes.map((route, idx) => {
             const Page = route.component;
-
             return <Route key={idx} path={route.path} element={<Page />}></Route>;
           })}
         </Route>

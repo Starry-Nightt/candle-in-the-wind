@@ -3,10 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import avatar from '~/assets/images/avatar-default.jpg';
 import style from './navbar.module.scss';
 import User from './components/user/user';
-import { showLayer } from '~/redux/layer/layer.action';
-import Modal from '~/shared/components/modal/modal';
 import { connect, useDispatch } from 'react-redux';
-import { openModal } from '~/redux/modal/modal.action';
 import { logout } from '~/redux/user-profile/user-profile.thunk';
 
 function Navbar(props) {
@@ -99,13 +96,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    openModal: (component) => {
-      dispatch(showLayer(<Modal />));
-      dispatch(openModal(component));
-    },
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Navbar);
+export default connect(mapStateToProps, null)(Navbar);
