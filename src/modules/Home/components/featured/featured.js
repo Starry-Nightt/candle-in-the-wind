@@ -1,38 +1,54 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper';
 import './featured-swiper.scss';
 import 'swiper/css';
 import 'swiper/css/navigation';
+import appClient from '~/shared/utils/appClient';
 function Featured() {
+  const [featuredList, setFeaturedList] = useState([]);
+  useEffect(() => {
+    appClient()
+      .get('products?limit=16&select=title,price,thumbnail')
+      .then((res) => {
+        setFeaturedList(res.data.products);
+      });
+  }, []);
+
   return (
     <section id="featured">
       <h2 className="section-title">Hot Sale</h2>
       <div>
         <Swiper
           slidesPerView={3}
-          slidesPerGroup={3}
-          loopFillGroupWithBlank={true}
+          slidesPerGroup={2}
+          loopfillgroupwithblank="true"
           spaceBetween={30}
           pagination={{
             clickable: true,
           }}
           autoplay={{
-            delay: 4000,
+            delay: 5000,
             disableOnInteraction: false,
           }}
           navigation={true}
           modules={[Navigation, Autoplay]}
         >
-          <SwiperSlide>Slide 1</SwiperSlide>
-          <SwiperSlide>Slide 2</SwiperSlide>
-          <SwiperSlide>Slide 3</SwiperSlide>
-          <SwiperSlide>Slide 4</SwiperSlide>
-          <SwiperSlide>Slide 5</SwiperSlide>
-          <SwiperSlide>Slide 6</SwiperSlide>
-          <SwiperSlide>Slide 7</SwiperSlide>
-          <SwiperSlide>Slide 8</SwiperSlide>
-          <SwiperSlide>Slide 9</SwiperSlide>
+          {featuredList.map((item) => {
+            return (
+              <SwiperSlide key={item.id}>
+                <article className="item">
+                  <div className="item-thumbnail">
+                    <img className="item-image" src={item.thumbnail} alt="image" />
+                    <span className="item-price">{`FLASH SALE: ${item.price}.000 VNĐ`}</span>
+                  </div>
+                  <div className="item-body">
+                    <h6 className="item-name">{item.title}</h6>
+                  </div>
+                </article>
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
       </div>
     </section>

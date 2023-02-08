@@ -2,21 +2,15 @@
 #featured {
   .swiper {
     width: 100%;
-    height: 300px;
 
     .swiper-slide {
       background-position: center;
       background-size: cover;
-      background-color: $secondary-color;
-      display: flex;
-      justify-content: center;
-      align-items: center;
     }
 
     .swiper-button-prev,
     .swiper-button-next {
       color: $white-color;
-      background-color: rgba(0, 0, 0, 0.3);
       transition: 0.3s ease;
 
       &:hover {
@@ -25,6 +19,51 @@
 
       &::after {
         font-size: 16px;
+      }
+    }
+  }
+
+  .item {
+    border-radius: 10px;
+    height: 320px;
+    overflow: hidden;
+    border: 1px solid $dim-color;
+    .item-thumbnail {
+      height: 80%;
+      position: relative;
+      user-select: none;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 4px;
+      }
+
+      .item-price {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding: 12px 20px;
+        background-color: rgba(0, 0, 0, 0.35);
+        text-align: center;
+        color: $white-color;
+        font-size: 12px;
+        font-weight: 500;
+      }
+    }
+
+    .item-body {
+      height: 20%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .item-name {
+        text-align: center;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 1.5;
+        text-transform: capitalize;
       }
     }
   }
