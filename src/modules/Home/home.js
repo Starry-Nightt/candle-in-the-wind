@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from '~/assets/svg/logo.svg';
+import products from '../Products/products'; //temmp link
 
 function Home() {
   return (
@@ -17,6 +18,9 @@ function Home() {
         </a>
 
         <br></br>
+
+        <a href={`/products/${products.id}`}>🥸</a>    
+
       </div>
     </>
   );

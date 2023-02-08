@@ -3,6 +3,7 @@ import Register from '~/modules/auth/components/register/register';
 import Home from '~/modules/Home/home';
 import NotFound from '~/modules/not-found/not-found';
 import Products from '~/modules/Products/products';
+import DetailProduct from '~/modules/DetailProduct/DetailProduct';
 
 const publicRoutes = [
   {
@@ -16,6 +17,10 @@ const publicRoutes = [
   {
     path: '/products',
     component: Products,
+  },
+  {
+    path: '/products/:productId',
+    component: DetailProduct,
   },
   {
     path: '/login',
