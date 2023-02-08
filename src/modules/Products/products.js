@@ -11,6 +11,7 @@ function Products() {
     dispatch(loadProduct());
   }, []);
 
+  
   return (
     <>
       <div>
