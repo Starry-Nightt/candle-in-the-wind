@@ -24,7 +24,7 @@ const loginAccount = (authInfo) => {
 const logout = () => {
   return function (dispatch) {
     dispatch(endSession());
-    // localStorage.removeItem(TOKEN);
+    localStorage.removeItem(TOKEN);
   };
 };
 
