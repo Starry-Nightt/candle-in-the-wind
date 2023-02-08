@@ -3,7 +3,7 @@ import Header from './layout/header/header';
 import Layer from './shared/components/layer/layer';
 import { Provider } from 'react-redux';
 import store from './redux/store';
-import Router from './routes/router';
+import Router from './Routes/router';
 
 function App() {
   return (

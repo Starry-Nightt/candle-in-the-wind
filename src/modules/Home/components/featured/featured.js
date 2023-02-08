@@ -20,8 +20,16 @@ function Featured() {
       <h2 className="section-title">Hot Sale</h2>
       <div>
         <Swiper
-          slidesPerView={3}
-          slidesPerGroup={2}
+          slidesPerView={1}
+          slidesPerGroup={1}
+          breakpoints={{
+            740: {
+              slidesPerView: 2,
+            },
+            1024: {
+              slidesPerView: 3,
+            },
+          }}
           loopfillgroupwithblank="true"
           spaceBetween={30}
           pagination={{
@@ -39,7 +47,7 @@ function Featured() {
               <SwiperSlide key={item.id}>
                 <article className="item">
                   <div className="item-thumbnail">
-                    <img className="item-image" src={item.thumbnail} alt="image" />
+                    <img className="item-image" src={item.thumbnail} alt="" />
                     <span className="item-price">{`FLASH SALE: ${item.price}.000 VNĐ`}</span>
                   </div>
                   <div className="item-body">
