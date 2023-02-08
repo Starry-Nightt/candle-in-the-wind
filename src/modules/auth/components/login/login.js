@@ -6,12 +6,11 @@ import { loginAccount } from '~/redux/user-profile/user-profile.thunk';
 import { requiredField, minLengthField, maxLengthField } from '@utils/validator';
 import Input from '@components/input/input';
 import style from './login.module.scss';
-import Spinner from '@components/spinner/spinner';
 import AuthWrapper from '../auth-wrapper/auth-wrapper';
 
 function Login() {
   const userProfile = useSelector((state) => state.userProfile);
-  const { isLoggedIn, error, loading } = userProfile;
+  const { isLoggedIn, error } = userProfile;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -53,7 +52,6 @@ function Login() {
   return (
     <AuthWrapper>
       <form className={`${style.form}`} onSubmit={handleSubmit((data) => login(data))}>
-        {loading && <Spinner loading={loading} />}
         <h4>Cảm ơn bạn đã trở lại</h4>
         {errorMsg && errorMsg.length && <p className={`${style.alert}`}>{errorMsg}</p>}
         <div className={`${style.formGroup}`}>
