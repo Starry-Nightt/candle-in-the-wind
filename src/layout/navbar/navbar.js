@@ -4,7 +4,7 @@ import avatar from '~/assets/images/avatar-default.jpg';
 import style from './navbar.module.scss';
 import User from './components/user/user';
 import { showLayer } from '~/redux/layer/layer.action';
-import Modal from '~/modules/modal/modal';
+import Modal from '~/shared/components/modal/modal';
 import { connect, useDispatch } from 'react-redux';
 import { openModal } from '~/redux/modal/modal.action';
 import { logout } from '~/redux/user-profile/user-profile.thunk';
