@@ -1,3 +1,5 @@
+import { TOKEN } from '~/shared/constants';
+
 const { default: userService } = require('@services/user.service');
 const {
   fetchUserProfileRequest,
@@ -6,15 +8,13 @@ const {
   fetchUserProfileSuccess,
 } = require('./user.profile.action');
 
-const tokenKey = 'token';
-
 const loginAccount = (authInfo) => {
   return function (dispatch) {
     dispatch(fetchUserProfileRequest());
     userService
       .login(authInfo)
       .then((res) => {
-        localStorage.setItem(tokenKey, res.data?.token);
+        localStorage.setItem(TOKEN, JSON.stringify(authInfo));
         dispatch(fetchUserProfileSuccess(res.data));
       })
       .catch((error) => dispatch(fetchUserProfileFailure(error)));
@@ -24,7 +24,7 @@ const loginAccount = (authInfo) => {
 const logout = () => {
   return function (dispatch) {
     dispatch(endSession());
-    localStorage.removeItem(tokenKey);
+    // localStorage.removeItem(TOKEN);
   };
 };
 

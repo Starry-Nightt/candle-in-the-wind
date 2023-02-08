@@ -8,11 +8,7 @@ function Forum() {
   const { loading, post, error } = postState;
   const dispatch = useDispatch();
   useEffect(() => {
-    const controller = new AbortController();
     dispatch(loadPost());
-    return () => {
-      controller.abort();
-    };
   }, []);
 
   return (
