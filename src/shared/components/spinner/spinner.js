@@ -8,10 +8,14 @@ const override = {
   borderColor: 'red',
 };
 
-function Spinner({ loading, size, color = 'white' }) {
+function Spinner({ loading, size, color, absolute }) {
+  if (!color)
+    color = 'white';
+  if (!size)
+    size = 8
   return (
     <>
-      <div className={`${style.spinnerContainer}`}>
+      <div className={`${style.spinnerContainer} ${absolute ? 'absolute' : ''}`}>
         <SyncLoader
           color={color}
           loading={loading}

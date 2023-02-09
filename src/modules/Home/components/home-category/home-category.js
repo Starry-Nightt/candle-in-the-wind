@@ -11,7 +11,7 @@ function HomeCategory() {
             <div className="col l-2 m-4 c-4" key={idx}>
               <article className={`${style.item}`}>
                 <div className={` ${style.itemImage}`}>
-                  <img src={item.image} />
+                  <img src={item.image} alt="" />
                 </div>
                 <div className={` ${style.itemBody}`}>
                   <h6 className={` ${style.itemName}`}>{item.name}</h6>
