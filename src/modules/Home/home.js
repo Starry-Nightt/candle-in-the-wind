@@ -19,7 +19,7 @@ function Home() {
 
         <br></br>
 
-        <a href={`/products/${products.id}`}>🥸</a>    
+        <a href={`/products/${products._id}`}>🥸</a>    
 
       </div>
     </>
