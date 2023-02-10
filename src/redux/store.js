@@ -4,6 +4,7 @@ import layerReducer from './layer/layer.reducer';
 import modalReducer from './modal/modal.reducer';
 import postsReducer from './post/post.reducer';
 import productReducer from './product/product.reducer';
+import sidebarReducer from './sidebar/sidebar.reducer';
 import userProfileReducer from './user-profile/user-profile.reducer';
 
 const rootReducer = combineReducers({
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   modal: modalReducer,
   userProfile: userProfileReducer,
   post: postsReducer,
+  sidebar: sidebarReducer,
 });
 
 const middleware = [thunk];

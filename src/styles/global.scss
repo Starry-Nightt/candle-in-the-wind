@@ -1,4 +1,5 @@
 @import 'variables.scss';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap');
 
 * {
   margin: 0;
@@ -128,6 +129,10 @@ a {
 
 .justify-center {
   justify-content: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
 }
 
 .space-between {
@@ -424,7 +429,7 @@ a {
 
 .section-title {
   font-size: 36px;
-  font-family: 'Courier New', Courier, monospace;
+  font-family: 'Montserrat', sans-serif;
   font-weight: 600;
   margin-bottom: 20px;
 }
@@ -435,6 +440,14 @@ a {
 
 .relative {
   position: relative;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.lowercase {
+  text-transform: lowercase;
 }
 
 

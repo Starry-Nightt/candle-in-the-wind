@@ -24,7 +24,7 @@ function App() {
 
   useEffect(() => {
     if (loading) {
-      dispatch(showLayer(<Spinner loading={true} size={12} absolute={true} />));
+      dispatch(showLayer(<Spinner loading={true} size={12} absolute={true} color={'white'} />));
     } else {
       dispatch(hideLayer());
     }

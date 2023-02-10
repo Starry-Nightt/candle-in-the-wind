@@ -3,7 +3,6 @@
 .navLink {
     padding: 12px 20px;
     position: relative;
-    min-width: 120px;
     
     
     a {
@@ -35,5 +34,12 @@
         //         opacity: 1;
         //      }
         // }
+    }
+}
+
+@media  screen and (max-width: 740px) {
+    .navLink {
+        font-size: 14px;
+        padding: 10px 8px;
     }
 }

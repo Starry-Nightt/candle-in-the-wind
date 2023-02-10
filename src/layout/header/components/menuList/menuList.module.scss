@@ -1,0 +1,23 @@
+@import '../../../../styles/variables.scss';
+
+.menuList {
+    text-align: start;
+    .list {
+        .item {
+            padding: 16px 12px;
+            border-bottom: 2px solid #eeeeee;
+            font-weight: 500;
+            font-size: 18px;
+            transition: 0.3s ease;
+            cursor: pointer;
+            &:first-child {
+                border-top: 2px solid #eeeeee;
+            }
+
+            &:hover {
+                background-color: $primary-color;
+                color: $white-color;
+            }
+        }
+    }
+}

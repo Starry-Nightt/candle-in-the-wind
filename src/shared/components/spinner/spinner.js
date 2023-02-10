@@ -9,10 +9,8 @@ const override = {
 };
 
 function Spinner({ loading, size, color, absolute }) {
-  if (!color)
-    color = 'white';
-  if (!size)
-    size = 8
+  if (!color) color = '#015394';
+  if (!size) size = 8;
   return (
     <>
       <div className={`${style.spinnerContainer} ${absolute ? 'absolute' : ''}`}>
