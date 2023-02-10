@@ -87,13 +87,11 @@ function Navbar(props) {
             )}
           </div>
         </div>
-        <div
-          className={`hide-on-tablet hide-on-pc py-1 flex ${
-            loggedIn === true ? 'space-between' : 'justify-end'
-          }`}
-        >
-          {loggedIn && <User user={{ ...user, avatar }} />}
-          <Hamburger />
+        <div className="hide-on-tablet hide-on-pc py-1">
+          <div className={`flex ${loggedIn === true ? 'space-between' : 'justify-end'}`}>
+            {loggedIn && <User user={{ ...user, avatar }} />}
+            <Hamburger />
+          </div>
         </div>
       </div>
     </section>
