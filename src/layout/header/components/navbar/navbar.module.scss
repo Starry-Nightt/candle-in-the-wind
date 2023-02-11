@@ -27,7 +27,7 @@
       content: '';
       position: absolute;
       height: 100%;
-      width: 2px;
+      width: 1px;
       background-color: $white-color;
       top: 50%;
       left: 100%;
@@ -39,6 +39,7 @@
     display: flex;
     padding: 5px 0;
     align-items: center;
+
     button {
       margin-left: 8px;
     }
