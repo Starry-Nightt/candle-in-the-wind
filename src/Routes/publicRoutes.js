@@ -12,7 +12,13 @@ const publicRoutes = [
     return {
       path: category.path,
       component: Products,
-    }
+    };
+  }),
+  ...categoryList.map((category) => {
+    return {
+      path: `${category.path}/:id`,
+      component: Home,
+    };
   }),
   {
     path: '*',

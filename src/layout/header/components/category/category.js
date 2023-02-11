@@ -4,27 +4,27 @@ import { NavLink } from 'react-router-dom';
 
 export const categoryList = [
   {
-    path: 'allproducts',
+    path: 'products/all',
     viewValue: 'Tất cả',
   },
   {
-    path: 'products',
+    path: 'products/oil',
     viewValue: 'Tinh dầu',
   },
   {
-    path: 'productx',
+    path: 'products/candle',
     viewValue: 'Nến',
   },
   {
-    path: 'producty',
+    path: 'products/wax',
     viewValue: 'Sáp thơm',
   },
   {
-    path: 'productz',
+    path: 'products/decorate',
     viewValue: 'Trang trí',
   },
   {
-    path: 'productt',
+    path: 'products/accessory',
     viewValue: 'Phụ kiện',
   },
 ];

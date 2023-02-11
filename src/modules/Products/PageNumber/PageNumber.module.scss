@@ -11,9 +11,14 @@
   + .number {
     margin-left: 10px;
   }
+  &.noneMargin {
+    margin-left: 2px;
+    border-radius: 0;
+    background-color: #fff;
+  }
 }
 
 .active {
-    background-color: #3f3f3f;
-    color: white;
+  background-color: #3f3f3f;
+  color: white;
 }

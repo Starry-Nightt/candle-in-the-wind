@@ -6,11 +6,11 @@ import styles from './ProductItem.module.scss';
 
 const cx = classNames.bind(styles);
 
-function ProductItem({ data }) {
+function ProductItem({ data, pathname }) {
   return (
     <div className={cx('column')}>
       <div className={cx('wrapper')}>
-        <Link>
+        <Link to={`${pathname}/${data.id}`}>
           <div
             className={cx('image')}
             style={{

@@ -1,10 +1,10 @@
 import ProductService from '~/shared/services/product.service';
 import { fetchProductFailure, fetchProductRequest, fetchProductSuccess } from './product.action';
 
-const loadProduct = () => {
+const loadProduct = (category) => {
   return function (dispatch) {
     dispatch(fetchProductRequest());
-    ProductService.getAllProduct()
+    ProductService.getAllProduct(category)
       .then((response) => {
         dispatch(fetchProductSuccess(response.data));
       })

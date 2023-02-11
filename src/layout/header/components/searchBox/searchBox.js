@@ -46,6 +46,7 @@ function SearchBox() {
             })}
           </div>
         )}
+        hideOnClick={false}
       >
         <div className={cx('wrap-option')}>
           <span className={cx('current-option')}>{currentOption}</span>

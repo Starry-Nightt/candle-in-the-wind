@@ -10,6 +10,8 @@ import Filter from './Filter/Filter';
 import PageNumber from './PageNumber/PageNumber';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
+import TopFilter from './TopFilter/TopFilter';
+import { useLocation } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -18,31 +20,41 @@ function Products() {
   const { loading, product, error } = productState;
   const dispatch = useDispatch();
 
+  const { pathname } = useLocation();
   const [numbersPage, setNumbersPage] = useState([1, 2, 3, 4, 5]);
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
-    dispatch(loadProduct());
-  }, []);
+    dispatch(loadProduct(pathname.slice(10)));
+  }, [pathname]);
 
   return (
     <>
       <div className="row">
-        <div className={cx('filter')}>
+        <div className={cx('column-2')}>
           <Filter />
         </div>
-        <div className={cx('product')}>
-          {loading && <Spinner />}
-          {error && <h3>Error</h3>}
-          {/* jsonserver tra ve  */}
-          {product &&
-            product.products &&
-            product.products.length > 0 &&
-            product.products.map((item, index) =>
-              index < currentPage * 15 && index >= (currentPage - 1) * 15 ? (
-                <ProductItem key={item.id} data={item} />
-              ) : null,
-            )}
+        <div className={cx('column-10')}>
+          <div className={cx('filter-wrapper')}>
+            <TopFilter
+              numbersPage={numbersPage}
+              setNumbersPage={setNumbersPage}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
+          </div>
+          <div className={cx('product-list')}>
+            {loading && <Spinner />}
+            {error && <h3>Error</h3>}
+            {product &&
+              product.products &&
+              product.products.length > 0 &&
+              product.products.map((item, index) =>
+                index < currentPage * 30 && index >= (currentPage - 1) * 30 ? (
+                  <ProductItem key={item.id} data={item} pathname={pathname} />
+                ) : null,
+              )}
+          </div>
         </div>
       </div>
       <div className={cx('page')}>

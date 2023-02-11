@@ -1,4 +1,5 @@
 import classNames from 'classnames/bind';
+import Button from '~/shared/components/Button';
 
 import styles from './Filter.module.scss';
 
@@ -13,7 +14,7 @@ function Filter() {
           <input type={'number'} placeholder="từ ...đ" /> -
           <input type={'number'} placeholder="đến ...đ" />
         </div>
-        <button>Áp dụng</button>
+        <Button type='primary' size='large' children={'Áp dụng'}/>
       </div>
 
       <div className={cx('size', 'filter')}>
@@ -31,6 +32,8 @@ function Filter() {
           <label htmlFor="large">Lớn</label>
         </div>
       </div>
+
+      <Button type='primary' size='large' children={'Xoá tất cả'}/>
     </div>
   );
 }
