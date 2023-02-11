@@ -16,17 +16,63 @@ import { useLocation } from 'react-router-dom';
 const cx = classNames.bind(styles);
 
 function Products() {
-  const productState = useSelector((state) => state.product);
-  const { loading, product, error } = productState;
+  const { loading, product, error } = useSelector((state) => state.product);
   const dispatch = useDispatch();
 
   const { pathname } = useLocation();
-  const [numbersPage, setNumbersPage] = useState([1, 2, 3, 4, 5]);
+  const [numbersPage, setNumbersPage] = useState([1]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalPage, setTotalPage] = useState();
 
   useEffect(() => {
-    dispatch(loadProduct(pathname.slice(10)));
+    setCurrentPage(1);
   }, [pathname]);
+
+  useEffect(() => {
+    dispatch(loadProduct(pathname.slice(10), (currentPage - 1) * 30));
+  }, [pathname, currentPage]);
+
+  useEffect(() => {
+    if (product) setTotalPage(Math.ceil(product.total / 30));
+  }, [product]);
+
+  useEffect(() => {
+    let arr = [];
+    for (let i = 1; i <= 5; i++) {
+      if (i > totalPage) break;
+      else arr.push(i);
+    }
+    setNumbersPage(arr);
+  }, [totalPage]);
+
+  useEffect(() => {
+    let arr = [];
+    if (totalPage <= 5) return;
+
+    if (currentPage === numbersPage[numbersPage.length - 1] && currentPage < totalPage) {
+      if (totalPage - currentPage >= 2) {
+        for (let i = currentPage - 2; i <= currentPage + 2; i++) {
+          arr.push(i);
+        }
+      } else {
+        for (let i = totalPage - 4; i <= totalPage; i++) {
+          arr.push(i);
+        }
+      }
+      setNumbersPage(arr);
+    } else if (currentPage === numbersPage[0] && currentPage < totalPage) {
+      if (currentPage > 2) {
+        for (let i = currentPage - 2; i <= currentPage + 2; i++) {
+          arr.push(i);
+        }
+      } else {
+        for (let i = 1; i <= 5; i++) {
+          arr.push(i);
+        }
+      }
+      setNumbersPage(arr);
+    }
+  }, [currentPage]);
 
   return (
     <>
@@ -37,7 +83,7 @@ function Products() {
         <div className={cx('column-10')}>
           <div className={cx('filter-wrapper')}>
             <TopFilter
-              numbersPage={numbersPage}
+              totalPage={totalPage}
               setNumbersPage={setNumbersPage}
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
@@ -49,11 +95,9 @@ function Products() {
             {product &&
               product.products &&
               product.products.length > 0 &&
-              product.products.map((item, index) =>
-                index < currentPage * 30 && index >= (currentPage - 1) * 30 ? (
-                  <ProductItem key={item.id} data={item} pathname={pathname} />
-                ) : null,
-              )}
+              product.products.map((item, index) => (
+                <ProductItem key={item.id} data={item} pathname={pathname} />
+              ))}
           </div>
         </div>
       </div>
@@ -62,7 +106,7 @@ function Products() {
           <FontAwesomeIcon
             onClick={() =>
               setCurrentPage((prev) => {
-                return prev > numbersPage[0] ? prev - 1 : prev;
+                return prev > 1 ? prev - 1 : prev;
               })
             }
             icon={faCaretLeft}
@@ -83,7 +127,7 @@ function Products() {
           <FontAwesomeIcon
             onClick={() =>
               setCurrentPage((prev) => {
-                return prev < numbersPage[4] ? prev + 1 : prev;
+                return prev < totalPage ? prev + 1 : prev;
               })
             }
             icon={faCaretRight}
@@ -94,4 +138,4 @@ function Products() {
   );
 }
 
-export default connect()(Products);
+export default Products;

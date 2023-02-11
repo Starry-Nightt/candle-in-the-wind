@@ -9,7 +9,7 @@ import styles from './TopFilter.module.scss';
 
 const cx = classNames.bind(styles);
 
-function TopFilter({ numbersPage, setNumbersPage, currentPage, setCurrentPage }) {
+function TopFilter({ totalPage, setNumbersPage, currentPage, setCurrentPage }) {
   const filterList = ['Phổ biến', 'Mới nhất', 'A-Z', 'Z-A'];
   const [primaryBtn, setPrimaryBtn] = useState(filterList[0]);
   return (
@@ -31,13 +31,13 @@ function TopFilter({ numbersPage, setNumbersPage, currentPage, setCurrentPage })
 
       <div className={cx('page')}>
         <span className={cx('page-label')}>
-          Trang {currentPage}/{numbersPage[4]}
+          Trang {currentPage}/{totalPage}
         </span>
         <PageNumber noneMargin={true}>
           <FontAwesomeIcon
             onClick={() =>
               setCurrentPage((prev) => {
-                return prev > numbersPage[0] ? prev - 1 : prev;
+                return prev > 1 ? prev - 1 : prev;
               })
             }
             icon={faCaretLeft}
@@ -47,7 +47,7 @@ function TopFilter({ numbersPage, setNumbersPage, currentPage, setCurrentPage })
           <FontAwesomeIcon
             onClick={() =>
               setCurrentPage((prev) => {
-                return prev < numbersPage[4] ? prev + 1 : prev;
+                return prev < totalPage ? prev + 1 : prev;
               })
             }
             icon={faCaretRight}

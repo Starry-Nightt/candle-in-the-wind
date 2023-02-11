@@ -1,7 +1,7 @@
 import appClient from '@utils/appClient';
 
 class ProductService {
-  getAllProduct = (category) => {
+  getCategoryProduct = (category, params = {}) => {
     let path;
     switch (category) {
       case 'oil':
@@ -22,7 +22,9 @@ class ProductService {
       default:
         path = '';
     }
-    return appClient().get(`products${path}?limit=100`);
+    return appClient().get(`products${path}`, {
+      params,
+    });
   };
 }
 
