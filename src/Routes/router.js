@@ -17,8 +17,8 @@ function Router() {
         {/* Public Routes*/}
         <Route path="" element={<Navigate to="home" />}></Route>
         <Route path="/home" element={<Home />}></Route>
-        <Route path="/products" element={<Products />}></Route>
-        <Route path="/products/:productId" element={<ProductDetail />}></Route>
+        <Route path="/products/:category" element={<Products />}></Route>
+        <Route path="/products/:category/:productId" element={<ProductDetail />}></Route>
 
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>

@@ -29,10 +29,10 @@ function ProductItem({ data, pathname }) {
 
         <div className={cx('bottom')}>
           <span className={cx('prize')}>{data.price}.000đ</span>
-          <span className={cx('add')}>Add to cart</span>
+          <span className={cx('add')}>Thêm vào</span>
         </div>
 
-        <div className={cx('sale')}>20% off</div>
+        <div className={cx('sale')}>{Math.floor(data.discountPercentage)}% giảm</div>
       </div>
     </div>
   );

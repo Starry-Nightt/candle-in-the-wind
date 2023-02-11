@@ -7,6 +7,7 @@ import ProductDetailInfo from './product-detail-info/product-detail-info';
 
 function ProductDetail() {
   const { productId } = useParams();
+
   const [product, setProduct] = useState(undefined);
   const [loading, setLoading] = useState(false);
 
