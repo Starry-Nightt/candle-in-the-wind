@@ -7,12 +7,11 @@ import { useState } from 'react';
 import Button from '~/shared/components/Button';
 import PageNumber from '../PageNumber/PageNumber';
 import styles from './TopFilter.module.scss';
+import sortFilterList from './sortFilterList';
 
 const cx = classNames.bind(styles);
 
-function TopFilter({ totalPage, currentPage, setCurrentPage }) {
-  const filterList = ['Phổ biến', 'Mới nhất', 'A-Z', 'Z-A'];
-  const [primaryBtn, setPrimaryBtn] = useState(filterList[0]);
+function TopFilter({ sortFilter, setSortFilter, totalPage, currentPage, setCurrentPage }) {
   const [pageValue, setPageValue] = useState(currentPage);
   const [inputWidth, setInputWidth] = useState(12);
 
@@ -29,15 +28,15 @@ function TopFilter({ totalPage, currentPage, setCurrentPage }) {
     <div className={cx('wrapper')}>
       <div className={cx('filter')}>
         <span className={cx('label')}>Sắp xếp theo</span>
-        {filterList.map((filter, index) => (
+        {sortFilterList.map((filter, index) => (
           <Button
             key={index}
             className={cx({
-              primary: filter === primaryBtn,
+              primary: filter === sortFilter,
             })}
             type="pNoneOutline"
-            children={filter}
-            onClick={() => setPrimaryBtn(filter)}
+            children={filter.label}
+            onClick={() => setSortFilter(filter)}
           />
         ))}
       </div>

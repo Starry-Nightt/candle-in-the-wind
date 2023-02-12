@@ -13,6 +13,7 @@ import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import TopFilter from './TopFilter/TopFilter';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import NotFoundProduct from './NotFoundProduct/NotFoundProduct';
+import sortFilterList from './TopFilter/sortFilterList';
 
 const cx = classNames.bind(styles);
 
@@ -24,16 +25,19 @@ function Products() {
   const [numbersPage, setNumbersPage] = useState([1]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
+
+  const [sortFilter, setSortFilter] = useState(sortFilterList[0]);
+
   const [a] = useSearchParams();
   const searchValue = a.get('search');
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [pathname]);
+  }, [pathname, sortFilter]);
 
   useEffect(() => {
-    dispatch(loadProduct(pathname.slice(10), (currentPage - 1) * 30, searchValue));
-  }, [pathname, currentPage]);
+    dispatch(loadProduct(pathname.slice(10), (currentPage - 1) * 30, searchValue, sortFilter));
+  }, [pathname, currentPage, sortFilter]);
 
   useEffect(() => {
     if (product) {
@@ -91,6 +95,8 @@ function Products() {
         <div className={cx('column-10')}>
           <div className={cx('filter-wrapper')}>
             <TopFilter
+              sortFilter={sortFilter}
+              setSortFilter={setSortFilter}
               totalPage={totalPage}
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
