@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loadProduct } from '~/redux/product/product.thunk';
 import Spinner from '@components/spinner/spinner';
 import ProductItem from './ProductItem/ProductItem';
@@ -11,7 +11,8 @@ import PageNumber from './PageNumber/PageNumber';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import TopFilter from './TopFilter/TopFilter';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useSearchParams } from 'react-router-dom';
+import NotFoundProduct from './NotFoundProduct/NotFoundProduct';
 
 const cx = classNames.bind(styles);
 
@@ -22,18 +23,25 @@ function Products() {
   const { pathname } = useLocation();
   const [numbersPage, setNumbersPage] = useState([1]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPage, setTotalPage] = useState();
+  const [totalPage, setTotalPage] = useState(1);
+  const [a] = useSearchParams();
+  const searchValue = a.get('search');
 
   useEffect(() => {
     setCurrentPage(1);
   }, [pathname]);
 
   useEffect(() => {
-    dispatch(loadProduct(pathname.slice(10), (currentPage - 1) * 30));
+    dispatch(loadProduct(pathname.slice(10), (currentPage - 1) * 30, searchValue));
   }, [pathname, currentPage]);
 
   useEffect(() => {
-    if (product) setTotalPage(Math.ceil(product.total / 30));
+    if (product) {
+      let total;
+      total = Math.ceil(product.total / 30);
+      if (Number.isNaN(total)) setTotalPage(1);
+      else setTotalPage(total);
+    }
   }, [product]);
 
   useEffect(() => {
@@ -49,7 +57,7 @@ function Products() {
     let arr = [];
     if (totalPage <= 5) return;
 
-    if (currentPage === numbersPage[numbersPage.length - 1] && currentPage < totalPage) {
+    if (currentPage >= numbersPage[numbersPage.length - 1] && currentPage < totalPage) {
       if (totalPage - currentPage >= 2) {
         for (let i = currentPage - 2; i <= currentPage + 2; i++) {
           arr.push(i);
@@ -60,7 +68,7 @@ function Products() {
         }
       }
       setNumbersPage(arr);
-    } else if (currentPage === numbersPage[0] && currentPage < totalPage) {
+    } else if (currentPage <= numbersPage[0] && currentPage < totalPage) {
       if (currentPage > 2) {
         for (let i = currentPage - 2; i <= currentPage + 2; i++) {
           arr.push(i);
@@ -74,7 +82,6 @@ function Products() {
     }
   }, [currentPage]);
 
-  
   return (
     <>
       <div className="row">
@@ -85,7 +92,6 @@ function Products() {
           <div className={cx('filter-wrapper')}>
             <TopFilter
               totalPage={totalPage}
-              setNumbersPage={setNumbersPage}
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
             />
@@ -93,6 +99,7 @@ function Products() {
           <div className={cx('product-list')}>
             {loading && <Spinner />}
             {error && <h3>Error</h3>}
+            {!totalPage && <NotFoundProduct />}
             {product &&
               product.products &&
               product.products.length > 0 &&

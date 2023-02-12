@@ -11,7 +11,7 @@ import { useLocation } from 'react-router-dom';
 const cx = classNames.bind(styles);
 
 function SearchBox() {
-  const [currentOption, setCurrentOption] = useState(categoryList[0].viewValue);
+  const [currentOption, setCurrentOption] = useState(categoryList[0]);
   const [searchValue, setSearchValue] = useState('');
   const currentPath = useLocation().pathname;
 
@@ -20,21 +20,22 @@ function SearchBox() {
     categoryList.forEach((item) => {
       if (item.path === currentPath) {
         notChange = false;
-        setCurrentOption(item.viewValue);
+        setCurrentOption(item);
       }
     });
-    if(notChange) setCurrentOption(categoryList[0].viewValue);
+    if (notChange) setCurrentOption(categoryList[0]);
   }, [currentPath]);
 
   return (
-    <div className={cx('wrapper')}>
+    <form method="get" action={`${currentOption.path}`} className={cx('wrapper')}>
       <div className={cx('wrap-input')}>
         <input
+          name="search"
           value={searchValue}
           className={cx('search-input')}
           placeholder="Nhập mã sản phẩm hoặc tên sản phẩm để tìm kiếm..."
           onChange={(e) => setSearchValue(e.target.value)}
-        ></input>
+        />
       </div>
 
       <Tippy
@@ -45,13 +46,9 @@ function SearchBox() {
           <div tabIndex="-1" {...attrs} className={cx('options')}>
             {categoryList.map((category, index) => {
               return (
-                <div
-                  className={cx('item')}
-                  key={index}
-                  onClick={() => setCurrentOption(category.viewValue)}
-                >
+                <div className={cx('item')} key={index} onClick={() => setCurrentOption(category)}>
                   <span>{category.viewValue}</span>
-                  {category.viewValue === currentOption ? (
+                  {category.viewValue === currentOption.viewValue ? (
                     <FontAwesomeIcon className={cx('check')} icon={faCheck} />
                   ) : null}
                 </div>
@@ -62,15 +59,15 @@ function SearchBox() {
         hideOnClick={false}
       >
         <div className={cx('wrap-option')}>
-          <span className={cx('current-option')}>{currentOption}</span>
+          <span className={cx('current-option')}>{currentOption.viewValue}</span>
           <FontAwesomeIcon icon={faAngleDown} />
         </div>
       </Tippy>
 
-      <button className={cx('search-btn')}>
+      <button className={cx('search-btn')} type="submit">
         <FontAwesomeIcon className={cx('search-icon')} icon={faMagnifyingGlass} />
       </button>
-    </div>
+    </form>
   );
 }
 
