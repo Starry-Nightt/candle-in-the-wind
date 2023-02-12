@@ -1,7 +1,7 @@
 import appClient from '@utils/appClient';
 
 class ProductService {
-  getCategoryProduct = (category, params = {}, searchValue, sortFilter) => {
+  getCategoryProduct = (category, params = {}, searchValue, sortFilter, priceRange) => {
     const { limit, skip } = params;
     // if (searchValue) {
     params = { limit: 0 };
@@ -33,6 +33,12 @@ class ProductService {
       })
       .then((res) => {
         sortFilter.sortFunc(res.data.products);
+        if (priceRange.from && priceRange.to) {
+          res.data.products = res.data.products.filter((product) => {
+            return product.price > priceRange.from && product.price < priceRange.to;
+          });
+          res.data.total = res.data.products.length;
+        }
         let total = 0;
         if (searchValue) {
           res.data.products = res.data.products.filter((product) => {

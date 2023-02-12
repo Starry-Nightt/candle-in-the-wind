@@ -1,23 +1,53 @@
 import classNames from 'classnames/bind';
+import { useState } from 'react';
 import Button from '~/shared/components/Button';
 
 import styles from './Filter.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Filter() {
+function Filter({ setPriceRange }) {
+  const [from, setFrom] = useState('');
+  const [to, setTo] = useState('');
   return (
     <div className={cx('wrapper')}>
       <div className={cx('price', 'filter')}>
-        <h4>Mức giá</h4>
+        <h4>Khoảng giá</h4>
         <div className={cx('input')}>
-          <input type={'number'} placeholder="từ ...đ" /> -
-          <input type={'number'} placeholder="đến ...đ" />
+          <input
+            maxLength={7}
+            value={from}
+            placeholder="từ...000đ"
+            onChange={(e) => {
+              let tmp = e.target.value;
+              let lastChar = tmp[tmp.length - 1];
+              if (tmp === '' || (tmp[0] !== '0' && lastChar <= '9' && lastChar >= '0'))
+                setFrom(tmp);
+            }}
+          />{' '}
+          -
+          <input
+            maxLength={7}
+            value={to}
+            placeholder="đến...000đ"
+            onChange={(e) => {
+              let tmp = e.target.value;
+              let lastChar = tmp[tmp.length - 1];
+              if (tmp === '' || (tmp[0] !== '0' && lastChar <= '9' && lastChar >= '0')) setTo(tmp);
+            }}
+          />
         </div>
-        <Button type='primary' size='large' children={'Áp dụng'}/>
+        <Button
+          type="primary"
+          size="large"
+          children={'Áp dụng'}
+          onClick={() => {
+            setPriceRange({ from, to });
+          }}
+        />
       </div>
 
-      <div className={cx('size', 'filter')}>
+      {/* <div className={cx('size', 'filter')}>
         <h4>Kích cỡ</h4>
         <div className={cx('checkbox')}>
           <input id="small" name="size" type={'checkbox'} value="small" />{' '}
@@ -31,9 +61,18 @@ function Filter() {
           <input id="large" name="size" type={'checkbox'} value="large" />{' '}
           <label htmlFor="large">Lớn</label>
         </div>
-      </div>
+      </div> */}
 
-      <Button type='primary' size='large' children={'Xoá tất cả'}/>
+      <Button
+        type="primary"
+        size="large"
+        children={'Xóa bộ lọc'}
+        onClick={() => {
+          setFrom('');
+          setTo('');
+          setPriceRange({ from: '', to: '' });
+        }}
+      />
     </div>
   );
 }

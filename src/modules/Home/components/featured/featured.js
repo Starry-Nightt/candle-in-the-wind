@@ -22,7 +22,7 @@ function Featured() {
   }, []);
 
   const onSelectProduct = (id) => {
-    navigate(`/products/${id}`);
+    navigate(`/products/all/${id}`);
   };
 
   return (

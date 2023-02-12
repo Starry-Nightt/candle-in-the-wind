@@ -25,8 +25,8 @@ function Products() {
   const [numbersPage, setNumbersPage] = useState([1]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPage, setTotalPage] = useState(1);
-
   const [sortFilter, setSortFilter] = useState(sortFilterList[0]);
+  const [priceRange, setPriceRange] = useState({ from: '', to: '' });
 
   const [a] = useSearchParams();
   const searchValue = a.get('search');
@@ -36,8 +36,10 @@ function Products() {
   }, [pathname, sortFilter]);
 
   useEffect(() => {
-    dispatch(loadProduct(pathname.slice(10), (currentPage - 1) * 30, searchValue, sortFilter));
-  }, [pathname, currentPage, sortFilter]);
+    dispatch(
+      loadProduct(pathname.slice(10), (currentPage - 1) * 30, searchValue, sortFilter, priceRange),
+    );
+  }, [pathname, currentPage, sortFilter, priceRange]);
 
   useEffect(() => {
     if (product) {
@@ -90,7 +92,7 @@ function Products() {
     <>
       <div className="row">
         <div className={cx('column-2')}>
-          <Filter />
+          <Filter setPriceRange={setPriceRange} />
         </div>
         <div className={cx('column-10')}>
           <div className={cx('filter-wrapper')}>
