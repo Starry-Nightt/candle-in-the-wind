@@ -34,15 +34,13 @@
 
   .filter {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    gap: 12px;
     margin-bottom: 12px;
   }
 
   .page {
     display: flex;
     justify-content: flex-end;
-    padding: 0 20px;
   }
 }
