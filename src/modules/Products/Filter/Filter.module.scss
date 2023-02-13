@@ -37,3 +37,20 @@
     border-bottom: 1px solid #c4c4c4;
   }
 }
+
+@media screen and (max-width: 1113px) {
+  .wrapper {
+    margin-bottom: 20px;
+    h4 {
+      text-align: center;
+      padding-bottom: 6px;
+    }
+    .input {
+      align-items: center;
+      margin-bottom: 16px;
+      input {
+        padding: 12px 8px;
+      }
+    }
+  }
+}

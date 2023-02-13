@@ -90,3 +90,10 @@
   width: 100%;
   min-height: 32px;
 }
+
+@media screen and (max-width: 739px) {
+  .wrapper {
+    padding: 6px 8px;
+    font-size: 14px;
+  }
+}

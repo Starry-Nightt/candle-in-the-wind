@@ -91,10 +91,10 @@ function Products() {
   return (
     <>
       <div className="row">
-        <div className={cx('column-2')}>
+        <div className="col l-2 m-12 c-12">
           <Filter setPriceRange={setPriceRange} />
         </div>
-        <div className={cx('column-10')}>
+        <div className="col l-10 m-12 c-12">
           <div className={cx('filter-wrapper')}>
             <TopFilter
               sortFilter={sortFilter}
@@ -104,7 +104,7 @@ function Products() {
               setCurrentPage={setCurrentPage}
             />
           </div>
-          <div className={cx('product-list')}>
+          <div className={cx('row')}>
             {loading && <Spinner />}
             {error && <h3>Error</h3>}
             {!totalPage && <NotFoundProduct />}

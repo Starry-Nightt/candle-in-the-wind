@@ -13,12 +13,14 @@ const cx = classNames.bind(styles);
 function Cart() {
   const [countProduct, setCountProduct] = useState(1);
   return (
-    <Tippy content="Giỏ hàng" placement="bottom">
-      <Link to="/cart" className={cx('cart-icon')}>
-        <FontAwesomeIcon icon={faShoppingCart} />
-        {countProduct ? <div className={cx('count')}>{countProduct}</div> : null}
-      </Link>
-    </Tippy>
+    <div className="flex justify-center align-center">
+      <Tippy content="Giỏ hàng" placement="bottom">
+        <Link to="/cart" className={cx('cart-icon')}>
+          <FontAwesomeIcon icon={faShoppingCart} />
+          {countProduct ? <div className={cx('count')}>{countProduct}</div> : null}
+        </Link>
+      </Tippy>
+    </div>
   );
 }
 

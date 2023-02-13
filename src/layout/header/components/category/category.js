@@ -31,22 +31,20 @@ export const categoryList = [
 
 function Category() {
   return (
-    <div className="row">
-      <ul className="col l-o-2 l-10 m-o-2 m-10 c-12 flex flex-wrap py-1">
-        {categoryList.map((item, index) => {
-          return (
-            <li className={`${style.navLink}`} key={index}>
-              <NavLink
-                className={({ isActive }) => (isActive ? style.active : undefined)}
-                to={item.path}
-              >
-                {item.viewValue}
-              </NavLink>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+    <ul className="flex flex-wrap my-1">
+      {categoryList.map((item, index) => {
+        return (
+          <li className={`${style.navLink}`} key={index}>
+            <NavLink
+              className={({ isActive }) => (isActive ? style.active : undefined)}
+              to={item.path}
+            >
+              {item.viewValue}
+            </NavLink>
+          </li>
+        );
+      })}
+    </ul>
   );
 }
 

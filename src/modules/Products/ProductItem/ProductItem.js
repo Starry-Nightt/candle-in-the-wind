@@ -8,7 +8,7 @@ const cx = classNames.bind(styles);
 
 function ProductItem({ data, pathname }) {
   return (
-    <div className={cx('column')}>
+    <div className={cx('col l-2-4 m-4 c-4')}>
       <div className={cx('wrapper')}>
         <Link to={`${pathname}/${data.id}`}>
           <div
