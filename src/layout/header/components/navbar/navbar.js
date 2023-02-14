@@ -4,7 +4,6 @@ import avatar from '~/assets/images/avatar-default.jpg';
 import style from './navbar.module.scss';
 import User from '../user/user';
 import { connect, useDispatch } from 'react-redux';
-import { logout } from '~/redux/user-profile/user-profile.thunk';
 import Hamburger from '../hamburger/hamburger';
 
 function Navbar(props) {
@@ -23,10 +22,6 @@ function Navbar(props) {
   const dispatch = useDispatch();
   const { user } = props;
   const navigate = useNavigate();
-
-  const handleLogout = () => {
-    dispatch(logout());
-  };
 
   const onLogin = () => {
     navigate('/login');
@@ -71,9 +66,6 @@ function Navbar(props) {
             {loggedIn ? (
               <>
                 <User user={{ ...user, avatar }} />
-                <button className="button flat-button" onClick={() => handleLogout()}>
-                  Đăng xuất
-                </button>
               </>
             ) : (
               <>

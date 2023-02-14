@@ -1,3 +1,5 @@
+@import '../../../../styles/variables.scss';
+
 .avatar {
   overflow: hidden;
   width: 28px;
@@ -16,4 +18,26 @@
   font-weight: 500;
   transform: translateY(-1px);
   margin-right: 20px;
+}
+
+.options {
+  background-color: $white-color;
+  box-shadow: rgb(0 0 0 / 12%) 0px 2px 12px;
+  max-height: min((100vh - 96px) - 60px, 734px);
+  min-height: 100px;
+  min-width: 120px;
+  overflow-y: auto;
+  animation: appear linear 0.2s;
+}
+
+.item {
+  padding: 8px;
+  cursor: pointer;
+  &:hover {
+    background-color: #f1f1f1;
+  }
+
+  & + .item {
+    border-top: 1px solid #e8e8e8;
+  }
 }

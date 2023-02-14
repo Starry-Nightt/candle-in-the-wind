@@ -9,6 +9,7 @@ import Login from '~/modules/auth/components/login/login';
 import Register from '~/modules/auth/components/register/register';
 import NotFound from '~/modules/not-found/not-found';
 import ProductDetail from '~/modules/product-detail/product-detail';
+import ChangePassword from '~/modules/auth/components/ChangePassword/ChangePassword';
 
 function Router() {
   return (
@@ -22,6 +23,7 @@ function Router() {
 
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
+        <Route path="/changepassword" element={<ChangePassword />}></Route>
         <Route path="*" element={<NotFound />}></Route>
 
         {/* Protected Routes */}

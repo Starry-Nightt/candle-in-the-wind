@@ -15,9 +15,22 @@ const loginAccount = (authInfo) => {
       .login(authInfo)
       .then((res) => {
         localStorage.setItem(TOKEN, JSON.stringify(authInfo));
+        console.log(res.data);
         dispatch(fetchUserProfileSuccess(res.data));
       })
       .catch((error) => dispatch(fetchUserProfileFailure(error)));
+  };
+};
+
+const changePassword = (authInfo) => {
+  return function (dispatch) {
+    // userService
+    //   .login(authInfo)
+    //   .then((res) => {
+    //     localStorage.setItem(TOKEN, JSON.stringify(authInfo));
+    //     dispatch(fetchUserProfileSuccess(res.data));
+    //   })
+    //   .catch((error) => dispatch(fetchUserProfileFailure(error)));
   };
 };
 
