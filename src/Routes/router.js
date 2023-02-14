@@ -11,6 +11,8 @@ import NotFound from '~/modules/not-found/not-found';
 import ProductDetail from '~/modules/product-detail/product-detail';
 import CartPage from '~/modules/cart-page/cart-page';
 import CartPurchase from '~/modules/cart-page/cart-purchase/cart-purchase';
+import AdminPage from '~/modules/AminPage/AdminPage';
+import ProductManage from '~/modules/AminPage/components/ProductManage/ProductManage';
 
 function Router() {
   return (
@@ -21,7 +23,6 @@ function Router() {
         <Route path="/home" element={<Home />}></Route>
         <Route path="/products/:category" element={<Products />}></Route>
         <Route path="/products/:category/:productId" element={<ProductDetail />}></Route>
-
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/cart" element={<CartPage />}></Route>
@@ -34,6 +35,17 @@ function Router() {
         </Route>
 
         {/* Private routes */}
+      </Route>
+      <Route path="/admin" element={<AdminPage />}>
+        <Route path="/admin" element={<Navigate to="/admin/product/view" />}></Route>
+        <Route path="/admin/product" element={<Navigate to="/admin/product/view" />}></Route>
+        <Route path="/admin/forum" element={<Navigate to="/admin/forum/view" />}></Route>
+        <Route path="/admin/voucher" element={<Navigate to="/admin/voucher/view" />}></Route>
+        <Route path="/admin/product/view" element={<ProductManage />}></Route>
+        <Route path="/admin/product/add" element={<ProductManage />}></Route>
+        <Route path="/admin/forum/view" element={<ProductManage />}></Route>
+        <Route path="/admin/voucher/view" element={<ProductManage />}></Route>
+        <Route path="/admin/voucher/add" element={<ProductManage />}></Route>
       </Route>
     </Routes>
   );

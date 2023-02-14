@@ -29,6 +29,7 @@ const userProfileReducer = (state = initialState, action) => {
         user: action.payload,
         error: '',
         isLoggedIn: true,
+        role: action.payload.username === 'kminchelle',
       };
     case FETCH_USER_PROFILE_FAILURE:
       return {

@@ -1,6 +1,3 @@
-import Footer from './layout/footer/footer';
-import Header from './layout/header/header';
-import Layer from './shared/components/layer/layer';
 import Router from './Routes/router';
 import { useSelector, useDispatch } from 'react-redux';
 import { TOKEN } from './shared/constants';
@@ -32,10 +29,7 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
       <Router />
-      <Footer />
-      <Layer />
     </div>
   );
 }

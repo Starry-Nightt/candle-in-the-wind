@@ -10,7 +10,7 @@ import AuthWrapper from '../auth-wrapper/auth-wrapper';
 
 function Login() {
   const userProfile = useSelector((state) => state.userProfile);
-  const { isLoggedIn, error } = userProfile;
+  const { isLoggedIn, error, role } = userProfile;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -32,11 +32,13 @@ function Login() {
   };
 
   useEffect(() => {
-    if (isLoggedIn) {
+    if (role) {
+      navigate('/admin');
+    } else if (isLoggedIn) {
       const from = location.state?.from?.pathname || '/';
       navigate(from, { replace: true });
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, role]);
 
   useEffect(() => {
     if (!error) {

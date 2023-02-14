@@ -5,7 +5,7 @@ function User({ user }) {
   return (
     <div className="flex align-center">
       <div className={`${style.avatar}`}>
-        <img src={user.avatar} alt=""></img>
+        <img src={user.image || user.avatar} alt=""></img>
       </div>
       <p className={`${style.username}`}>{user.username}</p>
     </div>

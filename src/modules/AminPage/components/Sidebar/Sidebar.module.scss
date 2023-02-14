@@ -1,0 +1,67 @@
+@import '../../../../styles/variables.scss';
+
+.wrapper {
+  width: 20%;
+  background-color: $primary-color;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.logo {
+  text-align: center;
+  font-weight: 400;
+  font-size: 28px;
+  color: $white-color;
+  line-height: 60px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.user {
+  display: flex;
+  padding-left: 36px;
+  margin-bottom: 60px;
+
+  img {
+    background-color: $secondary-color;
+    border: 2px solid white;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+  }
+
+  span {
+    padding-left: 16px;
+    flex: 1;
+    line-height: 50px;
+    font-weight: 500;
+    margin-right: 20px;
+    color: white;
+  }
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  color: white;
+  font-size: 16px;
+  font-weight: 400;
+  width: 100%;
+  padding-left: 36px;
+  line-height: 46px;
+
+  &.active {
+    background-color: $secondary-color;
+    font-weight: 500;
+  }
+}
+
+.logout {
+  border-top: 1px solid white;
+  position: absolute;
+  bottom: 40px;
+  cursor: pointer;
+}
