@@ -29,10 +29,13 @@ const fetchCartFailure = (error) => {
   };
 };
 
-const addItemToCart = (item) => {
+const addItemToCart = (item, quantity = 1) => {
   return {
     type: ADD_ITEM_TO_CART,
-    payload: item,
+    payload: {
+      product: item,
+      quantity,
+    },
   };
 };
 

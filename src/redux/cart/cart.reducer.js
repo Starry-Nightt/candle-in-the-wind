@@ -47,24 +47,32 @@ const cartReducer = (state = initialState, action) => {
         cartQuantity: 0,
       };
     case ADD_ITEM_TO_CART: {
-      const idx = state.cartItems.findIndex((item) => item.id === action.payload.id);
+      let { product, quantity } = action.payload;
+      const idx = state.cartItems.findIndex((item) => item.id === product.id);
       let newState;
       if (idx === -1) {
-        const tmpItem = { ...action.payload, quantity: 1 };
+        if (quantity > product.stock) {
+          quantity = product.stock;
+        }
+        const tmpItem = { ...product, quantity };
         newState = {
           ...state,
           cartItems: [...state.cartItems, tmpItem],
-          cartQuantity: state.cartQuantity + 1,
+          cartQuantity: state.cartQuantity + quantity,
         };
       } else {
         let check = false;
-        if (state.cartItems[idx].quantity < state.cartItems[idx].stock) {
-          state.cartItems[idx].quantity++;
+        let dif;
+        if (state.cartItems[idx].quantity + quantity <= state.cartItems[idx].stock) {
+          state.cartItems[idx].quantity += quantity;
           check = true;
+        } else {
+          dif = product.stock - state.cartItems[idx].quantity;
+          state.cartItems[idx].quantity = product.stock;
         }
         newState = {
           ...state,
-          cartQuantity: state.cartQuantity + (check === true ? 1 : 0),
+          cartQuantity: state.cartQuantity + (check === true ? quantity : dif),
         };
       }
       localStorage.setItem(CART, JSON.stringify(newState));

@@ -5,6 +5,7 @@
   overflow: hidden;
   border-radius: 8px;
   height: 160px;
+  cursor: pointer;
 }
 
 .item-info {
@@ -15,6 +16,7 @@
   .item-title {
     font-size: 16px;
     margin-bottom: 12px;
+    cursor: pointer;
   }
 
   .item-desc {
@@ -37,31 +39,56 @@
 }
 
 .quantity {
-  button,
-  input {
-    padding: 12px;
-    font-size: 16px;
-    text-align: center;
-  }
-  button {
-    background-color: $white-color;
-    border: 1px solid $dim-color;
-    cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  .quantity-action {
+    display: flex;
 
-    &:hover {
-      opacity: 0.8;
+    button,
+    span {
+      height: 36px;
+      width: 28px;
+      border: 1px solid $dim-color;
+      flex: 1;
+    }
+    span {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+    }
+    button {
+      cursor: pointer;
     }
   }
+}
 
-  input {
-    background-color: $white-color;
-    border: 1px solid $dim-color;
-    width: 50px;
+.remove-icon {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  font-size: 20px;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 4px;
+  background-color: $secondary-color;
+  color: $white-color;
+  text-align: center;
+  cursor: pointer;
+}
 
-    &::-webkit-outer-spin-button,
-    &::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
+@media screen and (max-width: 739px) {
+  .item-desc {
+    display: none;
+  }
+  .item-image {
+    height: auto;
+  }
+  .item-price {
+    font-size: 14px;
+  }
+  .item-price-final {
+    font-size: 14px;
   }
 }

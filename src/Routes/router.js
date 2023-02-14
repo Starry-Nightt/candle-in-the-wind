@@ -10,6 +10,7 @@ import Register from '~/modules/auth/components/register/register';
 import NotFound from '~/modules/not-found/not-found';
 import ProductDetail from '~/modules/product-detail/product-detail';
 import CartPage from '~/modules/cart-page/cart-page';
+import CartPurchase from '~/modules/cart-page/cart-purchase/cart-purchase';
 
 function Router() {
   return (
@@ -29,6 +30,7 @@ function Router() {
         {/* Protected Routes */}
         <Route element={<RequireAuth />}>
           <Route path="/forum" element={<Forum />}></Route>
+          <Route path="/cart-purchase" element={<CartPurchase />}></Route>
         </Route>
 
         {/* Private routes */}
