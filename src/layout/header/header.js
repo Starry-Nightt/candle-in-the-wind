@@ -14,7 +14,7 @@ function Header() {
       <section className="bg-white">
         <div className="grid wide">
           <Link to="/home" className={`${style.logo}`}>
-            Candle In The Wind
+            <h3 className="text-center font-semibold">Candle In The Wind</h3>
           </Link>
           <div className="row">
             <div className="col l-o-2 l-8  m-10 c-10">

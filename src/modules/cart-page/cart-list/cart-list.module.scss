@@ -1,0 +1,9 @@
+@import '../../../styles/variables.scss';
+
+.item-wrapper {
+  border-bottom: 2px solid $dim-color;
+}
+
+.item-wrapper:last-child {
+  border-bottom: none;
+}
