@@ -6,7 +6,7 @@ import Tippy from '@tippyjs/react/headless';
 
 import styles from './searchBox.module.scss';
 import { categoryList } from '../category/category';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
@@ -14,6 +14,7 @@ function SearchBox() {
   const [currentOption, setCurrentOption] = useState(categoryList[0]);
   const [searchValue, setSearchValue] = useState('');
   const currentPath = useLocation().pathname;
+  const navigate = useNavigate();
 
   useEffect(() => {
     let notChange = true;
@@ -26,8 +27,16 @@ function SearchBox() {
     if (notChange) setCurrentOption(categoryList[0]);
   }, [currentPath]);
 
+  const onSearch = () => {
+    navigate(`${currentOption.path}?search=${searchValue}`);
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') onSearch();
+  };
+
   return (
-    <form method="get" action={`${currentOption.path}`} className={cx('wrapper')}>
+    <div className={cx('wrapper')}>
       <div className={cx('wrap-input')}>
         <input
           name="search"
@@ -35,6 +44,7 @@ function SearchBox() {
           className={cx('search-input')}
           placeholder="Nhập mã sản phẩm hoặc tên sản phẩm để tìm kiếm..."
           onChange={(e) => setSearchValue(e.target.value)}
+          onKeyDown={(e) => handleKeyDown(e)}
         />
       </div>
 
@@ -64,10 +74,10 @@ function SearchBox() {
         </div>
       </Tippy>
 
-      <button className={cx('search-btn')} type="submit">
+      <button className={cx('search-btn')} onClick={() => onSearch()}>
         <FontAwesomeIcon className={cx('search-icon')} icon={faMagnifyingGlass} />
       </button>
-    </form>
+    </div>
   );
 }
 

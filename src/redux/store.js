@@ -1,5 +1,6 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import thunk from 'redux-thunk';
+import cartReducer from './cart/cart.reducer';
 import layerReducer from './layer/layer.reducer';
 import modalReducer from './modal/modal.reducer';
 import postsReducer from './post/post.reducer';
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   userProfile: userProfileReducer,
   post: postsReducer,
   sidebar: sidebarReducer,
+  cart: cartReducer,
 });
 
 const middleware = [thunk];

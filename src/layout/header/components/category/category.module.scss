@@ -1,7 +1,7 @@
 @import '../../../../styles/variables.scss';
 
 .navLink {
-  padding: 4px 16px;
+  padding: 10px 16px;
   position: relative;
 
   a {
@@ -29,12 +29,11 @@
       }
     }
 
-    // &.active {
-
-    //      &::after {
-    //         opacity: 1;
-    //      }
-    // }
+    &.active {
+      &::after {
+        opacity: 1;
+      }
+    }
   }
 }
 

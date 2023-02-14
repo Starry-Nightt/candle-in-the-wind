@@ -39,7 +39,7 @@ function Products() {
     dispatch(
       loadProduct(pathname.slice(10), (currentPage - 1) * 30, searchValue, sortFilter, priceRange),
     );
-  }, [pathname, currentPage, sortFilter, priceRange]);
+  }, [pathname, currentPage, sortFilter, priceRange, searchValue]);
 
   useEffect(() => {
     if (product) {
@@ -90,11 +90,11 @@ function Products() {
 
   return (
     <>
-      <div className="row">
-        <div className={cx('column-2')}>
+      <div className="row ">
+        <div className="col l-2 m-12 c-12">
           <Filter setPriceRange={setPriceRange} />
         </div>
-        <div className={cx('column-10')}>
+        <div className="col l-10 m-12 c-12 ">
           <div className={cx('filter-wrapper')}>
             <TopFilter
               sortFilter={sortFilter}
@@ -104,7 +104,7 @@ function Products() {
               setCurrentPage={setCurrentPage}
             />
           </div>
-          <div className={cx('product-list')}>
+          <div className={cx('row sm-gutter')}>
             {loading && <Spinner />}
             {error && <h3>Error</h3>}
             {!totalPage && <NotFoundProduct />}
@@ -115,40 +115,40 @@ function Products() {
                 <ProductItem key={item.id} data={item} pathname={pathname} />
               ))}
           </div>
-        </div>
-      </div>
-      <div className={cx('page')}>
-        <PageNumber>
-          <FontAwesomeIcon
-            onClick={() =>
-              setCurrentPage((prev) => {
-                return prev > 1 ? prev - 1 : prev;
-              })
-            }
-            icon={faCaretLeft}
-          />
-        </PageNumber>
-        {numbersPage.map((numberPage) => {
-          return (
-            <PageNumber
-              key={numberPage}
-              currentPage={currentPage}
-              onClick={() => setCurrentPage(numberPage)}
-            >
-              {numberPage}
+          <div className={cx('page')}>
+            <PageNumber>
+              <FontAwesomeIcon
+                onClick={() =>
+                  setCurrentPage((prev) => {
+                    return prev > 1 ? prev - 1 : prev;
+                  })
+                }
+                icon={faCaretLeft}
+              />
             </PageNumber>
-          );
-        })}
-        <PageNumber>
-          <FontAwesomeIcon
-            onClick={() =>
-              setCurrentPage((prev) => {
-                return prev < totalPage ? prev + 1 : prev;
-              })
-            }
-            icon={faCaretRight}
-          />
-        </PageNumber>
+            {numbersPage.map((numberPage) => {
+              return (
+                <PageNumber
+                  key={numberPage}
+                  currentPage={currentPage}
+                  onClick={() => setCurrentPage(numberPage)}
+                >
+                  {numberPage}
+                </PageNumber>
+              );
+            })}
+            <PageNumber>
+              <FontAwesomeIcon
+                onClick={() =>
+                  setCurrentPage((prev) => {
+                    return prev < totalPage ? prev + 1 : prev;
+                  })
+                }
+                icon={faCaretRight}
+              />
+            </PageNumber>
+          </div>
+        </div>
       </div>
     </>
   );

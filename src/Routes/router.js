@@ -9,6 +9,8 @@ import Login from '~/modules/auth/components/login/login';
 import Register from '~/modules/auth/components/register/register';
 import NotFound from '~/modules/not-found/not-found';
 import ProductDetail from '~/modules/product-detail/product-detail';
+import CartPage from '~/modules/cart-page/cart-page';
+import CartPurchase from '~/modules/cart-page/cart-purchase/cart-purchase';
 
 function Router() {
   return (
@@ -22,11 +24,13 @@ function Router() {
 
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
+        <Route path="/cart" element={<CartPage />}></Route>
         <Route path="*" element={<NotFound />}></Route>
 
         {/* Protected Routes */}
         <Route element={<RequireAuth />}>
           <Route path="/forum" element={<Forum />}></Route>
+          <Route path="/cart-purchase" element={<CartPurchase />}></Route>
         </Route>
 
         {/* Private routes */}

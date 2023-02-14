@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { addItemToCart } from '~/redux/cart/cart.action';
 import Star from '~/shared/components/star/star';
 import style from './product-detail-info.module.scss';
 
 function ProductDetailInfo({ product }) {
   const { title, description, price, discountPercentage, rating, stock, brand, category } = product;
   const [number, setNumber] = useState(1);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onIncreaseQuantity = () => {
     setNumber((prev) => prev + 1);
@@ -18,7 +23,16 @@ function ProductDetailInfo({ product }) {
 
   const onChangeQuantity = (e) => {
     const tmp = Number(e.target.value);
-    setNumber(tmp);
+    if (tmp >= stock) setNumber(stock);
+    else setNumber(tmp);
+  };
+
+  const onAddToCart = () => {
+    dispatch(addItemToCart(product, number));
+  };
+
+  const onPurchase = () => {
+    navigate('/cart-purchase');
   };
 
   return (
@@ -64,11 +78,13 @@ function ProductDetailInfo({ product }) {
         </div>
       </div>
       <div className={`${style.action}`}>
-        <button className={`${style.btnAdd}`}>
+        <button className={`${style.btnAdd}`} onClick={onAddToCart}>
           <i className="fa-solid fa-cart-plus"></i>
           <span>Thêm vào giỏ hàng</span>
         </button>
-        <button className={`${style.btnBuy}`}>Mua ngay</button>
+        <button className={`${style.btnBuy}`} onClick={onPurchase}>
+          Mua ngay
+        </button>
       </div>
     </div>
   );

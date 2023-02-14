@@ -1,12 +1,10 @@
 @import '../../../styles/variables.scss';
 
-.column {
-  width: 20%;
-  padding: 0 4px;
-  margin-bottom: 20px;
+.wrapper {
+  padding-bottom: 5px;
 }
 
-.wrapper {
+.item {
   position: relative;
   display: inline-block;
   width: 100%;
@@ -73,6 +71,8 @@
   border-top-left-radius: 4px;
   position: relative;
   cursor: pointer;
+  text-align: center;
+  user-select: none;
 
   &::before {
     content: '';
@@ -100,4 +100,5 @@
   height: 28px;
   line-height: 27px;
   font-size: 14px;
+  text-align: center;
 }

@@ -19,6 +19,7 @@
 }
 
 .page {
-  width: calc(100% * 5 / 6);
-  margin-left: calc(100% / 6);
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
 }

@@ -27,7 +27,7 @@ function Featured() {
 
   return (
     <section id="featured">
-      <h2 className="section-title">Hot Sale</h2>
+      <h2 className="section-title text-center">Hot Sale</h2>
       {loading ? (
         <Spinner color={'#015394'} size={8} />
       ) : (
