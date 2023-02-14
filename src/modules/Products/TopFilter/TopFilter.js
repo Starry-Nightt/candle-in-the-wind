@@ -60,6 +60,7 @@ function TopFilter({ sortFilter, setSortFilter, totalPage, currentPage, setCurre
               )
                 setPageValue(tmp);
             }}
+            onBlur={() => setPageValue(currentPage)}
           />
           / {totalPage}
         </span>
