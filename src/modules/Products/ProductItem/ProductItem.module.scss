@@ -71,6 +71,8 @@
   border-top-left-radius: 4px;
   position: relative;
   cursor: pointer;
+  text-align: center;
+  user-select: none;
 
   &::before {
     content: '';

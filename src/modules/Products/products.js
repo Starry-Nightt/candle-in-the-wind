@@ -39,7 +39,7 @@ function Products() {
     dispatch(
       loadProduct(pathname.slice(10), (currentPage - 1) * 30, searchValue, sortFilter, priceRange),
     );
-  }, [pathname, currentPage, sortFilter, priceRange]);
+  }, [pathname, currentPage, sortFilter, priceRange, searchValue]);
 
   useEffect(() => {
     if (product) {

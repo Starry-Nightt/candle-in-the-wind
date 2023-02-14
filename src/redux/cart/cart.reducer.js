@@ -1,3 +1,5 @@
+import { CART } from '~/shared/constants';
+
 const {
   FETCH_CART_REQUEST,
   FETCH_CART_SUCCESS,
@@ -11,8 +13,10 @@ const {
 
 const initialState = {
   loading: false,
-  cartItems: [],
-  cartQuantity: 0,
+  cartItems: localStorage.getItem(CART) ? JSON.parse(localStorage.getItem(CART)).cartItems : [],
+  cartQuantity: localStorage.getItem(CART)
+    ? JSON.parse(localStorage.getItem(CART)).cartQuantity
+    : 0,
   error: undefined,
 };
 
@@ -31,8 +35,8 @@ const cartReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: undefined,
-        cartItems: action.payload,
-        cartQuantity: action.payload.length,
+        cartItems: action.payload.products,
+        cartQuantity: action.payload.totalQuantity,
       };
     case FETCH_CART_FAILURE:
       return {
@@ -43,10 +47,11 @@ const cartReducer = (state = initialState, action) => {
         cartQuantity: 0,
       };
     case ADD_ITEM_TO_CART: {
-      const idx = state.cartItems.find((item) => item.id === action.payload.id);
-      if (!idx || idx === -1) {
+      const idx = state.cartItems.findIndex((item) => item.id === action.payload.id);
+      let newState;
+      if (idx === -1) {
         const tmpItem = { ...action.payload, quantity: 1 };
-        return {
+        newState = {
           ...state,
           cartItems: [...state.cartItems, tmpItem],
           cartQuantity: state.cartQuantity + 1,
@@ -57,49 +62,60 @@ const cartReducer = (state = initialState, action) => {
           state.cartItems[idx].quantity++;
           check = true;
         }
-        return {
+        newState = {
           ...state,
-          cartQuantity: state.cartQuantity + (check == true) ? 1 : 0,
+          cartQuantity: state.cartQuantity + (check === true ? 1 : 0),
         };
       }
+      localStorage.setItem(CART, JSON.stringify(newState));
+      return newState;
     }
 
     case INCREASE_ITEM_IN_CART: {
       const idx = state.cartItems.findIndex((item) => item.id === action.payload);
       state.cartItems[idx].quantity++;
-      return {
+      let newState = {
         ...state,
         cartQuantity: state.cartQuantity + 1,
       };
+      localStorage.setItem(CART, JSON.stringify(newState));
+      return newState;
     }
     case DECREASE_ITEM_IN_CART: {
       const idx = state.cartItems.findIndex((item) => item.id === action.payload);
       const tmp = state.cartItems[idx];
+      let newState;
       state.cartItems[idx].quantity--;
-      if (state.cartItems[idx].quantity == 0) {
-        return {
+      if (state.cartItems[idx].quantity === 0) {
+        newState = {
           ...state,
-          cartItems: state.cartItems.filter((item) => item.id != tmp.id),
+          cartItems: state.cartItems.filter((item) => item.id !== tmp.id),
+          cartQuantity: state.cartQuantity - 1,
+        };
+      } else {
+        newState = {
+          ...state,
           cartQuantity: state.cartQuantity - 1,
         };
       }
-      return {
-        ...state,
-        cartQuantity: state.cartQuantity - 1,
-      };
+      localStorage.setItem(CART, JSON.stringify(newState));
+      return newState;
     }
     case CLEAR_CART:
+      localStorage.setItem(CART, JSON.stringify({ ...initialState }));
       return {
         ...initialState,
       };
     case REMOVE_ITEM_IN_CART: {
       const idx = state.cartItems.findIndex((item) => item.id === action.payload);
       const tmp = state.cartItems[idx];
-      return {
+      let newState = {
         ...state,
-        cartItems: state.cartItems.filter((item) => item.id != tmp.id),
+        cartItems: state.cartItems.filter((item) => item.id !== tmp.id),
         cartQuantity: state.cartQuantity - tmp.quantity,
       };
+      localStorage.setItem(CART, newState);
+      return newState;
     }
     default:
       return state;

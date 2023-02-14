@@ -44,9 +44,8 @@ class ProductService {
           res.data.products = res.data.products.filter((product) => {
             let title = product.title.toLowerCase();
             let description = product.description.toLowerCase();
-            searchValue = searchValue.toLowerCase();
-
-            let flag = title.includes(searchValue) || description.includes(searchValue);
+            searchValue = searchValue.toLowerCase().trim();
+            let flag = title.startsWith(searchValue) || description.includes(searchValue);
             if (flag) total++;
             return flag && total > skip && total <= skip + limit;
           });

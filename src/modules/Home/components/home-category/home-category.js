@@ -4,7 +4,7 @@ import style from './home-category.module.scss';
 function HomeCategory() {
   return (
     <div>
-      <h2 className="section-title">Shop By Category</h2>
+      <h2 className="section-title text-center">Shop By Category</h2>
       <div className="row">
         {category.map((item, idx) => {
           return (
