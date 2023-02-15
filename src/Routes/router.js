@@ -12,9 +12,11 @@ import ProductDetail from '~/modules/product-detail/product-detail';
 import CartPage from '~/modules/cart-page/cart-page';
 import CartPurchase from '~/modules/cart-page/cart-purchase/cart-purchase';
 import AdminPage from '~/modules/AminPage/AdminPage';
-import ProductManage from '~/modules/AminPage/components/ProductManage/ProductManage';
+import ProductList from '~/modules/AminPage/components/ProductList/ProductList';
+import { useSelector } from 'react-redux';
 
 function Router() {
+  const { role } = useSelector((state) => state.userProfile);
   return (
     <Routes>
       <Route path="/" element={<MainLayout />}>
@@ -36,17 +38,22 @@ function Router() {
 
         {/* Private routes */}
       </Route>
-      <Route path="/admin" element={<AdminPage />}>
-        <Route path="/admin" element={<Navigate to="/admin/product/view" />}></Route>
-        <Route path="/admin/product" element={<Navigate to="/admin/product/view" />}></Route>
-        <Route path="/admin/forum" element={<Navigate to="/admin/forum/view" />}></Route>
-        <Route path="/admin/voucher" element={<Navigate to="/admin/voucher/view" />}></Route>
-        <Route path="/admin/product/view" element={<ProductManage />}></Route>
-        <Route path="/admin/product/add" element={<ProductManage />}></Route>
-        <Route path="/admin/forum/view" element={<ProductManage />}></Route>
-        <Route path="/admin/voucher/view" element={<ProductManage />}></Route>
-        <Route path="/admin/voucher/add" element={<ProductManage />}></Route>
-      </Route>
+      {role && (
+        <Route path="/admin" element={<AdminPage />}>
+          <Route path="/admin" element={<Navigate to="/admin/product/view" />}></Route>
+          <Route path="/admin/product" element={<Navigate to="/admin/product/view" />}></Route>
+          <Route path="/admin/forum" element={<Navigate to="/admin/forum/view" />}></Route>
+          <Route path="/admin/voucher" element={<Navigate to="/admin/voucher/view" />}></Route>
+          <Route path="/admin/order" element={<Navigate to="/admin/order/view" />}></Route>
+          <Route path="/admin/product/view" element={<ProductList />}></Route>
+          <Route path="/admin/product/add" element={<ProductList />}></Route>
+          <Route path="/admin/forum/view" element={<ProductList />}></Route>
+          <Route path="/admin/voucher/view" element={<ProductList />}></Route>
+          <Route path="/admin/voucher/add" element={<ProductList />}></Route>
+          <Route path="/admin/order/view" element={<ProductList />}></Route>
+          <Route path="/admin/order/add" element={<ProductList />}></Route>
+        </Route>
+      )}
     </Routes>
   );
 }

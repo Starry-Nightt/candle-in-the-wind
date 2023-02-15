@@ -61,7 +61,12 @@
 
 .logout {
   border-top: 1px solid white;
+  width: 20%;
   position: absolute;
   bottom: 40px;
   cursor: pointer;
+}
+
+.icon {
+  margin-right: 8px;
 }

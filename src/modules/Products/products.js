@@ -111,7 +111,7 @@ function Products() {
             {product &&
               product.products &&
               product.products.length > 0 &&
-              product.products.map((item, index) => (
+              product.products.map((item) => (
                 <ProductItem key={item.id} data={item} pathname={pathname} />
               ))}
           </div>

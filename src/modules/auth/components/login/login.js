@@ -10,10 +10,9 @@ import AuthWrapper from '../auth-wrapper/auth-wrapper';
 
 function Login() {
   const userProfile = useSelector((state) => state.userProfile);
-  const { isLoggedIn, error, role } = userProfile;
+  const { error } = userProfile;
   const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
+  
   const {
     register,
     handleSubmit,
@@ -30,15 +29,6 @@ function Login() {
   const login = (detail) => {
     dispatch(loginAccount(detail));
   };
-
-  useEffect(() => {
-    if (role) {
-      navigate('/admin');
-    } else if (isLoggedIn) {
-      const from = location.state?.from?.pathname || '/';
-      navigate(from, { replace: true });
-    }
-  }, [isLoggedIn, role]);
 
   useEffect(() => {
     if (!error) {

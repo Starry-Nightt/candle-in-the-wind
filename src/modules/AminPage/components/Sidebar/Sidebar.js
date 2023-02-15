@@ -16,7 +16,7 @@ function Sidebar({ menu, setActive }) {
     <div className={cx('wrapper')}>
       <div className={cx('logo')}>Candle In The Wind</div>
       <div className={cx('user')}>
-        <img src={user?.image || avatar} />
+        <img src={user?.image || avatar} alt="Loading" />
         <span>{user?.username || 'Admin'}</span>
       </div>
 
@@ -29,6 +29,7 @@ function Sidebar({ menu, setActive }) {
               to={item.path}
               onClick={() => setActive(item)}
             >
+              {item.icon && <span className={cx('icon')}>{item.icon}</span>}
               {item.label}
             </NavLink>
           );

@@ -1,0 +1,6 @@
+export const SET_NUMBERS_PAGE = 'SET_NUMBERS_PAGE';
+export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+export const SET_TOTAL_PAGE = 'SET_TOTAL_PAGE';
+export const SET_SORT_FILTER = 'SET_SORT_FILTER';
+export const SET_PRICE_RANGE = 'SET_PRICE_RANGE';
+export const REMOVE_FILTER = 'REMOVE_FILTER';

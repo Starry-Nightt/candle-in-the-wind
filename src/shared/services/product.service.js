@@ -27,18 +27,21 @@ class ProductService {
       default:
         path = '';
     }
+
     return appClient()
       .get(`products${path}`, {
         params,
       })
       .then((res) => {
-        sortFilter.sortFunc(res.data.products);
-        if (priceRange.from && priceRange.to) {
+        if (sortFilter) sortFilter.sortFunc(res.data.products);
+
+        if (priceRange?.from && priceRange?.to) {
           res.data.products = res.data.products.filter((product) => {
             return product.price > priceRange.from && product.price < priceRange.to;
           });
           res.data.total = res.data.products.length;
         }
+
         let total = 0;
         if (searchValue) {
           res.data.products = res.data.products.filter((product) => {
@@ -51,11 +54,14 @@ class ProductService {
           });
           res.data.total = total;
         } else {
-          res.data.products = res.data.products.filter((product) => {
-            total++;
-            return total > skip && total <= skip + limit;
-          });
+          if (skip && limit) {
+            res.data.products = res.data.products.filter((product) => {
+              total++;
+              return total > skip && total <= skip + limit;
+            });
+          }
         }
+
         return res;
       });
   };
