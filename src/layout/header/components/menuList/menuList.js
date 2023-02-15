@@ -15,6 +15,10 @@ function MenuList() {
       path: 'forum',
       viewValue: 'Diễn đàn trao đổi',
     },
+    {
+      path: 'products/all',
+      viewValue: 'Shop now',
+    },
   ];
   const userProfile = useSelector((state) => state.userProfile);
   const { isLoggedIn } = userProfile;

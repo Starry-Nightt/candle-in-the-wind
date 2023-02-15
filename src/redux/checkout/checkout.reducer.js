@@ -7,7 +7,8 @@ const initialState = {
 const checkoutReducer = (state = initialState, action) => {
   switch (action.type) {
     case CHECKOUT_ITEM: {
-      return { ...state, items: [{ ...action.payload, quantity: 1 }] };
+      const { item, quantity } = action.payload;
+      return { ...state, items: [{ ...item, quantity }] };
     }
     case CHECKOUT_CART: {
       return {
