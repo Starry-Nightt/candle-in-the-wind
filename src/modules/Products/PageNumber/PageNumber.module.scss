@@ -1,0 +1,25 @@
+.number {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  line-height: 28px;
+  color: #3f3f3f;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+
+  + .number {
+    margin-left: 10px;
+  }
+  &.noneMargin {
+    margin-left: 2px;
+    border-radius: 0;
+    background-color: #fff;
+  }
+}
+
+.active {
+  background-color: #3f3f3f;
+  color: white;
+}

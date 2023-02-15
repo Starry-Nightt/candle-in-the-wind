@@ -8,17 +8,17 @@ const override = {
   borderColor: 'red',
 };
 
-function Spinner({ loading }) {
-  const color = '#015394';
-
+function Spinner({ loading, size, color, absolute }) {
+  if (!color) color = '#015394';
+  if (!size) size = 8;
   return (
     <>
-      <div className={`${style.spinnerContainer}`}>
+      <div className={`${style.spinnerContainer} ${absolute ? 'absolute' : ''}`}>
         <SyncLoader
           color={color}
           loading={loading}
           cssOverride={override}
-          size={8}
+          size={size}
           aria-label="Loading Spinner"
           data-testid="loader"
         />

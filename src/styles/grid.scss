@@ -7,6 +7,7 @@
 .grid.wide {
     max-width: 1200px;
     margin: 0 auto;
+    padding: 0 20px;
 }
 
 .row {
@@ -139,8 +140,18 @@
     margin-left: 91.66667%;
 }
 
+@media screen and (max-width: 739px) {
+    .hide-on-mobile {
+        display: none !important;
+    }
+ }
+
+
 /* >= Tablet */
 @media (min-width: 740px) {
+    .hide-on-tablet {
+        display: none;
+    }
     .row {
         margin-left: -8px;
         margin-right: -8px;
@@ -277,6 +288,9 @@
 
 /* PC medium resolution > */
 @media (min-width: 1113px) {
+    .hide-on-pc {
+        display: none;
+    }
     .row {
         margin-left: -12px;
         margin-right: -12px;
