@@ -17,7 +17,7 @@ function Filter({ setPriceRange }) {
           <input
             maxLength={7}
             value={from}
-            placeholder="từ...000đ"
+            placeholder="từ $...00"
             onChange={(e) => {
               let tmp = e.target.value;
               let lastChar = tmp[tmp.length - 1];
@@ -29,7 +29,7 @@ function Filter({ setPriceRange }) {
           <input
             maxLength={7}
             value={to}
-            placeholder="đến...000đ"
+            placeholder="đến $...00"
             onChange={(e) => {
               let tmp = e.target.value;
               let lastChar = tmp[tmp.length - 1];

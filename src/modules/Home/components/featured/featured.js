@@ -7,6 +7,7 @@ import 'swiper/css/navigation';
 import appClient from '~/shared/utils/appClient';
 import Spinner from '~/shared/components/spinner/spinner';
 import { useNavigate } from 'react-router-dom';
+import { DollarCurrency } from '~/shared/utils/currency';
 function Featured() {
   const [featuredList, setFeaturedList] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -58,10 +59,12 @@ function Featured() {
             {featuredList.map((item) => {
               return (
                 <SwiperSlide key={item.id}>
-                  <article className="item" onClick={() => onSelectProduct(item.id)}>
+                  <article className="item bg-white" onClick={() => onSelectProduct(item.id)}>
                     <div className="item-thumbnail">
                       <img className="item-image" src={item.thumbnail} alt="" />
-                      <span className="item-price">{`FLASH SALE: ${item.price}.000 VNĐ`}</span>
+                      <span className="item-price">{`FLASH SALE: ${DollarCurrency(
+                        item.price,
+                      )}`}</span>
                     </div>
                     <div className="item-body">
                       <h6 className="item-name">{item.title}</h6>

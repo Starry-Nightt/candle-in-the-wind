@@ -1,4 +1,5 @@
 import { CART } from '~/shared/constants';
+import { SuccessNotify } from '~/shared/utils/notify';
 
 const {
   FETCH_CART_REQUEST,
@@ -76,6 +77,7 @@ const cartReducer = (state = initialState, action) => {
         };
       }
       localStorage.setItem(CART, JSON.stringify(newState));
+      SuccessNotify('Thêm vào giỏ hàng thành công');
       return newState;
     }
 

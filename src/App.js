@@ -8,6 +8,8 @@ import { useEffect } from 'react';
 import { loginAccount } from './redux/user-profile/user-profile.thunk';
 import Spinner from './shared/components/spinner/spinner';
 import { hideLayer, showLayer } from './redux/layer/layer.action';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const userProfile = useSelector((state) => state.userProfile);
@@ -31,11 +33,12 @@ function App() {
   }, [loading]);
 
   return (
-    <div className="App">
+    <div className="App bg-neutral">
       <Header />
       <Router />
       <Footer />
       <Layer />
+      <ToastContainer />
     </div>
   );
 }

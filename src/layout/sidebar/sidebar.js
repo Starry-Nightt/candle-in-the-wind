@@ -2,6 +2,8 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { unShowSidebar } from '~/redux/sidebar/sidebar.action';
 import style from './sidebar.module.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
 function Sidebar() {
   const sidebar = useSelector((state) => state.sidebar);
@@ -16,7 +18,7 @@ function Sidebar() {
     <div className={`${style.sidebar}`}>
       <h3 className={`${style.sidebarTitle}`}>Menu</h3>
       <button className={`${style.sidebarCloseButton}`} onClick={closeSidebar}>
-        <i className="fa-solid fa-xmark"></i>
+        <FontAwesomeIcon icon={faXmark} />
       </button>
       {component}
     </div>

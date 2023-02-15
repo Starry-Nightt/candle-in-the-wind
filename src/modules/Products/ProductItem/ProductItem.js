@@ -3,6 +3,7 @@ import classNames from 'classnames/bind';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addItemToCart } from '~/redux/cart/cart.action';
+import { DollarCurrency } from '~/shared/utils/currency';
 
 import styles from './ProductItem.module.scss';
 
@@ -36,7 +37,7 @@ function ProductItem({ data, pathname }) {
           </Link>
 
           <div className={cx('bottom')}>
-            <span className={cx('prize')}>{data.price}.000đ</span>
+            <span className={cx('prize')}>{DollarCurrency(data.price)}</span>
             <span className={cx('add')} onClick={() => onAddItemToCart(data)}>
               Thêm vào
             </span>
