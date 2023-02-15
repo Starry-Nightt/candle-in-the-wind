@@ -11,7 +11,7 @@ import { DollarCurrency } from '~/shared/utils/currency';
 const cx = classNames.bind(style);
 
 function CartItem({ item }) {
-  const { thumbnail, title, description, price, quantity, stock, id } = item;
+  const { thumbnail, title, description, price, quantity, stock, id, brand } = item;
   const [canShowAlert, setCanShowAlert] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -44,6 +44,7 @@ function CartItem({ item }) {
             <h4 className={cx('item-title')} onClick={onViewItem}>
               {title}
             </h4>
+            <p className={cx('item-brand')}>{brand}</p>
             <p className={cx('item-desc')}>{description}</p>
           </div>
         </div>

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addItemToCart } from '~/redux/cart/cart.action';
+import { checkoutItem } from '~/redux/checkout/checkout.action';
 import Star from '~/shared/components/star/star';
 import { DollarCurrency } from '~/shared/utils/currency';
 import style from './product-detail-info.module.scss';
@@ -33,6 +34,7 @@ function ProductDetailInfo({ product }) {
   };
 
   const onPurchase = () => {
+    dispatch(checkoutItem(product));
     navigate('/cart-purchase');
   };
 

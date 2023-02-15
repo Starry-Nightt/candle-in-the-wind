@@ -1,14 +1,16 @@
 import React, { useMemo } from 'react';
 import style from './cart-bill.module.scss';
 import classNames from 'classnames/bind';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { DollarCurrency } from '~/shared/utils/currency';
+import { checkoutCart } from '~/redux/checkout/checkout.action';
 
 const cx = classNames.bind(style);
 function CartBill() {
   const { cartItems } = useSelector((state) => state.cart);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const total = useMemo(() => {
     const res = cartItems.reduce((acc, cur) => {
@@ -18,6 +20,7 @@ function CartBill() {
   });
 
   const onPurchase = () => {
+    dispatch(checkoutCart(cartItems));
     navigate('/cart-purchase');
   };
 

@@ -11,15 +11,20 @@ function Input({
   maxLength,
   pattern,
   error,
+  value,
+  radioButton,
 }) {
   return (
     <>
-      <label>{label}</label>
-      <input
-        type={type}
-        placeholder={placeholder}
-        {...register(formControl, { required, minLength, maxLength, pattern })}
-      />
+      <section className={radioButton ? `${style.control}` : ''}>
+        <label>{label}</label>
+        <input
+          type={type}
+          placeholder={placeholder}
+          {...register(formControl, { required, minLength, maxLength, pattern })}
+          value={value}
+        />
+      </section>
       <p className={`${style.error}`}>{error?.message}</p>
     </>
   );
