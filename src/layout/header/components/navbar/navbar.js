@@ -19,7 +19,6 @@ function Navbar(props) {
     },
   ];
   const [loggedIn, setLoggedIn] = useState(false);
-  const [fixed, setFixed] = useState(false);
   const dispatch = useDispatch();
   const { user } = props;
   const navigate = useNavigate();
@@ -41,19 +40,8 @@ function Navbar(props) {
     else setLoggedIn(false);
   }, [user]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY >= 300) setFixed(true);
-      else setFixed(false);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
   return (
-    <section className={`${style.navbar} ${fixed ? `${style.fixed}` : ''}`}>
+    <section className={`${style.navbar}`}>
       <div className="grid wide ">
         <div className="hide-on-mobile flex space-between align-center">
           <ul className={`${style.navbarLinks}`}>

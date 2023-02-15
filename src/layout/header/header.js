@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import style from './header.module.scss';
 import Navbar from './components/navbar/navbar';
 import Ads from './components/ads/ads';
@@ -8,8 +8,22 @@ import Category from './components/category/category';
 import { Link } from 'react-router-dom';
 
 function Header() {
+  const [fixed, setFixed] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY >= 400) setFixed(true);
+      else setFixed(false);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   return (
     <header>
+      <div className={`${fixed ? `${style.fixed}` : `${style.hide}`}`}>
+        <Navbar />
+      </div>
       <Navbar />
       <section className="bg-white">
         <div className="grid wide">

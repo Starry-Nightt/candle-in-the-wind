@@ -6,11 +6,12 @@ import { decreaseItemInCart, increaseItemInCart, removeItemInCart } from '~/redu
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
+import { DollarCurrency } from '~/shared/utils/currency';
 
 const cx = classNames.bind(style);
 
 function CartItem({ item }) {
-  const { thumbnail, title, description, price, quantity, stock, id } = item;
+  const { thumbnail, title, description, price, quantity, stock, id, brand } = item;
   const [canShowAlert, setCanShowAlert] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -33,7 +34,7 @@ function CartItem({ item }) {
   };
 
   return (
-    <div className="row py-3">
+    <div className="row py-3 bg-white">
       <div className="col l-5 m-5 c-5">
         <div className="flex">
           <div className={cx('item-image')} onClick={onViewItem}>
@@ -43,12 +44,13 @@ function CartItem({ item }) {
             <h4 className={cx('item-title')} onClick={onViewItem}>
               {title}
             </h4>
+            <p className={cx('item-brand')}>{brand}</p>
             <p className={cx('item-desc')}>{description}</p>
           </div>
         </div>
       </div>
       <div className="col l-2 m-2 c-2 flex align-center justify-center">
-        <span className={cx('item-price')}>{price}.000 VNĐ</span>
+        <span className={cx('item-price')}>{DollarCurrency(price)}</span>
       </div>
       <div className="col l-3 m-3 c-3 flex align-center justify-center">
         <div className={cx('quantity')}>
@@ -70,7 +72,7 @@ function CartItem({ item }) {
         </div>
       </div>
       <div className="col l-2 m-2 c-2 flex align-center justify-center relative">
-        <span className={cx('item-price-final')}>{price * quantity}.000 VNĐ</span>
+        <span className={cx('item-price-final')}>{DollarCurrency(price * quantity)}</span>
         <div className={cx('remove-icon')} onClick={() => dispatch(removeItemInCart(id))}>
           <FontAwesomeIcon icon={faXmark} />
         </div>

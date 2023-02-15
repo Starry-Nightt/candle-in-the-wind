@@ -15,7 +15,7 @@ function HomeCategory() {
       <div className="row">
         {category.map((item, idx) => {
           return (
-            <div className="col l-2 m-4 c-4" key={idx}>
+            <div className="col l-2 m-4 c-4 " key={idx}>
               <article
                 className={`${style.item}`}
                 onClick={() => onViewCategory(categoryList[(idx + 1) % categoryList.length].path)}

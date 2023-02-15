@@ -2,7 +2,9 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addItemToCart } from '~/redux/cart/cart.action';
+import { checkoutItem } from '~/redux/checkout/checkout.action';
 import Star from '~/shared/components/star/star';
+import { DollarCurrency } from '~/shared/utils/currency';
 import style from './product-detail-info.module.scss';
 
 function ProductDetailInfo({ product }) {
@@ -32,6 +34,7 @@ function ProductDetailInfo({ product }) {
   };
 
   const onPurchase = () => {
+    dispatch(checkoutItem(product));
     navigate('/cart-purchase');
   };
 
@@ -54,9 +57,9 @@ function ProductDetailInfo({ product }) {
         </div>
       </ul>
       <div className={`${style.price}`}>
-        <span className={`${style.oldPrice}`}>{price}.000đ</span>
+        <span className={`${style.oldPrice}`}>{DollarCurrency(price)}</span>
         <span className={`${style.salePrice}`}>
-          {Math.floor((1 - discountPercentage / 100) * price)}.000đ
+          {DollarCurrency(Math.floor((1 - discountPercentage / 100) * price))}
         </span>
         <span className={`${style.sale} text-center`}>{Math.floor(discountPercentage)}% giảm</span>
       </div>

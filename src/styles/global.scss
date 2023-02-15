@@ -158,23 +158,23 @@ img {
 }
 
 .text-sm {
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 14px !important;
+  line-height: 20px !important;
 }
 
 .text-base {
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 16px !important;
+  line-height: 24px !important;
 }
 
 .text-lg {
-  font-size: 18px;
-  line-height: 28px;
+  font-size: 18px !important;
+  line-height: 28px !important;
 }
 
 .text-xl {
-  font-size: 20px;
-  line-height: 28px;
+  font-size: 20px !important;
+  line-height: 28px !important;
 }
 
 // Text align

@@ -16,7 +16,14 @@ const maxLengthField = (value) => {
 };
 
 const emailField = () => {
-  return '/^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/';
+  return { value: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, message: 'Email không hợp lệ' };
 };
 
-export { requiredField, minLengthField, maxLengthField, emailField };
+const phoneNumber = () => {
+  return {
+    value: /\(?([0-9]{3})\)?([ .-]?)([0-9]{3})\2([0-9]{4})/,
+    message: 'Số điện thoại không hợp lệ',
+  };
+};
+
+export { requiredField, minLengthField, maxLengthField, emailField, phoneNumber };
