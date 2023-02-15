@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadProduct } from '~/redux/product/product.thunk';
 import Spinner from '@components/spinner/spinner';
@@ -13,40 +13,46 @@ import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 import TopFilter from './TopFilter/TopFilter';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import NotFoundProduct from './NotFoundProduct/NotFoundProduct';
-import sortFilterList from './TopFilter/sortFilterList';
+import {
+  removeFilter,
+  setCurrentPage,
+  setNumbersPage,
+  setSearchValue,
+  setTotalPage,
+} from '~/redux/filter/filter.action';
 
 const cx = classNames.bind(styles);
 
 function Products() {
   const { loading, product, error } = useSelector((state) => state.product);
+  const { numbersPage, currentPage, totalPage, sortFilter, priceRange, searchValue } = useSelector(
+    (state) => state.filter,
+  );
   const dispatch = useDispatch();
 
   const { pathname } = useLocation();
-  const [numbersPage, setNumbersPage] = useState([1]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPage, setTotalPage] = useState(1);
-  const [sortFilter, setSortFilter] = useState(sortFilterList[0]);
-  const [priceRange, setPriceRange] = useState({ from: '', to: '' });
 
   const [a] = useSearchParams();
-  const searchValue = a.get('search');
+  if (a.get('search') === '') dispatch(removeFilter());
 
   useEffect(() => {
-    setCurrentPage(1);
+    dispatch(setCurrentPage(1));
   }, [pathname, sortFilter]);
 
   useEffect(() => {
-    dispatch(
-      loadProduct(pathname.slice(10), (currentPage - 1) * 30, searchValue, sortFilter, priceRange),
-    );
+    dispatch(setSearchValue(''));
+  }, [pathname]);
+
+  useEffect(() => {
+    dispatch(loadProduct(pathname.slice(10), currentPage, sortFilter, priceRange, searchValue));
   }, [pathname, currentPage, sortFilter, priceRange, searchValue]);
 
   useEffect(() => {
     if (product) {
       let total;
       total = Math.ceil(product.total / 30);
-      if (Number.isNaN(total)) setTotalPage(1);
-      else setTotalPage(total);
+      if (Number.isNaN(total)) dispatch(setTotalPage(1));
+      else dispatch(setTotalPage(total));
     }
   }, [product]);
 
@@ -56,7 +62,7 @@ function Products() {
       if (i > totalPage) break;
       else arr.push(i);
     }
-    setNumbersPage(arr);
+    dispatch(setNumbersPage(arr));
   }, [totalPage]);
 
   useEffect(() => {
@@ -73,7 +79,7 @@ function Products() {
           arr.push(i);
         }
       }
-      setNumbersPage(arr);
+      dispatch(setNumbersPage(arr));
     } else if (currentPage <= numbersPage[0] && currentPage < totalPage) {
       if (currentPage > 2) {
         for (let i = currentPage - 2; i <= currentPage + 2; i++) {
@@ -84,7 +90,7 @@ function Products() {
           arr.push(i);
         }
       }
-      setNumbersPage(arr);
+      dispatch(setNumbersPage(arr));
     }
   }, [currentPage]);
 
@@ -92,19 +98,15 @@ function Products() {
     <>
       <div className="row ">
         <div className="col l-2 m-12 c-12">
-          <Filter setPriceRange={setPriceRange} />
+          <Filter />
         </div>
+
         <div className="col l-10 m-12 c-12 ">
           <div className={cx('filter-wrapper')}>
-            <TopFilter
-              sortFilter={sortFilter}
-              setSortFilter={setSortFilter}
-              totalPage={totalPage}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-            />
+            <TopFilter />
           </div>
-          <div className={cx('row sm-gutter')}>
+
+          <div className={cx('row sm-gutter')} style={{ minHeight: 200 }}>
             {loading && <Spinner />}
             {error && <h3>Error</h3>}
             {!totalPage && <NotFoundProduct />}
@@ -115,35 +117,22 @@ function Products() {
                 <ProductItem key={item.id} data={item} pathname={pathname} />
               ))}
           </div>
+
           <div className={cx('page')}>
-            <PageNumber>
+            <PageNumber noneMargin={true}>
               <FontAwesomeIcon
-                onClick={() =>
-                  setCurrentPage((prev) => {
-                    return prev > 1 ? prev - 1 : prev;
-                  })
-                }
+                onClick={() => dispatch(setCurrentPage(currentPage - 1))}
                 icon={faCaretLeft}
               />
             </PageNumber>
+
             {numbersPage.map((numberPage) => {
-              return (
-                <PageNumber
-                  key={numberPage}
-                  currentPage={currentPage}
-                  onClick={() => setCurrentPage(numberPage)}
-                >
-                  {numberPage}
-                </PageNumber>
-              );
+              return <PageNumber key={numberPage} numberPage={numberPage} />;
             })}
-            <PageNumber>
+
+            <PageNumber noneMargin={true}>
               <FontAwesomeIcon
-                onClick={() =>
-                  setCurrentPage((prev) => {
-                    return prev < totalPage ? prev + 1 : prev;
-                  })
-                }
+                onClick={() => dispatch(setCurrentPage(currentPage + 1))}
                 icon={faCaretRight}
               />
             </PageNumber>

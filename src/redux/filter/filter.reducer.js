@@ -6,18 +6,20 @@ const {
   SET_TOTAL_PAGE,
   SET_SORT_FILTER,
   SET_PRICE_RANGE,
+  SET_SEARCH_VALUE,
   REMOVE_FILTER,
 } = require('./filter.type');
 
-const initialProduct = {
+const initialFilter = {
   numbersPage: [1],
   currentPage: 1,
   totalPage: 1,
   sortFilter: sortFilterList[0],
+  searchValue: '',
   priceRange: { from: '', to: '' },
 };
 
-const productReducer = (state = initialProduct, action) => {
+const filterReducer = (state = initialFilter, action) => {
   switch (action.type) {
     case REMOVE_FILTER:
       return {
@@ -26,6 +28,7 @@ const productReducer = (state = initialProduct, action) => {
         currentPage: 1,
         totalPage: 1,
         sortFilter: sortFilterList[0],
+        searchValue: '',
         priceRange: { from: '', to: '' },
       };
     case SET_NUMBERS_PAGE:
@@ -34,9 +37,12 @@ const productReducer = (state = initialProduct, action) => {
         numbersPage: action.payload,
       };
     case SET_CURRENT_PAGE:
+      let tmp = action.payload;
+      tmp = tmp >= 1 ? tmp : 1;
+      tmp = tmp <= state.totalPage ? tmp : state.totalPage;
       return {
         ...state,
-        currentPage: action.payload,
+        currentPage: tmp,
       };
     case SET_TOTAL_PAGE:
       return {
@@ -53,9 +59,14 @@ const productReducer = (state = initialProduct, action) => {
         ...state,
         priceRange: action.payload,
       };
+    case SET_SEARCH_VALUE:
+      return {
+        ...state,
+        searchValue: action.payload,
+      };
     default:
       return state;
   }
 };
 
-export default productReducer;
+export default filterReducer;

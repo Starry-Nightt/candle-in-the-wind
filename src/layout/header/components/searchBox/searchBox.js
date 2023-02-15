@@ -7,12 +7,16 @@ import Tippy from '@tippyjs/react/headless';
 import styles from './searchBox.module.scss';
 import { categoryList } from '../category/category';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { setSearchValue } from '~/redux/filter/filter.action';
 
 const cx = classNames.bind(styles);
 
 function SearchBox() {
   const [currentOption, setCurrentOption] = useState(categoryList[0]);
-  const [searchValue, setSearchValue] = useState('');
+  const { searchValue } = useSelector((state) => state.filter);
+  const dispatch = useDispatch();
+  const [search, setSearch] = useState('');
   const currentPath = useLocation().pathname;
   const navigate = useNavigate();
 
@@ -28,7 +32,9 @@ function SearchBox() {
   }, [currentPath]);
 
   const onSearch = () => {
-    navigate(`${currentOption.path}?search=${searchValue}`);
+    dispatch(setSearchValue(search));
+    setSearch('');
+    navigate(`${currentOption.path}?search=${search}`);
   };
 
   const handleKeyDown = (e) => {
@@ -40,10 +46,10 @@ function SearchBox() {
       <div className={cx('wrap-input')}>
         <input
           name="search"
-          value={searchValue}
+          value={search}
           className={cx('search-input')}
           placeholder="Nhập mã sản phẩm hoặc tên sản phẩm để tìm kiếm..."
-          onChange={(e) => setSearchValue(e.target.value)}
+          onChange={(e) => setSearch(e.target.value)}
           onKeyDown={(e) => handleKeyDown(e)}
         />
       </div>

@@ -1,11 +1,10 @@
 import appClient from '@utils/appClient';
 
 class ProductService {
-  getCategoryProduct = (category, params = {}, searchValue, sortFilter, priceRange) => {
-    const { limit, skip } = params;
-    // if (searchValue) {
-    params = { limit: 0 };
-    // }
+  getCategoryProduct = (category, currentPage, sortFilter, priceRange, searchValue) => {
+    const limit = 30;
+    const skip = (currentPage - 1) * limit;
+    const params = { limit: 0 };
 
     let path;
     switch (category) {
@@ -47,14 +46,14 @@ class ProductService {
           res.data.products = res.data.products.filter((product) => {
             let title = product.title.toLowerCase();
             let description = product.description.toLowerCase();
-            searchValue = searchValue.toLowerCase().trim();
-            let flag = title.startsWith(searchValue) || description.includes(searchValue);
+            let tmp = searchValue.toLowerCase().trim();
+            let flag = title.startsWith(tmp) || description.includes(tmp);
             if (flag) total++;
             return flag && total > skip && total <= skip + limit;
           });
           res.data.total = total;
         } else {
-          if (skip && limit) {
+          if (limit) {
             res.data.products = res.data.products.filter((product) => {
               total++;
               return total > skip && total <= skip + limit;

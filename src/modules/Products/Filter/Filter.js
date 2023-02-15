@@ -1,12 +1,15 @@
 import classNames from 'classnames/bind';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { removeFilter, setPriceRange } from '~/redux/filter/filter.action';
 import Button from '~/shared/components/Button';
 
 import styles from './Filter.module.scss';
 
 const cx = classNames.bind(styles);
 
-function Filter({ setPriceRange }) {
+function Filter() {
+  const dispatch = useDispatch();
   const [from, setFrom] = useState('');
   const [to, setTo] = useState('');
   return (
@@ -41,9 +44,7 @@ function Filter({ setPriceRange }) {
           type="primary"
           size="large"
           children={'Áp dụng'}
-          onClick={() => {
-            setPriceRange({ from, to });
-          }}
+          onClick={() => dispatch(setPriceRange({ from, to }))}
         />
       </div>
 
@@ -67,11 +68,7 @@ function Filter({ setPriceRange }) {
         type="primary"
         size="large"
         children={'Xóa bộ lọc'}
-        onClick={() => {
-          setFrom('');
-          setTo('');
-          setPriceRange({ from: '', to: '' });
-        }}
+        onClick={() => dispatch(removeFilter())}
       />
     </div>
   );

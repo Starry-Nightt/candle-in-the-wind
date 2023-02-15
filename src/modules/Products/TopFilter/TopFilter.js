@@ -8,19 +8,23 @@ import Button from '~/shared/components/Button';
 import PageNumber from '../PageNumber/PageNumber';
 import styles from './TopFilter.module.scss';
 import sortFilterList from './sortFilterList';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentPage, setSortFilter } from '~/redux/filter/filter.action';
 
 const cx = classNames.bind(styles);
 
-function TopFilter({ sortFilter, setSortFilter, totalPage, currentPage, setCurrentPage }) {
+function TopFilter() {
+  const { sortFilter, totalPage, currentPage } = useSelector((state) => state.filter);
+  const dispatch = useDispatch();
   const [pageValue, setPageValue] = useState(currentPage);
   const [inputWidth, setInputWidth] = useState(12);
-
   useEffect(() => {
     setPageValue(currentPage);
   }, [currentPage]);
 
   useEffect(() => {
-    if (!Number.isNaN(Number.parseInt(pageValue))) setCurrentPage(Number.parseInt(pageValue));
+    if (!Number.isNaN(Number.parseInt(pageValue)))
+      dispatch(setCurrentPage(Number.parseInt(pageValue)));
     if (pageValue.length > 0) setInputWidth(12 + 9 * (pageValue.length - 1));
   }, [pageValue]);
 
@@ -36,7 +40,7 @@ function TopFilter({ sortFilter, setSortFilter, totalPage, currentPage, setCurre
             })}
             type="pNoneOutline"
             children={filter.label}
-            onClick={() => setSortFilter(filter)}
+            onClick={() => dispatch(setSortFilter(filter))}
           />
         ))}
       </div>
@@ -65,21 +69,13 @@ function TopFilter({ sortFilter, setSortFilter, totalPage, currentPage, setCurre
         </span>
         <PageNumber noneMargin={true}>
           <FontAwesomeIcon
-            onClick={() =>
-              setCurrentPage((prev) => {
-                return prev > 1 ? prev - 1 : prev;
-              })
-            }
+            onClick={() => dispatch(setCurrentPage(currentPage - 1))}
             icon={faCaretLeft}
           />
         </PageNumber>
         <PageNumber noneMargin={true}>
           <FontAwesomeIcon
-            onClick={() =>
-              setCurrentPage((prev) => {
-                return prev < totalPage ? prev + 1 : prev;
-              })
-            }
+            onClick={() => dispatch(setCurrentPage(currentPage + 1))}
             icon={faCaretRight}
           />
         </PageNumber>

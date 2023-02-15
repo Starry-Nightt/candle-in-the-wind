@@ -4,6 +4,7 @@ const {
   SET_TOTAL_PAGE,
   SET_SORT_FILTER,
   SET_PRICE_RANGE,
+  SET_SEARCH_VALUE,
   REMOVE_FILTER,
 } = require('./filter.type');
 
@@ -42,7 +43,14 @@ const setPriceRange = (priceRange) => {
   };
 };
 
-const fetchProductFailure = () => {
+const setSearchValue = (searchValue) => {
+  return {
+    type: SET_SEARCH_VALUE,
+    payload: searchValue,
+  };
+};
+
+const removeFilter = () => {
   return {
     type: REMOVE_FILTER,
   };
@@ -54,5 +62,6 @@ export {
   setTotalPage,
   setSortFilter,
   setPriceRange,
-  fetchProductFailure,
+  setSearchValue,
+  removeFilter,
 };
