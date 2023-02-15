@@ -7,11 +7,21 @@ import TippyHeadless from '@tippyjs/react/headless';
 
 const cx = classNames.bind(style);
 
-function ProductItem({ data }) {
+function ProductItem({ data, addDeleteItem, removeDeleteItem, deleteItem }) {
   return (
     <div className={cx('wrapper')}>
       <div className={cx('select')}>
-        <input type={'checkbox'} />
+        <input
+          type={'checkbox'}
+          checked={deleteItem.includes(data.id)}
+          onChange={(e) => {
+            if (e.target.checked) {
+              addDeleteItem([data.id]);
+            } else {
+              removeDeleteItem([data.id]);
+            }
+          }}
+        />
       </div>
       <div className={cx('image')}>
         <img src={data.thumbnail} alt="Loading" />

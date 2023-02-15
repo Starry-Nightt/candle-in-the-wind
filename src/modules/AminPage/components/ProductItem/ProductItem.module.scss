@@ -14,10 +14,15 @@
   }
 
   .select {
-    width: 25px;
+    width: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    input {
+      width: 16px;
+      height: 16px;
+    }
   }
 
   .image {

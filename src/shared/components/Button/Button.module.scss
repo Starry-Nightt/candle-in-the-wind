@@ -8,7 +8,7 @@
   min-width: 90px;
   min-height: 32px;
   background-color: $white-color;
-  border: 1px solid transparent;
+  border: 2px solid transparent;
   cursor: pointer;
   user-select: none;
 
@@ -83,7 +83,8 @@
 // Button Size
 .small {
   min-width: 88px;
-  min-height: 32px;
+  min-height: 24px;
+  font-size: 14px;
 }
 
 .large {

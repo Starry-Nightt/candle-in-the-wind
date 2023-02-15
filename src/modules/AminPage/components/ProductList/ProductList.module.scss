@@ -64,7 +64,12 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 20px;
+    width: 40px;
+
+    input {
+      width: 16px;
+      height: 16px;
+    }
   }
 
   .image {
@@ -113,5 +118,15 @@
   border: none;
   outline: none;
   font-size: 16px;
+  background-color: $light-primary-color;
   transform: translateY(1px);
+}
+
+.delete-btn {
+  padding: 0 4px;
+  color: #333;
+  position: fixed;
+  bottom: 100px;
+  right: 50px;
+  z-index: 100;
 }

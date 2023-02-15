@@ -8,7 +8,6 @@ import { faImage } from '@fortawesome/free-regular-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { loadProduct } from '~/redux/product/product.thunk';
-import { useLocation } from 'react-router-dom';
 import Spinner from '~/shared/components/spinner/spinner';
 import PageNumber from '~/modules/Products/PageNumber/PageNumber';
 import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
@@ -20,6 +19,7 @@ import {
   setTotalPage,
 } from '~/redux/filter/filter.action';
 import NotFoundProduct from '~/modules/Products/NotFoundProduct/NotFoundProduct';
+import Button from '~/shared/components/Button';
 
 const cx = classNames.bind(style);
 
@@ -29,7 +29,26 @@ function ProductList() {
     (state) => state.filter,
   );
   const [category, setCategory] = useState(categoryList[0].path);
+  const [deleteItem, setDeleteItem] = useState([]);
+  const [pageValue, setPageValue] = useState(currentPage);
+  const [inputWidth, setInputWidth] = useState(12);
   const dispatch = useDispatch();
+
+  function addDeleteItem(item) {
+    let arr = new Set(deleteItem);
+    item.forEach((sub) => arr.add(sub));
+    setDeleteItem([...arr]);
+  }
+
+  function removeDeleteItem(item) {
+    let arr = new Set(deleteItem);
+    item.forEach((sub) => arr.delete(sub));
+    setDeleteItem([...arr]);
+  }
+
+  useEffect(() => {
+    console.log(deleteItem);
+  }, [deleteItem]);
 
   useEffect(() => {
     dispatch(loadProduct(category.slice(10), currentPage, sortFilter, priceRange, searchValue));
@@ -82,8 +101,6 @@ function ProductList() {
     }
   }, [currentPage]);
 
-  const [pageValue, setPageValue] = useState(currentPage);
-  const [inputWidth, setInputWidth] = useState(12);
   useEffect(() => {
     setPageValue(currentPage);
   }, [currentPage]);
@@ -119,6 +136,7 @@ function ProductList() {
               </option>
             ))}
           </select>
+
           <span>Sắp xếp:</span>
           <select
             onChange={(e) => {
@@ -133,6 +151,12 @@ function ProductList() {
               </option>
             ))}
           </select>
+
+          {deleteItem.length > 0 && (
+            <Button className={cx('delete-btn')} rounded type="pOutline">
+              Xóa sản phẩm
+            </Button>
+          )}
         </span>
 
         <div className={cx('page')}>
@@ -175,7 +199,16 @@ function ProductList() {
       <div className={cx('product')}>
         <div className={cx('label')}>
           <div className={cx('select')}>
-            <input type={'checkbox'} />
+            <input
+              type={'checkbox'}
+              onChange={(e) => {
+                if (e.target.checked) {
+                  addDeleteItem(product.products.map((data) => data.id));
+                } else {
+                  removeDeleteItem(product.products.map((data) => data.id));
+                }
+              }}
+            />
           </div>
           <div className={cx('image')}>
             <FontAwesomeIcon icon={faImage} />
@@ -193,7 +226,15 @@ function ProductList() {
         {product &&
           product.products &&
           product.products.length > 0 &&
-          product.products.map((item) => <ProductItem key={item.id} data={item} />)}
+          product.products.map((item) => (
+            <ProductItem
+              key={item.id}
+              data={item}
+              addDeleteItem={addDeleteItem}
+              removeDeleteItem={removeDeleteItem}
+              deleteItem={deleteItem}
+            />
+          ))}
         <div className={cx('page')}>
           <PageNumber>
             <FontAwesomeIcon

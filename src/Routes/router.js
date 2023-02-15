@@ -46,12 +46,12 @@ function Router() {
           <Route path="/admin/voucher" element={<Navigate to="/admin/voucher/view" />}></Route>
           <Route path="/admin/order" element={<Navigate to="/admin/order/view" />}></Route>
           <Route path="/admin/product/view" element={<ProductList />}></Route>
-          <Route path="/admin/product/add" element={<ProductList />}></Route>
-          <Route path="/admin/forum/view" element={<ProductList />}></Route>
-          <Route path="/admin/voucher/view" element={<ProductList />}></Route>
-          <Route path="/admin/voucher/add" element={<ProductList />}></Route>
-          <Route path="/admin/order/view" element={<ProductList />}></Route>
-          <Route path="/admin/order/add" element={<ProductList />}></Route>
+          <Route path="/admin/product/add" element={<NotFound />}></Route>
+          <Route path="/admin/forum/view" element={<NotFound />}></Route>
+          <Route path="/admin/voucher/view" element={<NotFound />}></Route>
+          <Route path="/admin/voucher/add" element={<NotFound />}></Route>
+          <Route path="/admin/order/view" element={<NotFound />}></Route>
+          <Route path="/admin/order/add" element={<NotFound />}></Route>
         </Route>
       )}
     </Routes>
