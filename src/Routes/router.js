@@ -10,6 +10,8 @@ import Register from '~/modules/auth/components/register/register';
 import NotFound from '~/modules/not-found/not-found';
 import ProductDetail from '~/modules/product-detail/product-detail';
 import ChangePassword from '~/modules/auth/components/ChangePassword/ChangePassword';
+import ChangeUserInfo from '~/modules/auth/components/ChangeUserInfo/ChangeUserInfo';
+import UserInfo from '~/modules/auth/components/UserInfo/UserInfo';
 
 function Router() {
   return (
@@ -24,6 +26,8 @@ function Router() {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/changepassword" element={<ChangePassword />}></Route>
+        <Route path="/changeuserinfo" element={<ChangeUserInfo />}></Route>
+        <Route path="/userinfo" element={<UserInfo />}></Route>
         <Route path="*" element={<NotFound />}></Route>
 
         {/* Protected Routes */}

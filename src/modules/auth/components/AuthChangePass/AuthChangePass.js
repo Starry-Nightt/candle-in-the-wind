@@ -11,8 +11,16 @@ function AuthChangePass({ children }) {
     navigate('/changepassword');
   };
 
+  const onChangeUserInfoTab = () => {
+    navigate('/changeuserinfo');
+  };
+
   const isChangePasswordTab = () => {
     return pathname === '/changepassword';
+  };
+
+  const isChangeUserInfoTab = () => {
+    return pathname === '/changeuserinfo';
   };
 
   return (
@@ -24,6 +32,12 @@ function AuthChangePass({ children }) {
           onClick={onChangePasswordTab}
         >
           <span>Đổi mật khẩu</span>
+        </div>
+        <div
+          className={`${style.tab} ${isChangeUserInfoTab() ? style.active : ''}`}
+          onClick={onChangeUserInfoTab}
+        >
+          <span>Sửa thông tin tài khoản</span>
         </div>
       </div>
       {/* Modal body */}

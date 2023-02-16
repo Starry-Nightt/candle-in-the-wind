@@ -9,7 +9,18 @@ function User({ user }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const menuItem = [
-    { value: 'Xem thông tin tài khoản', handleClick() {} },
+    {
+      value: 'Xem thông tin tài khoản',
+      handleClick() {
+        navigate('/userInfo');
+      },
+    },
+    {
+      value: 'Đổi thông tin tài khoản',
+      handleClick() {
+        navigate('/changeuserinfo');
+      },
+    },
     {
       value: 'Đổi mật khẩu',
       handleClick() {
