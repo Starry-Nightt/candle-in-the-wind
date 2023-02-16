@@ -34,6 +34,15 @@
     display: flex;
   }
 
+  .containerNext {
+    border-top: 2px solid #015394;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px 0;
+  }
+
   .infoContainer {
     padding: 10px 20px;
     width: 60%;
@@ -109,7 +118,7 @@
     margin: auto 0;
   }
   .submitButton {
-    width: 100%;
+    width: 30%;
     padding: 16px;
     text-align: center;
     border: none;
