@@ -10,11 +10,10 @@ function ProductDetail() {
 
   const [product, setProduct] = useState(undefined);
   const [loading, setLoading] = useState(false);
-
   useEffect(() => {
     setLoading(true);
     productService.getProduct(productId).then((res) => {
-      setProduct(res.data);
+      setProduct(res.data.product);
       setLoading(false);
     });
   }, []);

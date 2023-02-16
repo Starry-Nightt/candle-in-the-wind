@@ -3,7 +3,7 @@ import classNames from 'classnames/bind';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addItemToCart } from '~/redux/cart/cart.action';
-import { DollarCurrency } from '~/shared/utils/currency';
+import { DollarCurrency, VNDCurrency } from '~/shared/utils/currency';
 
 import styles from './ProductItem.module.scss';
 
@@ -19,7 +19,7 @@ function ProductItem({ data, pathname }) {
     <div className={cx('col l-2-4 m-4 c-4')}>
       <div className={cx('wrapper')}>
         <div className={cx('item')}>
-          <Link to={`${pathname}/${data.id}`}>
+          <Link to={`${pathname}/${data.ID_Product}`}>
             <div
               className={cx('image')}
               style={{
@@ -43,7 +43,7 @@ function ProductItem({ data, pathname }) {
             </span>
           </div>
 
-          <div className={cx('sale')}>{Math.floor(data.discountPercentage)}% giảm</div>
+          <div className={cx('sale')}>{VNDCurrency(data.discount)} giảm</div>
         </div>
       </div>
     </div>

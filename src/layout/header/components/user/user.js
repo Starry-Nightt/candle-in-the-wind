@@ -42,7 +42,7 @@ function User({ user }) {
         <div className={`${style.avatar}`}>
           <img src={user.avatar} alt=""></img>
         </div>
-        <p className={`${style.username}`}>{user.username}</p>
+        <p className={`${style.username}`}>{user.fullname}</p>
       </div>
     </Tippy>
   );

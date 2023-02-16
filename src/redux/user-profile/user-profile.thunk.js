@@ -16,7 +16,8 @@ const loginAccount = (authInfo) => {
       .login(authInfo)
       .then((res) => {
         localStorage.setItem(TOKEN, JSON.stringify(authInfo));
-        dispatch(fetchUserProfileSuccess(res.data));
+        dispatch(fetchUserProfileSuccess(res.data.user));
+        console.log(res.data);
         SuccessNotify('Đăng nhập thành công');
       })
       .catch((error) => {
@@ -28,9 +29,30 @@ const loginAccount = (authInfo) => {
 
 const logout = () => {
   return function (dispatch) {
-    dispatch(endSession());
-    localStorage.removeItem(TOKEN);
+    userService
+      .logout()
+      .then((res) => {
+        dispatch(endSession());
+        localStorage.removeItem(TOKEN);
+        SuccessNotify('Đăng xuất thành công');
+      })
+      .catch(() => {
+        ErrorNotify('Đã xảy ra lỗi');
+      });
   };
 };
 
-export { loginAccount, logout };
+const registerAccount = (authInfo) => {
+  return function (dispatch) {
+    userService
+      .register(authInfo)
+      .then((res) => {
+        SuccessNotify('Đăng ký thành công');
+      })
+      .catch(() => {
+        ErrorNotify('Đã xảy ra lỗi');
+      });
+  };
+};
+
+export { loginAccount, logout, registerAccount };

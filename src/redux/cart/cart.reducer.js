@@ -49,7 +49,7 @@ const cartReducer = (state = initialState, action) => {
       };
     case ADD_ITEM_TO_CART: {
       let { product, quantity } = action.payload;
-      const idx = state.cartItems.findIndex((item) => item.id === product.id);
+      const idx = state.cartItems.findIndex((item) => item.ID_Product === product.ID_Product);
       let newState;
       if (idx === -1) {
         if (quantity > product.stock) {
@@ -82,7 +82,7 @@ const cartReducer = (state = initialState, action) => {
     }
 
     case INCREASE_ITEM_IN_CART: {
-      const idx = state.cartItems.findIndex((item) => item.id === action.payload);
+      const idx = state.cartItems.findIndex((item) => item.ID_Product === action.payload);
       state.cartItems[idx].quantity++;
       let newState = {
         ...state,
@@ -92,14 +92,14 @@ const cartReducer = (state = initialState, action) => {
       return newState;
     }
     case DECREASE_ITEM_IN_CART: {
-      const idx = state.cartItems.findIndex((item) => item.id === action.payload);
+      const idx = state.cartItems.findIndex((item) => item.ID_Product === action.payload);
       const tmp = state.cartItems[idx];
       let newState;
       state.cartItems[idx].quantity--;
       if (state.cartItems[idx].quantity === 0) {
         newState = {
           ...state,
-          cartItems: state.cartItems.filter((item) => item.id !== tmp.id),
+          cartItems: state.cartItems.filter((item) => item.ID_Product !== tmp.ID_Product),
           cartQuantity: state.cartQuantity - 1,
         };
       } else {
@@ -117,11 +117,11 @@ const cartReducer = (state = initialState, action) => {
         ...initialState,
       };
     case REMOVE_ITEM_IN_CART: {
-      const idx = state.cartItems.findIndex((item) => item.id === action.payload);
+      const idx = state.cartItems.findIndex((item) => item.ID_Product === action.payload);
       const tmp = state.cartItems[idx];
       let newState = {
         ...state,
-        cartItems: state.cartItems.filter((item) => item.id !== tmp.id),
+        cartItems: state.cartItems.filter((item) => item.ID_Product !== tmp.ID_Product),
         cartQuantity: state.cartQuantity - tmp.quantity,
       };
       localStorage.setItem(CART, newState);

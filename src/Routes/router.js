@@ -34,7 +34,7 @@ function Router() {
           <Route path="/forum" element={<Forum />}></Route>
           <Route path="/cart-purchase" element={<Checkout />}></Route>
           <Route path="/profile" element={<Profile />}></Route>
-          <Route path="reset-password" element={<ResetPassword />}></Route>
+          <Route path="/reset-password" element={<ResetPassword />}></Route>
         </Route>
 
         {/* Private routes */}

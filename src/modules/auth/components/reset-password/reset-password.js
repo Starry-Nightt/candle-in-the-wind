@@ -34,21 +34,18 @@ function ResetPassword() {
     }
     setAlert('');
     setLoading(true);
-    userService
-      .login({
-        username: user.username,
-        password: data.currentPassword,
-      })
-      .then((res) => {
-        SuccessNotify('Đổi mật khẩu thành công');
-        navigate('/home');
-        setLoading(false);
-        setAlert('');
-      })
-      .catch(() => {
-        setAlert('Mật khẩu không chính xác');
-        setLoading(false);
-      });
+    try {
+      const res = await userService.login({ email: user.email, password: data.currentPassword });
+      if (res.data.isError) return;
+
+      SuccessNotify('Đổi mật khẩu thành công');
+      navigate('/home');
+      setLoading(false);
+      setAlert('');
+    } catch {
+      setAlert('Mật khẩu không chính xác');
+      setLoading(false);
+    }
   };
 
   return (
@@ -67,7 +64,7 @@ function ResetPassword() {
                 type="password"
                 register={register}
                 required={requiredField()}
-                minLength={minLengthField(6)}
+                minLength={minLengthField(4)}
                 error={errors.currentPassword}
               />
             </div>
@@ -78,7 +75,7 @@ function ResetPassword() {
                 type="password"
                 register={register}
                 required={requiredField()}
-                minLength={minLengthField(6)}
+                minLength={minLengthField(4)}
                 error={errors.newPassword}
               />
             </div>
@@ -89,7 +86,7 @@ function ResetPassword() {
                 type="password"
                 register={register}
                 required={requiredField()}
-                minLength={minLengthField(6)}
+                minLength={minLengthField(4)}
                 error={errors.confirmPassword}
               />
             </div>
