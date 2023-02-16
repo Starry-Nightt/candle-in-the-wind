@@ -33,12 +33,6 @@ function AuthChangePass({ children }) {
         >
           <span>Đổi mật khẩu</span>
         </div>
-        <div
-          className={`${style.tab} ${isChangeUserInfoTab() ? style.active : ''}`}
-          onClick={onChangeUserInfoTab}
-        >
-          <span>Sửa thông tin tài khoản</span>
-        </div>
       </div>
       {/* Modal body */}
       <div className={`${style.form}`}>

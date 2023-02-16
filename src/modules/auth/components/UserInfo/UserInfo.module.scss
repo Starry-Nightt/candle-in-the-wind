@@ -57,7 +57,7 @@
   .subtitle {
     font-weight: 400;
     text-align: start;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
 
   .component {
@@ -81,11 +81,21 @@
     text-align: left;
   }
 
+  .naviChange {
+    font-size: 12px;
+    color: grey;
+    display: flex;
+  }
+
   .info {
     font-size: 1000;
     display: inline-grid;
     text-align: left;
     padding-right: 30px;
+  }
+
+  .icon {
+    margin-right: 10px;
   }
 
   .split {

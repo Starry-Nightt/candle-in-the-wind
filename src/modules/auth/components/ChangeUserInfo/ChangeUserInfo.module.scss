@@ -1,12 +1,21 @@
 @import '../../../../styles/variables.scss';
 
+.wrapper {
+  width: 70%;
+  min-width: 480px;
+  margin: 32px auto;
+  padding: 30px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+  border: 1px solid #c8c7cc;
+}
+
 .form {
   padding: 20px 0;
   .formGroup {
-    margin: 20px 0;
-
     input {
-      font-size: 18px;
+      font-size: 16px;
       letter-spacing: 0.04rem;
       border: none;
       outline: none;
@@ -19,7 +28,86 @@
       }
     }
   }
+  .container {
+    border-top: 2px solid #015394;
+    width: 100%;
+    display: flex;
+  }
 
+  .infoContainer {
+    padding: 10px 20px;
+    width: 60%;
+  }
+
+  .imageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%;
+  }
+
+  .title {
+    font-weight: 400;
+    text-align: start;
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    font-weight: 400;
+    text-align: start;
+    margin-bottom: 15px;
+  }
+
+  .component {
+    width: 90%;
+    display: grid;
+    grid-template-columns: 40% 60%;
+    margin: 10px 0 0 0;
+    align-items: center;
+  }
+
+  img {
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    object-fit: cover;
+    border: 5px solid #015394;
+  }
+
+  .chooseImage {
+    margin-top: 15px;
+    width: 200px;
+  }
+
+  .value {
+    font-weight: 400;
+    display: inline-grid;
+    text-align: left;
+  }
+
+  .naviChange {
+    font-size: 12px;
+    color: grey;
+    display: flex;
+  }
+
+  .info {
+    font-size: 1000;
+    display: inline-grid;
+    text-align: left;
+    padding-right: 30px;
+  }
+
+  .icon {
+    margin-right: 10px;
+  }
+
+  .split {
+    width: 1.5px;
+    height: 190px;
+    background-color: #015394;
+    margin: auto 0;
+  }
   .submitButton {
     width: 100%;
     padding: 16px;
