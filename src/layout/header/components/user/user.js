@@ -1,12 +1,9 @@
 import React from 'react';
 import style from './user.module.scss';
 import Tippy from '@tippyjs/react/headless';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { logout } from '~/redux/user-profile/user-profile.thunk';
 
 function User({ user }) {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const menuItem = [
     {
