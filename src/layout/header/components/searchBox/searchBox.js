@@ -28,6 +28,7 @@ function SearchBox() {
   }, [currentPath]);
 
   const onSearch = () => {
+    setSearchValue('');
     navigate(`${currentOption.path}?search=${searchValue}`);
   };
 

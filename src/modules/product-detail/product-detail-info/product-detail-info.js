@@ -34,7 +34,7 @@ function ProductDetailInfo({ product }) {
   };
 
   const onPurchase = () => {
-    dispatch(checkoutItem(product));
+    dispatch(checkoutItem(product, number));
     navigate('/cart-purchase');
   };
 
