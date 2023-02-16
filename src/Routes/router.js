@@ -11,6 +11,8 @@ import NotFound from '~/modules/not-found/not-found';
 import ProductDetail from '~/modules/product-detail/product-detail';
 import CartPage from '~/modules/cart-page/cart-page';
 import Checkout from '~/modules/checkout/checkout';
+import Profile from '~/modules/profile/profile';
+import ResetPassword from '~/modules/auth/components/reset-password/reset-password';
 
 function Router() {
   return (
@@ -31,6 +33,8 @@ function Router() {
         <Route element={<RequireAuth />}>
           <Route path="/forum" element={<Forum />}></Route>
           <Route path="/cart-purchase" element={<Checkout />}></Route>
+          <Route path="/profile" element={<Profile />}></Route>
+          <Route path="reset-password" element={<ResetPassword />}></Route>
         </Route>
 
         {/* Private routes */}
