@@ -20,6 +20,7 @@ import {
 } from '~/redux/filter/filter.action';
 import NotFoundProduct from '~/modules/Products/NotFoundProduct/NotFoundProduct';
 import Button from '~/shared/components/Button';
+import productService from '~/shared/services/product.service';
 
 const cx = classNames.bind(style);
 
@@ -45,10 +46,6 @@ function ProductList() {
     item.forEach((sub) => arr.delete(sub));
     setDeleteItem([...arr]);
   }
-
-  useEffect(() => {
-    console.log(deleteItem);
-  }, [deleteItem]);
 
   useEffect(() => {
     dispatch(loadProduct(category.slice(10), currentPage, sortFilter, priceRange, searchValue));
@@ -112,7 +109,7 @@ function ProductList() {
   }, [pageValue]);
 
   return (
-    <div className={cx('wrapper')}>
+    <>
       <div className={cx('search')}>
         <span>Tìm kiếm:</span>
         <input
@@ -153,7 +150,22 @@ function ProductList() {
           </select>
           {deleteItem.length > 0 ? <span>Đã chọn: {deleteItem.length} sản phẩm</span> : null}
           {deleteItem.length > 0 && (
-            <Button className={cx('delete-btn')} rounded type="pOutline">
+            <Button
+              className={cx('delete-btn')}
+              rounded
+              type="pOutline"
+              onClick={() => {
+                productService
+                  .deleteProducts(deleteItem)
+                  .then((res) => {
+                    alert('Thêm sản phẩm thành công');
+                  })
+                  .catch((error) => {
+                    console.log(error);
+                    alert('Đã xảy ra lỗi vui lòng thử lại');
+                  });
+              }}
+            >
               Xóa sản phẩm
             </Button>
           )}
@@ -260,7 +272,7 @@ function ProductList() {
           </PageNumber>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

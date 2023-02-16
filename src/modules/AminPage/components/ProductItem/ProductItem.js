@@ -4,10 +4,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfo, faPenToSquare } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react';
 import TippyHeadless from '@tippyjs/react/headless';
+import { menu } from '../../AdminPage';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(style);
 
 function ProductItem({ data, addDeleteItem, removeDeleteItem, deleteItem }) {
+  const navigate = useNavigate();
+
+  function handleUpdate(id) {
+    menu[0].subMenu.push({
+      label: 'Cập nhật thông tin sản phẩm',
+      path: `/admin/product/update/${id}`,
+    });
+    navigate(`/admin/product/update/${id}`);
+  }
+
   return (
     <div className={cx('wrapper')}>
       <div className={cx('select')}>
@@ -30,7 +42,7 @@ function ProductItem({ data, addDeleteItem, removeDeleteItem, deleteItem }) {
         <div className={cx('title')}>{data.title}</div>
         <div className={cx('wrap-icon')}>
           <Tippy content="Chỉnh sửa">
-            <div>
+            <div onClick={() => handleUpdate(data.id)}>
               <FontAwesomeIcon icon={faPenToSquare} />
             </div>
           </Tippy>
@@ -40,7 +52,7 @@ function ProductItem({ data, addDeleteItem, removeDeleteItem, deleteItem }) {
             delay={[0, 300]}
             render={(attrs) => (
               <div tabIndex="-1" {...attrs} className={cx('options')}>
-                ok
+                Thông tin sản phẩm
               </div>
             )}
             hideOnClick={false}

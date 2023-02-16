@@ -8,6 +8,7 @@ const minLengthField = (value) => {
     message: `Tối thiểu ${value} kí tự`,
   };
 };
+
 const maxLengthField = (value) => {
   return {
     value,

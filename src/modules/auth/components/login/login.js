@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { loginAccount } from '~/redux/user-profile/user-profile.thunk';
 import { requiredField, minLengthField, maxLengthField } from '@utils/validator';
 import Input from '@components/input/input';
@@ -12,7 +11,7 @@ function Login() {
   const userProfile = useSelector((state) => state.userProfile);
   const { error } = userProfile;
   const dispatch = useDispatch();
-  
+
   const {
     register,
     handleSubmit,
@@ -43,7 +42,7 @@ function Login() {
 
   return (
     <AuthWrapper>
-      <form className={`${style.form}`} onSubmit={handleSubmit((data) => login(data))}>
+      <form className={`${style.form}`} onSubmit={handleSubmit(login)}>
         <h4>Cảm ơn bạn đã trở lại</h4>
         {errorMsg && errorMsg.length && <p className={`${style.alert}`}>{errorMsg}</p>}
         <div className={`${style.formGroup}`}>

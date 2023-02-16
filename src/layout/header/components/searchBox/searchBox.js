@@ -14,7 +14,6 @@ const cx = classNames.bind(styles);
 
 function SearchBox() {
   const [currentOption, setCurrentOption] = useState(categoryList[0]);
-  const { searchValue } = useSelector((state) => state.filter);
   const dispatch = useDispatch();
   const [search, setSearch] = useState('');
   const currentPath = useLocation().pathname;

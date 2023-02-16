@@ -68,6 +68,18 @@ class ProductService {
   getProduct = (id) => {
     return appClient().get(`products/${id}`);
   };
+
+  addProduct = (data) => {
+    return appClient().post(`/product/addNewProduct`, { data });
+  };
+
+  updateProduct = (data) => {
+    return appClient().patch(`/product/updateProduct`, { data });
+  };
+
+  deleteProducts = (productId) => {
+    return appClient().delete(`/product/deleteProduct`, { productId });
+  };
 }
 
 export default new ProductService();

@@ -20,7 +20,7 @@ function App() {
 
   useEffect(() => {
     if (role) {
-      navigate('/admin');
+      navigate(location.pathname.startsWith('/admin') || '/admin');
     } else if (isLoggedIn) {
       const from = location.state?.from?.pathname || '/';
       navigate(from, { replace: true });

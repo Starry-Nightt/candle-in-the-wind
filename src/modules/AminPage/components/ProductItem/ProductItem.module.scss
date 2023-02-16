@@ -44,9 +44,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
     .title {
-        flex: 1;
+      flex: 1;
     }
   }
 
@@ -97,4 +97,15 @@
     border: 2px solid #333;
     margin-left: 10px;
   }
+}
+
+.options {
+  background-color: $white-color;
+  box-shadow: rgb(0 0 0 / 20%) 0px 2px 12px;
+  max-height: min((100vh - 96px) - 60px, 734px);
+  min-height: 100px;
+  min-width: 120px;
+  border-radius: 5px;
+  overflow-y: auto;
+  animation: appear linear 0.2s;
 }
