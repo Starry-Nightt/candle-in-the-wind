@@ -107,12 +107,12 @@ function Products() {
           <div className={cx('row sm-gutter')}>
             {loading && <Spinner />}
             {error && <h3>Error</h3>}
-            {!totalPage && <NotFoundProduct />}
+            {!loading && !totalPage ? <NotFoundProduct /> : null}
             {product &&
               product.products &&
               product.products.length > 0 &&
               product.products.map((item, index) => (
-                <ProductItem key={item.id} data={item} pathname={pathname} />
+                <ProductItem key={index} data={item} pathname={pathname} />
               ))}
           </div>
           <div className={cx('page')}>

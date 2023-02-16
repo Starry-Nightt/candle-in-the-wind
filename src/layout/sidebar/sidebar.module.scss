@@ -1,38 +1,37 @@
 @import '../../styles/variables.scss';
 
 .sidebar {
-    background-color: $white-color;
+  background-color: $white-color;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  min-width: 300px;
+  z-index: 10;
+
+  .sidebarTitle {
+    color: $primary-color;
+    text-align: start;
+    text-transform: uppercase;
+    margin-bottom: 40px;
+    padding: 12px;
+  }
+
+  .sidebarCloseButton {
     position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    min-width: 300px;
-    z-index: 10;
+    top: 4px;
+    right: 4px;
+    background-color: transparent;
+    font-size: 28px;
+    border: none;
+    color: $primary-color;
+    cursor: pointer;
+    transition: 0.3s ease;
+    width: 40px;
+    height: 40px;
 
-    .sidebarTitle {
-        color: $primary-color;
-        text-align: start;
-        text-transform: uppercase;
-        margin-bottom: 40px;
-        padding: 12px;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.14);
     }
-
-    .sidebarCloseButton {
-        position: absolute;
-        top: 4px;
-        right: 4px;
-        background-color: transparent;
-        font-size: 28px;
-        border: none;
-        color: $primary-color;
-        cursor: pointer;
-        transition: 0.3s ease;
-        width: 40px;
-        height: 40px;
-
-        &:hover {
-            background-color: rgba(0,0,0,0.14);
-        }
-    }
+  }
 }
-
