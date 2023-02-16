@@ -151,7 +151,7 @@ function ProductList() {
               </option>
             ))}
           </select>
-
+          {deleteItem.length > 0 ? <span>Đã chọn: {deleteItem.length} sản phẩm</span> : null}
           {deleteItem.length > 0 && (
             <Button className={cx('delete-btn')} rounded type="pOutline">
               Xóa sản phẩm
@@ -201,6 +201,11 @@ function ProductList() {
           <div className={cx('select')}>
             <input
               type={'checkbox'}
+              checked={
+                product && product.products
+                  ? product.products.every((data) => deleteItem.includes(data.id))
+                  : false
+              }
               onChange={(e) => {
                 if (e.target.checked) {
                   addDeleteItem(product.products.map((data) => data.id));
