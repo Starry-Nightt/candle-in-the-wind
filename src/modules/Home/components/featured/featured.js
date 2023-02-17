@@ -8,18 +8,18 @@ import appClient from '~/shared/utils/appClient';
 import Spinner from '~/shared/components/spinner/spinner';
 import { useNavigate } from 'react-router-dom';
 import { DollarCurrency } from '~/shared/utils/currency';
+import productService from '~/shared/services/product.service';
 function Featured() {
   const [featuredList, setFeaturedList] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
     setLoading((prev) => true);
-    appClient()
-      .get('products?limit=16&select=title,price,thumbnail')
-      .then((res) => {
-        setFeaturedList(res.data.products);
-        setLoading((prev) => false);
-      });
+    productService.getAllProduct().then((res) => {
+      const tmp = res.data.products.filter((item) => Number(item.price) <= 200000);
+      setFeaturedList(tmp);
+      setLoading((prev) => false);
+    });
   }, []);
 
   const onSelectProduct = (id) => {
@@ -58,8 +58,11 @@ function Featured() {
           >
             {featuredList.map((item) => {
               return (
-                <SwiperSlide key={item.id}>
-                  <article className="item bg-white" onClick={() => onSelectProduct(item.id)}>
+                <SwiperSlide key={item.ID_Product}>
+                  <article
+                    className="item bg-white"
+                    onClick={() => onSelectProduct(item.ID_Product)}
+                  >
                     <div className="item-thumbnail">
                       <img className="item-image" src={item.thumbnail} alt="" />
                       <span className="item-price">{`FLASH SALE: ${DollarCurrency(

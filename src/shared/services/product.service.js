@@ -1,4 +1,5 @@
 import appClient from '@utils/appClient';
+import appAPI from '../utils/appClient2';
 
 class ProductService {
   getCategoryProduct = (category, params = {}, searchValue, sortFilter, priceRange) => {
@@ -60,8 +61,23 @@ class ProductService {
       });
   };
 
+  getAllProduct = () => {
+    return appAPI().get('/product/getAllProduct');
+  };
+
   getProduct = (id) => {
-    return appClient().get(`products/${id}`);
+    return appAPI().get(`product/getProductByID/${id}`);
+  };
+
+  getAllCategory = () => {
+    return appAPI().get('product/getAllCategory');
+  };
+  getProductByCategory = (categoryID) => {
+    return appAPI().get(`product/searchProduct?id_category=${categoryID}`);
+  };
+
+  getProductByName = (key) => {
+    return appAPI().get(`product/searchProduct?search=${key}`);
   };
 }
 

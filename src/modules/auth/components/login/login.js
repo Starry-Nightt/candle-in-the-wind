@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { loginAccount } from '~/redux/user-profile/user-profile.thunk';
-import { requiredField, minLengthField, maxLengthField } from '@utils/validator';
+import { requiredField, minLengthField, emailField } from '@utils/validator';
 import Input from '@components/input/input';
 import style from './login.module.scss';
 import AuthWrapper from '../auth-wrapper/auth-wrapper';
@@ -20,8 +20,8 @@ function Login() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      username: 'kminchelle',
-      password: '0lelplR',
+      email: '',
+      password: '',
     },
   });
 
@@ -56,13 +56,12 @@ function Login() {
         {errorMsg && errorMsg.length && <p className={`${style.alert}`}>{errorMsg}</p>}
         <div className={`${style.formGroup}`}>
           <Input
-            formControl="username"
-            placeholder="Tên tài khoản"
+            formControl="email"
+            placeholder="Email"
             register={register}
             required={requiredField()}
-            minLength={minLengthField(6)}
-            maxLength={maxLengthField(15)}
-            error={errors.username}
+            pattern={emailField()}
+            error={errors.email}
           />
         </div>
         <div className={`${style.formGroup}`}>
@@ -72,7 +71,7 @@ function Login() {
             type="password"
             register={register}
             required={requiredField()}
-            minLength={minLengthField(6)}
+            minLength={minLengthField(4)}
             error={errors.password}
           />
         </div>

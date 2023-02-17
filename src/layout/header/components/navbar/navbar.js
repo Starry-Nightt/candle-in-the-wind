@@ -22,6 +22,7 @@ function Navbar(props) {
   const dispatch = useDispatch();
   const { user } = props;
   const navigate = useNavigate();
+  const userAvatar = user?.avatar ? user.avatar : avatar;
 
   const handleLogout = () => {
     dispatch(logout());
@@ -77,7 +78,7 @@ function Navbar(props) {
         </div>
         <div className="hide-on-tablet hide-on-pc py-1">
           <div className={`flex ${loggedIn === true ? 'space-between' : 'justify-end'}`}>
-            {loggedIn && <User user={{ ...user, avatar }} />}
+            {loggedIn && <User user={{ ...user, avatar: userAvatar }} />}
             <Hamburger />
           </div>
         </div>

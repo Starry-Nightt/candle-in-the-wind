@@ -4,9 +4,11 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPencil } from '@fortawesome/free-solid-svg-icons';
+import avatar from '~/assets/images/avatar-default.jpg';
 
 function Profile() {
   const { user } = useSelector((state) => state.userProfile);
+  const userAvatar = user?.avatar ? userAvatar : avatar;
   return (
     <div className={`${style.wrapper}`}>
       <form className={`${style.form}`}>
@@ -21,27 +23,25 @@ function Profile() {
             <div className={`${style.infoContainer}`}>
               <div className={`${style.component}`}>
                 <h4 className={`${style.info}`}>Họ và tên:</h4>
-                <h4 className={`${style.value}`}>
-                  {user.firstName} {user.lastName}
-                </h4>
+                <h4 className={`${style.value}`}>{user.fullname}</h4>
               </div>
               <div className={`${style.component}`}>
                 <h4 className={`${style.info}`}>Địa chỉ email: </h4>
                 <h4 className={`${style.value}`}>{user.email}</h4>
               </div>
               <div className={`${style.component}`}>
-                <h4 className={`${style.info}`}>Tên tài khoản:</h4>
-                <h4 className={`${style.value}`}>{user.username}</h4>
+                <h4 className={`${style.info}`}>Địa chỉ:</h4>
+                <h4 className={`${style.value}`}>{user.address}</h4>
               </div>
               <div className={`${style.component}`}>
-                <h4 className={`${style.info}`}>Giới tính: </h4>
-                <h4 className={`${style.value}`}>{user.gender}</h4>
+                <h4 className={`${style.info}`}>Số điện thoại: </h4>
+                <h4 className={`${style.value}`}>{user.phone_number}</h4>
               </div>
             </div>
           </div>
           <div className="col l-6 m-6 c-12">
             <div className={`${style.imageContainer}`}>
-              <img src={user.image} alt="" />
+              <img src={userAvatar} alt="" />
             </div>
           </div>
         </div>

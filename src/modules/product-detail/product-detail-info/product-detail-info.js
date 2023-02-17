@@ -4,11 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { addItemToCart } from '~/redux/cart/cart.action';
 import { checkoutItem } from '~/redux/checkout/checkout.action';
 import Star from '~/shared/components/star/star';
-import { DollarCurrency } from '~/shared/utils/currency';
+import { DollarCurrency, VNDCurrency } from '~/shared/utils/currency';
 import style from './product-detail-info.module.scss';
 
 function ProductDetailInfo({ product }) {
-  const { title, description, price, discountPercentage, rating, stock, brand, category } = product;
+  console.log(product);
+  const { title, description, price, discount, Category } = product;
   const [number, setNumber] = useState(1);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,8 +26,7 @@ function ProductDetailInfo({ product }) {
 
   const onChangeQuantity = (e) => {
     const tmp = Number(e.target.value);
-    if (tmp >= stock) setNumber(stock);
-    else setNumber(tmp);
+    setNumber(tmp);
   };
 
   const onAddToCart = () => {
@@ -42,26 +42,13 @@ function ProductDetailInfo({ product }) {
     <div className="text-start">
       <h3 className="section-title my-2 text-primary">{title}</h3>
       <div className="flex align-center">
-        <span className="text-lg uppercase font-semibold">{brand}</span>
-        <span className="mx-2"></span>
-        <span className={`${style.categoryName}`}>{category}</span>
+        <span className={`${style.categoryName}`}>{Category.name}</span>
       </div>
-      <ul className="my-2 flex align-center">
-        <div className={`${style.stars}`}>
-          <span className={`${style.rating}`}>{rating}</span>
-          <Star active={true} />
-          <Star active={true} />
-          <Star active={true} />
-          <Star active={true} />
-          <Star />
-        </div>
-      </ul>
+
       <div className={`${style.price}`}>
-        <span className={`${style.oldPrice}`}>{DollarCurrency(price)}</span>
-        <span className={`${style.salePrice}`}>
-          {DollarCurrency(Math.floor((1 - discountPercentage / 100) * price))}
-        </span>
-        <span className={`${style.sale} text-center`}>{Math.floor(discountPercentage)}% giảm</span>
+        <span className={`${style.oldPrice}`}>{VNDCurrency(price)}</span>
+        <span className={`${style.salePrice}`}>{VNDCurrency(price - discount)}</span>
+        <span className={`${style.sale} text-center`}>{VNDCurrency(discount)} giảm</span>
       </div>
       <div className="my-2">
         <h5 className={`text-primary font-semibold text-xl ${style.title}`}>Mô tả</h5>
@@ -73,11 +60,6 @@ function ProductDetailInfo({ product }) {
           <button onClick={onDecreaseQuantity}>-</button>
           <input type="number" value={number} onChange={(e) => onChangeQuantity(e)} />
           <button onClick={onIncreaseQuantity}>+</button>
-        </div>
-        <div className="text-sm">
-          Còn:
-          <span className="text-xl text-primary font-semibold mx-1">{stock}</span>
-          sản phẩm
         </div>
       </div>
       <div className={`${style.action}`}>

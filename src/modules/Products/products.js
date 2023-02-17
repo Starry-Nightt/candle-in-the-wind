@@ -30,7 +30,6 @@ function Products() {
 
   const [a] = useSearchParams();
   const searchValue = a.get('search');
-
   useEffect(() => {
     setCurrentPage(1);
   }, [pathname, sortFilter]);
@@ -95,7 +94,7 @@ function Products() {
           <Filter setPriceRange={setPriceRange} />
         </div>
         <div className="col l-10 m-12 c-12 ">
-          <div className={cx('filter-wrapper')}>
+          {/* <div className={cx('filter-wrapper')}>
             <TopFilter
               sortFilter={sortFilter}
               setSortFilter={setSortFilter}
@@ -103,7 +102,7 @@ function Products() {
               currentPage={currentPage}
               setCurrentPage={setCurrentPage}
             />
-          </div>
+          </div> */}
           <div className={cx('row sm-gutter')}>
             {loading && <Spinner />}
             {error && <h3>Error</h3>}
