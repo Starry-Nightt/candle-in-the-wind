@@ -26,7 +26,6 @@ function Register() {
       phone_number: '',
       address: '',
       password: '',
-      avatar: '',
     },
   });
 
@@ -89,15 +88,6 @@ function Register() {
             register={register}
             required={requiredField()}
             error={errors.address}
-          />
-        </div>
-        <div className={`${style.formGroup}`}>
-          <Input
-            formControl="avatar"
-            placeholder="Ảnh"
-            register={register}
-            required={requiredField()}
-            error={errors.avatar}
           />
         </div>
         <button type="submit" className={`${style.submitButton}`}>
