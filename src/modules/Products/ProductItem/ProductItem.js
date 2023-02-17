@@ -37,7 +37,7 @@ function ProductItem({ data, pathname }) {
           </Link>
 
           <div className={cx('bottom')}>
-            <span className={cx('prize')}>{DollarCurrency(data.price)}</span>
+            <span className={cx('prize')}>{VNDCurrency(data.price)}</span>
             <span className={cx('add')} onClick={() => onAddItemToCart(data)}>
               Thêm vào
             </span>
