@@ -28,7 +28,7 @@ function User({ user, disabledAction = false }) {
           <div className={`${style.avatar}`}>
             <img src={userAvatar} alt=""></img>
           </div>
-          <p className={`${style.username}`}>{user.fullname}</p>
+          <p className={`${style.username}`}>{user?.fullname}</p>
         </div>
       ) : (
         <Tippy
@@ -53,7 +53,7 @@ function User({ user, disabledAction = false }) {
             <div className={`${style.avatar}`}>
               <img src={userAvatar} alt=""></img>
             </div>
-            <p className={`${style.username}`}>{user.fullname}</p>
+            <p className={`${style.username}`}>{user?.fullname}</p>
           </div>
         </Tippy>
       )}
