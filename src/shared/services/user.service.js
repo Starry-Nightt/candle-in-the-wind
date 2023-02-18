@@ -1,8 +1,7 @@
-import appAPI from '@utils/appClient2';
+import appAPI from '~/shared/utils/appAPI';
 
 class UserService {
   login = (authInfo) => {
-    console.log(authInfo);
     return appAPI().post('/auth/login', authInfo);
   };
 

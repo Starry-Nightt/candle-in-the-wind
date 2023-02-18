@@ -1,4 +1,4 @@
-import { TOKEN } from '~/shared/constants';
+import { TOKEN } from '~/shared/constants/local-storage-key';
 import { ErrorNotify, SuccessNotify } from '~/shared/utils/notify';
 
 const { default: userService } = require('@services/user.service');
@@ -17,7 +17,6 @@ const loginAccount = (authInfo) => {
       .then((res) => {
         localStorage.setItem(TOKEN, JSON.stringify(authInfo));
         dispatch(fetchUserProfileSuccess(res.data.user));
-        console.log(res.data);
         SuccessNotify('Đăng nhập thành công');
       })
       .catch((error) => {
@@ -31,7 +30,7 @@ const logout = () => {
   return function (dispatch) {
     userService
       .logout()
-      .then((res) => {
+      .then(() => {
         dispatch(endSession());
         localStorage.removeItem(TOKEN);
         SuccessNotify('Đăng xuất thành công');
@@ -43,10 +42,10 @@ const logout = () => {
 };
 
 const registerAccount = (authInfo) => {
-  return function (dispatch) {
+  return function () {
     userService
       .register(authInfo)
-      .then((res) => {
+      .then(() => {
         SuccessNotify('Đăng ký thành công');
       })
       .catch(() => {

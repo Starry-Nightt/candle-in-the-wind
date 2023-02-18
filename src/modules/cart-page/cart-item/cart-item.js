@@ -6,12 +6,12 @@ import { decreaseItemInCart, increaseItemInCart, removeItemInCart } from '~/redu
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
-import { DollarCurrency, VNDCurrency } from '~/shared/utils/currency';
+import { VNDCurrency } from '~/shared/utils/currency';
 
 const cx = classNames.bind(style);
 
 function CartItem({ item }) {
-  const { thumbnail, title, description, price, quantity, ID_Product, discount } = item;
+  const { title, description, price, quantity, ID_Product, discount } = item;
   const [canShowAlert, setCanShowAlert] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -32,11 +32,11 @@ function CartItem({ item }) {
   };
 
   return (
-    <div className="row py-3 bg-white">
+    <div className="row py-3 bg-white relative">
       <div className="col l-5 m-5 c-5">
         <div className="flex">
           <div className={cx('item-image')} onClick={onViewItem}>
-            <img src={thumbnail} alt="" />
+            <img src={item?.Images[0]?.content} alt="" />
           </div>
           <div className={cx('item-info')}>
             <h4 className={cx('item-title')} onClick={onViewItem}>
@@ -46,8 +46,10 @@ function CartItem({ item }) {
           </div>
         </div>
       </div>
-      <div className="col l-2 m-2 c-2 flex align-center justify-center">
-        <span className={cx('item-price')}>{VNDCurrency(price - discount)}</span>
+      <div className="col l-2 m-2 c-2 ">
+        <div className="flex align-center justify-center text-center full-height">
+          <span className={cx('item-price')}>{VNDCurrency(price - discount)}</span>
+        </div>
       </div>
       <div className="col l-3 m-3 c-3 flex align-center justify-center">
         <div className={cx('quantity')}>
@@ -58,10 +60,14 @@ function CartItem({ item }) {
           </div>
         </div>
       </div>
-      <div className="col l-2 m-2 c-2 flex align-center justify-center relative">
-        <span className={cx('item-price-final')}>{VNDCurrency((price - discount) * quantity)}</span>
-        <div className={cx('remove-icon')} onClick={() => dispatch(removeItemInCart(ID_Product))}>
-          <FontAwesomeIcon icon={faXmark} />
+      <div className="col l-2 m-2 c-2 ">
+        <div className="flex align-center justify-center text-center full-height">
+          <span className={cx('item-price-final')}>
+            {VNDCurrency((price - discount) * quantity)}
+          </span>
+          <div className={cx('remove-icon')} onClick={() => dispatch(removeItemInCart(ID_Product))}>
+            <FontAwesomeIcon icon={faXmark} />
+          </div>
         </div>
       </div>
     </div>

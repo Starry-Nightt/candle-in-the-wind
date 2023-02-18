@@ -8,11 +8,14 @@
 
   img {
     width: 100%;
+    object-position: center;
   }
 }
 
 .item-info {
-  padding-left: 16px;
+  padding-top: 16px;
+  padding-left: 12px;
+  padding-right: 12px;
   flex: 1;
 
   .item-title {

@@ -24,7 +24,7 @@ function ProductDetail() {
       {!loading && product && (
         <div className="row py-6">
           <div className="col l-6 m-6 c-12">
-            <ProductDetailImage images={product.images} />
+            <ProductDetailImage images={product.Images} />
           </div>
           <div className="col l-6 m-6 c-12">
             <ProductDetailInfo product={product} />

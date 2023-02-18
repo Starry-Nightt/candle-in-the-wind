@@ -9,7 +9,6 @@ const cx = classNames.bind(style);
 
 function CheckoutProduct({ children }) {
   const { items } = useSelector((state) => state.checkout);
-  console.log(items);
   const subTotal = useMemo(() => {
     let tmp = 0;
     if (items && items.length > 0)

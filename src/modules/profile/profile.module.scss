@@ -11,7 +11,7 @@
 }
 
 .form {
-  padding: 20px 0;
+  padding-bottom: 20px;
   .formGroup {
     margin: 20px 0;
 
@@ -37,15 +37,14 @@
 
   .infoContainer {
     width: 100%;
-    border-right: 2px solid #015394;
     padding-right: 20px;
   }
 
   .imageContainer {
     width: 100%;
-
+    padding-top: 20px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
 
     img {

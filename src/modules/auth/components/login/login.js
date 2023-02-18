@@ -7,10 +7,11 @@ import { requiredField, minLengthField, emailField } from '@utils/validator';
 import Input from '@components/input/input';
 import style from './login.module.scss';
 import AuthWrapper from '../auth-wrapper/auth-wrapper';
+import { ADMIN_ROLE } from '~/shared/constants/role';
 
 function Login() {
   const userProfile = useSelector((state) => state.userProfile);
-  const { isLoggedIn, error } = userProfile;
+  const { isLoggedIn, error, role } = userProfile;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -31,8 +32,16 @@ function Login() {
     dispatch(loginAccount(detail));
   };
 
+  const isAdmin = () => {
+    return role === ADMIN_ROLE;
+  };
+
   useEffect(() => {
     if (isLoggedIn) {
+      if (isAdmin()) {
+        navigate('/admin');
+        return;
+      }
       const from = location.state?.from?.pathname || '/';
       navigate(from, { replace: true });
     }

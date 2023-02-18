@@ -51,7 +51,7 @@ function ResetPassword() {
   return (
     <div className={cx('wrapper')}>
       <form className={cx('form')} onSubmit={handleSubmit((data) => changePassword(data))}>
-        <h5 className="section-title text-center">Đổi mật khẩu</h5>
+        <h5 className="section-title text-xl text-center">Đổi mật khẩu</h5>
         {alert && alert.length > 0 && <p className={cx('error')}>{alert}</p>}
         {loading ? (
           <Spinner loading={true} />

@@ -3,12 +3,10 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addItemToCart } from '~/redux/cart/cart.action';
 import { checkoutItem } from '~/redux/checkout/checkout.action';
-import Star from '~/shared/components/star/star';
-import { DollarCurrency, VNDCurrency } from '~/shared/utils/currency';
+import { VNDCurrency } from '~/shared/utils/currency';
 import style from './product-detail-info.module.scss';
 
 function ProductDetailInfo({ product }) {
-  console.log(product);
   const { title, description, price, discount, Category } = product;
   const [number, setNumber] = useState(1);
   const dispatch = useDispatch();
@@ -40,7 +38,7 @@ function ProductDetailInfo({ product }) {
 
   return (
     <div className="text-start">
-      <h3 className="section-title my-2 text-primary">{title}</h3>
+      <h3 className="section-title text-4xl my-2 text-primary">{title}</h3>
       <div className="flex align-center">
         <span className={`${style.categoryName}`}>{Category.name}</span>
       </div>

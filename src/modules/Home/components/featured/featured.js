@@ -4,10 +4,9 @@ import { Navigation, Autoplay } from 'swiper';
 import './featured-swiper.scss';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import appClient from '~/shared/utils/appClient';
 import Spinner from '~/shared/components/spinner/spinner';
 import { useNavigate } from 'react-router-dom';
-import { DollarCurrency, VNDCurrency } from '~/shared/utils/currency';
+import { VNDCurrency } from '~/shared/utils/currency';
 import productService from '~/shared/services/product.service';
 function Featured() {
   const [featuredList, setFeaturedList] = useState([]);
@@ -23,12 +22,12 @@ function Featured() {
   }, []);
 
   const onSelectProduct = (id) => {
-    navigate(`/products/all/${id}`);
+    navigate(`/products/${id}`);
   };
 
   return (
     <section id="featured">
-      <h2 className="section-title text-center">Hot Sale</h2>
+      <h2 className="section-title text-3xl text-center">Hot Sale</h2>
       {loading ? (
         <Spinner color={'#015394'} size={8} />
       ) : (
@@ -64,7 +63,7 @@ function Featured() {
                     onClick={() => onSelectProduct(item.ID_Product)}
                   >
                     <div className="item-thumbnail">
-                      <img className="item-image" src={item.thumbnail} alt="" />
+                      <img className="item-image" src={item?.Images[0]?.content} alt="" />
                       <span className="item-price">{`FLASH SALE: ${VNDCurrency(item.price)}`}</span>
                     </div>
                     <div className="item-body">

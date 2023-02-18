@@ -21,6 +21,7 @@ const userProfileReducer = (state = initialState, action) => {
         loading: true,
         user: null,
         error: '',
+        role: null,
       };
     case FETCH_USER_PROFILE_SUCCESS:
       return {
@@ -29,6 +30,7 @@ const userProfileReducer = (state = initialState, action) => {
         user: action.payload,
         error: '',
         isLoggedIn: true,
+        role: action.payload.ID_Role,
       };
     case FETCH_USER_PROFILE_FAILURE:
       return {
@@ -36,6 +38,7 @@ const userProfileReducer = (state = initialState, action) => {
         loading: false,
         user: null,
         error: action.payload,
+        role: null,
       };
     case END_SESSION:
       return {

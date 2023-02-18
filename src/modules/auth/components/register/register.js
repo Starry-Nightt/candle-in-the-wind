@@ -30,7 +30,6 @@ function Register() {
   });
 
   const onRegister = (data) => {
-    console.log(data);
     dispatch(registerAccount(data));
   };
 

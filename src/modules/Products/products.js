@@ -1,151 +1,76 @@
 import React, { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { loadProduct } from '~/redux/product/product.thunk';
-import Spinner from '@components/spinner/spinner';
-import ProductItem from './ProductItem/ProductItem';
 import classNames from 'classnames/bind';
-
 import styles from './Products.module.scss';
-import Filter from './Filter/Filter';
-import PageNumber from './PageNumber/PageNumber';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
-import TopFilter from './TopFilter/TopFilter';
-import { useLocation, useSearchParams } from 'react-router-dom';
-import NotFoundProduct from './NotFoundProduct/NotFoundProduct';
-import sortFilterList from './TopFilter/sortFilterList';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadProductByCategory } from '~/redux/product/product.thunk';
+import Spinner from '@components/spinner/spinner';
+import { useParams } from 'react-router-dom';
+import Navigator from '~/shared/components/paginator/paginator';
+import ProductList from './product-list/product-list';
 
 const cx = classNames.bind(styles);
 
+export const PRODUCT_PER_PAGE = 12;
+
 function Products() {
   const { loading, product, error } = useSelector((state) => state.product);
-  const dispatch = useDispatch();
-
-  const { pathname } = useLocation();
-  const [numbersPage, setNumbersPage] = useState([1]);
+  const { categoryId } = useParams();
+  const [totalPage, setTotalPage] = useState(
+    product?.products?.length ? Math.floor(product?.products?.length / PRODUCT_PER_PAGE) + 1 : 1,
+  );
   const [currentPage, setCurrentPage] = useState(1);
-  const [totalPage, setTotalPage] = useState(1);
-  const [sortFilter, setSortFilter] = useState(sortFilterList[0]);
-  const [priceRange, setPriceRange] = useState({ from: '', to: '' });
+  const [displayProduct, setDisplayProduct] = useState([]);
 
-  const [a] = useSearchParams();
-  const searchValue = a.get('search');
+  const dispatch = useDispatch();
   useEffect(() => {
     setCurrentPage(1);
-  }, [pathname, sortFilter]);
+  }, []);
 
   useEffect(() => {
-    dispatch(
-      loadProduct(pathname.slice(10), (currentPage - 1) * 30, searchValue, sortFilter, priceRange),
-    );
-  }, [pathname, currentPage, sortFilter, priceRange, searchValue]);
+    dispatch(loadProductByCategory(categoryId));
+  }, [categoryId]);
 
   useEffect(() => {
-    if (product) {
-      let total;
-      total = Math.ceil(product.total / 30);
-      if (Number.isNaN(total)) setTotalPage(1);
-      else setTotalPage(total);
+    if (product?.products) {
+      setCurrentPage(1);
+      const prodList = [];
+      for (let i = 0; i < PRODUCT_PER_PAGE && i < product.products?.length; i++) {
+        prodList.push(product.products[i]);
+      }
+      setDisplayProduct(prodList);
     }
+    setTotalPage(
+      product?.products?.length ? Math.floor(product?.products?.length / PRODUCT_PER_PAGE) + 1 : 1,
+    );
   }, [product]);
 
   useEffect(() => {
-    let arr = [];
-    for (let i = 1; i <= 5; i++) {
-      if (i > totalPage) break;
-      else arr.push(i);
-    }
-    setNumbersPage(arr);
-  }, [totalPage]);
-
-  useEffect(() => {
-    let arr = [];
-    if (totalPage <= 5) return;
-
-    if (currentPage >= numbersPage[numbersPage.length - 1] && currentPage < totalPage) {
-      if (totalPage - currentPage >= 2) {
-        for (let i = currentPage - 2; i <= currentPage + 2; i++) {
-          arr.push(i);
-        }
-      } else {
-        for (let i = totalPage - 4; i <= totalPage; i++) {
-          arr.push(i);
-        }
+    if (product?.products) {
+      const tmp = (currentPage - 1) * PRODUCT_PER_PAGE;
+      const prodList = [];
+      for (let i = tmp; i < tmp + PRODUCT_PER_PAGE && i < product.products?.length; i++) {
+        prodList.push(product.products[i]);
       }
-      setNumbersPage(arr);
-    } else if (currentPage <= numbersPage[0] && currentPage < totalPage) {
-      if (currentPage > 2) {
-        for (let i = currentPage - 2; i <= currentPage + 2; i++) {
-          arr.push(i);
-        }
-      } else {
-        for (let i = 1; i <= 5; i++) {
-          arr.push(i);
-        }
-      }
-      setNumbersPage(arr);
+      setDisplayProduct(prodList);
     }
   }, [currentPage]);
 
   return (
     <>
       <div className="row ">
-        <div className="col l-2 m-12 c-12">
-          <Filter setPriceRange={setPriceRange} />
-        </div>
-        <div className="col l-10 m-12 c-12 ">
-          {/* <div className={cx('filter-wrapper')}>
-            <TopFilter
-              sortFilter={sortFilter}
-              setSortFilter={setSortFilter}
-              totalPage={totalPage}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-            />
-          </div> */}
+        <div className="col l-12 m-12 c-12 ">
+          {loading && <Spinner />}
+          {error && <h3>Error</h3>}
           <div className={cx('row sm-gutter')}>
-            {loading && <Spinner />}
-            {error && <h3>Error</h3>}
-            {!loading && !totalPage ? <NotFoundProduct /> : null}
-            {product &&
-              product.products &&
-              product.products.length > 0 &&
-              product.products.map((item, index) => (
-                <ProductItem key={index} data={item} pathname={pathname} />
-              ))}
+            <ProductList products={displayProduct} />
           </div>
           <div className={cx('page')}>
-            <PageNumber>
-              <FontAwesomeIcon
-                onClick={() =>
-                  setCurrentPage((prev) => {
-                    return prev > 1 ? prev - 1 : prev;
-                  })
-                }
-                icon={faCaretLeft}
-              />
-            </PageNumber>
-            {numbersPage.map((numberPage) => {
-              return (
-                <PageNumber
-                  key={numberPage}
-                  currentPage={currentPage}
-                  onClick={() => setCurrentPage(numberPage)}
-                >
-                  {numberPage}
-                </PageNumber>
-              );
-            })}
-            <PageNumber>
-              <FontAwesomeIcon
-                onClick={() =>
-                  setCurrentPage((prev) => {
-                    return prev < totalPage ? prev + 1 : prev;
-                  })
-                }
-                icon={faCaretRight}
-              />
-            </PageNumber>
+            <Navigator
+              products={product}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              numberPage={totalPage}
+            />
           </div>
         </div>
       </div>

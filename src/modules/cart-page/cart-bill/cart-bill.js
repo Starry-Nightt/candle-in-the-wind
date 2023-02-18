@@ -29,7 +29,7 @@ function CartBill() {
       {cartItems && cartItems.length > 0 && (
         <div className="py-4 my-5 ">
           <div className={cx('bill')}>
-            <h4 className="section-title">Đơn hàng</h4>
+            <h4 className="section-title text-3xl">Đơn hàng</h4>
             <div className="flex space-between">
               <span className="text-base font-semibold my-1">Tổng tiền thanh toán:</span>
               <span className={cx('price')}>{VNDCurrency(total)}</span>

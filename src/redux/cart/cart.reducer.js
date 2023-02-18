@@ -1,4 +1,4 @@
-import { CART } from '~/shared/constants';
+import { CART } from '~/shared/constants/local-storage-key';
 import { SuccessNotify } from '~/shared/utils/notify';
 
 const {
@@ -52,9 +52,6 @@ const cartReducer = (state = initialState, action) => {
       const idx = state.cartItems.findIndex((item) => item.ID_Product === product.ID_Product);
       let newState;
       if (idx === -1) {
-        if (quantity > product.stock) {
-          quantity = product.stock;
-        }
         const tmpItem = { ...product, quantity };
         newState = {
           ...state,
@@ -62,18 +59,13 @@ const cartReducer = (state = initialState, action) => {
           cartQuantity: state.cartQuantity + quantity,
         };
       } else {
-        let check = false;
-        let dif;
-        if (state.cartItems[idx].quantity + quantity <= state.cartItems[idx].stock) {
-          state.cartItems[idx].quantity += quantity;
-          check = true;
-        } else {
-          dif = product.stock - state.cartItems[idx].quantity;
-          state.cartItems[idx].quantity = product.stock;
-        }
         newState = {
           ...state,
-          cartQuantity: state.cartQuantity + (check === true ? quantity : dif),
+          cartItems: state.cartItems.map((item) => {
+            if (item.ID_Product === product.ID_Product) item.quantity += quantity;
+            return item;
+          }),
+          cartQuantity: state.cartQuantity + quantity,
         };
       }
       localStorage.setItem(CART, JSON.stringify(newState));
@@ -105,7 +97,7 @@ const cartReducer = (state = initialState, action) => {
       } else {
         newState = {
           ...state,
-          cartQuantity: state.cartQuantity - 1,
+          cartQuantity: state.cartQuantity - 1 >= 0 ? state.cartQuantity - 1 : 0,
         };
       }
       localStorage.setItem(CART, JSON.stringify(newState));

@@ -6,11 +6,11 @@ import { DollarCurrency, VNDCurrency } from '~/shared/utils/currency';
 const cx = classNames.bind(style);
 
 function CheckoutProductItem({ data }) {
-  const { thumbnail, title, price, quantity, discount } = data;
+  const { title, price, quantity, discount } = data;
   return (
     <div className="flex py-2">
       <div className={cx('item-image')}>
-        <img src={thumbnail} alt="" />
+        <img src={data?.Images[0].content} alt="" />
       </div>
       <div className={cx('item-info')}>
         <h5 className={cx('item-title')}>{title}</h5>

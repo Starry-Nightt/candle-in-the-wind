@@ -49,6 +49,9 @@
 .quantity {
   display: flex;
   flex-direction: column;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
   .quantity-action {
     display: flex;
 

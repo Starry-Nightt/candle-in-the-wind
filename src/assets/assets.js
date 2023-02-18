@@ -13,15 +13,15 @@ export const HeroImage = [
 export const HomeCategory = [
   {
     name: 'Shop Body Care',
-    image: require('./images/category-1.jpg'),
-  },
-  {
-    name: 'Shop Candles',
     image: require('./images/category-2.jpg'),
   },
   {
+    name: 'Shop Candles',
+    image: require('./images/category-4.jpg'),
+  },
+  {
     name: 'Shop Wallflowers',
-    image: require('./images/category-3.jpg'),
+    image: require('./images/category-6.jpg'),
   },
   {
     name: 'Shop Hand Soaps',

@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import avatar from '~/assets/images/avatar-default.jpg';
 import style from './navbar.module.scss';
 import User from '../user/user';
 import { connect, useDispatch } from 'react-redux';
 import { logout } from '~/redux/user-profile/user-profile.thunk';
-import Hamburger from '../hamburger/hamburger';
 
 function Navbar(props) {
   const navLinks = [
@@ -22,7 +20,6 @@ function Navbar(props) {
   const dispatch = useDispatch();
   const { user } = props;
   const navigate = useNavigate();
-  const userAvatar = user?.avatar ? user.avatar : avatar;
 
   const handleLogout = () => {
     dispatch(logout());
@@ -59,17 +56,17 @@ function Navbar(props) {
           <div className={`${style.navbarAuth}`}>
             {loggedIn ? (
               <>
-                <User user={{ ...user, avatar }} />
-                <button className="button flat-button" onClick={() => handleLogout()}>
+                <User user={user} />
+                <button className={`${style.flatButton}`} onClick={() => handleLogout()}>
                   Đăng xuất
                 </button>
               </>
             ) : (
               <>
-                <button className="button primary-button" onClick={() => onLogin()}>
+                <button className={`${style.strokeButton}`} onClick={() => onLogin()}>
                   Đăng nhập
                 </button>
-                <button className="button flat-button" onClick={() => onRegister()}>
+                <button className={`${style.flatButton}`} onClick={() => onRegister()}>
                   Đăng ký
                 </button>
               </>
@@ -78,8 +75,25 @@ function Navbar(props) {
         </div>
         <div className="hide-on-tablet hide-on-pc py-1">
           <div className={`flex ${loggedIn === true ? 'space-between' : 'justify-end'}`}>
-            {loggedIn && <User user={{ ...user, avatar: userAvatar }} />}
-            <Hamburger />
+            {loggedIn && <User user={user} />}
+            <div>
+              {loggedIn ? (
+                <>
+                  <button className={`${style.flatButton}`} onClick={() => handleLogout()}>
+                    Đăng xuất
+                  </button>
+                </>
+              ) : (
+                <>
+                  <button className={`${style.strokeButton}`} onClick={() => onLogin()}>
+                    Đăng nhập
+                  </button>
+                  <button className={`${style.flatButton}`} onClick={() => onRegister()}>
+                    Đăng ký
+                  </button>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>
