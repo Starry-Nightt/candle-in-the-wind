@@ -19,7 +19,7 @@ function ProductTable({ products }) {
           <th className={cx('header-cell')}>Tác vụ</th>
         </thead>
         <tbody>
-          {products.length > 0
+          {products && products.length > 0
             ? products.map((item, idx) => {
                 return <ProductTableItem key={idx} product={item} />;
               })

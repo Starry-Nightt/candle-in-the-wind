@@ -25,7 +25,7 @@ function ProductTableItem({ product }) {
     <tr className={cx('row')}>
       <td className={cx('image')}>
         <div className={cx('image-wrapper')}>
-          <img src={product?.Images[0]?.content} alt="" />
+          <img src={product?.Images?.[0]?.content} alt="" />
         </div>
       </td>
       <td className={cx('title')}>
@@ -35,7 +35,7 @@ function ProductTableItem({ product }) {
         <p>{product.ID_Product}</p>
       </td>
       <td className={cx('category')}>
-        <p>{product.Category.name}</p>
+        <p>{product.Category?.name}</p>
       </td>
       <td className={cx('price')}>
         <p>{product.price}</p>

@@ -63,7 +63,7 @@ function Featured() {
                     onClick={() => onSelectProduct(item.ID_Product)}
                   >
                     <div className="item-thumbnail">
-                      <img className="item-image" src={item?.Images[0]?.content} alt="" />
+                      <img className="item-image" src={item?.Images?.[0]?.content} alt="" />
                       <span className="item-price">{`FLASH SALE: ${VNDCurrency(item.price)}`}</span>
                     </div>
                     <div className="item-body">

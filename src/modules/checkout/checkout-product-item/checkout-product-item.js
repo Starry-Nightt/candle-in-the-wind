@@ -10,7 +10,7 @@ function CheckoutProductItem({ data }) {
   return (
     <div className="flex py-2">
       <div className={cx('item-image')}>
-        <img src={data?.Images[0].content} alt="" />
+        <img src={data?.Images?.[0].content} alt="" />
       </div>
       <div className={cx('item-info')}>
         <h5 className={cx('item-title')}>{title}</h5>

@@ -36,7 +36,7 @@ function CartItem({ item }) {
       <div className="col l-5 m-5 c-5">
         <div className="flex">
           <div className={cx('item-image')} onClick={onViewItem}>
-            <img src={item?.Images[0]?.content} alt="" />
+            <img src={item?.Images?.[0]?.content} alt="" />
           </div>
           <div className={cx('item-info')}>
             <h4 className={cx('item-title')} onClick={onViewItem}>

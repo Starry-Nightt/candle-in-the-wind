@@ -28,7 +28,7 @@ function ProductItem({ data }) {
           <div
             className={cx('image')}
             style={{
-              backgroundImage: `url(${data?.Images[0]?.content})`,
+              backgroundImage: `url(${data?.Images?.[0]?.content})`,
             }}
           ></div>
           <div className={cx('info')}>
