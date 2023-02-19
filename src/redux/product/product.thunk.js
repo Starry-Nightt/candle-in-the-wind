@@ -1,5 +1,13 @@
 import ProductService from '~/shared/services/product.service';
-import { fetchProductFailure, fetchProductRequest, fetchProductSuccess } from './product.action';
+import { ErrorNotify, SuccessNotify } from '~/shared/utils/notify';
+import {
+  createProduct,
+  deleteProduct,
+  fetchProductFailure,
+  fetchProductRequest,
+  fetchProductSuccess,
+  updateProduct,
+} from './product.action';
 
 const loadProductByCategory = (categoryId = 'all') => {
   return function (dispatch) {
@@ -26,10 +34,57 @@ const loadProductByKeyword = (key) => {
     dispatch(fetchProductRequest());
     ProductService.getProductByKey(key)
       .then((response) => {
+        console.log(response.data);
         dispatch(fetchProductSuccess(response.data));
       })
       .catch((error) => dispatch(fetchProductFailure(error.data)));
   };
 };
 
-export { loadProductByCategory, loadProductByKeyword };
+const createProductAsync = (product) => {
+  return function (dispatch) {
+    ProductService.createProduct(product)
+      .then(() => {
+        dispatch(createProduct(product));
+        SuccessNotify('Thêm mới sản phẩm thành công');
+      })
+      .catch(() => {
+        ErrorNotify('Đã có lỗi xảy ra');
+      });
+  };
+};
+
+const deleteProductAsync = (id) => {
+  return function (dispatch) {
+    ProductService.deleteProduct(id)
+      .then(() => {
+        dispatch(deleteProduct(id));
+        SuccessNotify('Xóa sản phẩm thành công');
+      })
+      .catch((error) => {
+        console.log(error);
+        ErrorNotify('Đã có lỗi xảy ra');
+      });
+  };
+};
+
+const updateProductAsync = (id, data) => {
+  return function (dispatch) {
+    ProductService.updateProduct(id, data)
+      .then(() => {
+        dispatch(updateProduct(id, data));
+        SuccessNotify('Cập nhật thành công');
+      })
+      .catch((err) => {
+        ErrorNotify('Đã có lỗi xảy ra');
+      });
+  };
+};
+
+export {
+  loadProductByCategory,
+  loadProductByKeyword,
+  createProductAsync,
+  deleteProductAsync,
+  updateProductAsync,
+};

@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCaretLeft, faCaretRight } from '@fortawesome/free-solid-svg-icons';
 const cx = classNames.bind(styles);
 
-function Navigator({ numberPage, currentPage, setCurrentPage }) {
+function Paginator({ numberPage, currentPage, setCurrentPage }) {
   const [paginatorButtons, setPaginatorButtons] = useState([]);
 
   useEffect(() => {
@@ -66,4 +66,4 @@ function Navigator({ numberPage, currentPage, setCurrentPage }) {
   );
 }
 
-export default Navigator;
+export default Paginator;

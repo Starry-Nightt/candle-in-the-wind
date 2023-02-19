@@ -8,6 +8,8 @@ import Input from '@components/input/input';
 import style from './login.module.scss';
 import AuthWrapper from '../auth-wrapper/auth-wrapper';
 import { ADMIN_ROLE } from '~/shared/constants/role';
+import { useCookies } from 'react-cookie';
+import userService from '~/shared/services/user.service';
 
 function Login() {
   const userProfile = useSelector((state) => state.userProfile);
@@ -26,10 +28,18 @@ function Login() {
     },
   });
 
+  const [cookies, setCookies] = useCookies(['user']);
+
   const [errorMsg, setErrorMsg] = useState('');
 
-  const login = (detail) => {
+  const login = async (detail) => {
     dispatch(loginAccount(detail));
+    try {
+      const response = await userService.login(detail);
+      setCookies('accessToken', response.data.accessToken, { path: '/' });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const isAdmin = () => {
@@ -54,7 +64,7 @@ function Login() {
     }
     const status = error?.response?.status;
     if (status === 429) setErrorMsg('No server response');
-    else if (status === 400) setErrorMsg('Tài khoản hoặc mật khẩu không đúng');
+    else if (status === 400 || status === 500) setErrorMsg('Tài khoản hoặc mật khẩu không đúng');
     else setErrorMsg('Vui lòng kiểm tra kết nối internet');
   }, [error]);
 

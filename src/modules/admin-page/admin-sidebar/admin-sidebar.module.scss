@@ -1,7 +1,11 @@
 @import '../../../styles/variables.scss';
 
 .wrapper {
-  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 20%;
   background-color: $primary-color;
   color: $white-color;
   display: flex;

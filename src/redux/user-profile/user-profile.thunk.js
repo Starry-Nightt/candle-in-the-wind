@@ -21,6 +21,7 @@ const loginAccount = (authInfo) => {
       })
       .catch((error) => {
         dispatch(fetchUserProfileFailure(error));
+        console.log(error);
         ErrorNotify('Đăng nhập thất bại');
       });
   };

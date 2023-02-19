@@ -3,9 +3,9 @@ import Header from './layout/header/header';
 import Layer from './shared/components/layer/layer';
 import Router from './Routes/router';
 import { useSelector, useDispatch } from 'react-redux';
-import { TOKEN } from './shared/constants/local-storage-key';
+// import { TOKEN } from './shared/constants/local-storage-key';
 import { useEffect } from 'react';
-import { loginAccount } from './redux/user-profile/user-profile.thunk';
+// import { loginAccount } from './redux/user-profile/user-profile.thunk';
 import Spinner from './shared/components/spinner/spinner';
 import { hideLayer, showLayer } from './redux/layer/layer.action';
 import 'react-toastify/dist/ReactToastify.css';
@@ -16,13 +16,13 @@ function App() {
   const { loading, role } = userProfile;
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const token = localStorage.getItem(TOKEN);
-    if (token) {
-      const authInfo = JSON.parse(token);
-      dispatch(loginAccount(authInfo));
-    }
-  }, []);
+  // useEffect(() => {
+  // const token = localStorage.getItem(TOKEN);
+  // if (token) {
+  //   const authInfo = JSON.parse(token);
+  //   dispatch(loginAccount(authInfo));
+  // }
+  // }, []);
 
   useEffect(() => {
     if (loading) {

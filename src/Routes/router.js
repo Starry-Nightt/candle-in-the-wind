@@ -24,6 +24,7 @@ import ViewOrderPage from '~/modules/CRUD-order/view-order-page/view-order-page'
 import CreateOrderPage from '~/modules/CRUD-order/create-order-page/create-order-page';
 import CreatePostPage from '~/modules/CRUD-post/create-post-page/create-post-page';
 import ViewPostPage from '~/modules/CRUD-post/view-post-page/view-post-page';
+import EditProductPage from '~/modules/CRUD-product/edit-product-page/edit-product-page';
 
 function Router() {
   return (
@@ -58,6 +59,7 @@ function Router() {
         <Route path="/admin" element={<Navigate to="/admin/product" />}></Route>
         <Route path="/admin/product" element={<ViewProductPage />}></Route>
         <Route path="/admin/product/create" element={<CreateProductPage />}></Route>
+        <Route path="/admin/product/edit/:productId" element={<EditProductPage />}></Route>
         <Route path="/admin/voucher" element={<ViewVoucherPage />}></Route>
         <Route path="/admin/voucher/create" element={<CreateVoucherPage />}></Route>
         <Route path="/admin/order" element={<ViewOrderPage />}></Route>
