@@ -20,12 +20,28 @@ function FormProduct({ formData, handleSubmitForm, title }) {
       price: formData?.price,
       discount: formData?.discount,
       quantity: formData?.quantity,
-      images: [],
+      description: formData?.description,
     },
   });
 
   const onSubmitForm = (data) => {
-    handleSubmitForm(data, formData?.ID_Product);
+    if (formData?.ID_Product) {
+      handleSubmitForm(data, formData?.ID_Product);
+    } else {
+      const formDataApi = new FormData();
+      const fileList = data.productImages;
+      for (let index = 0; index < fileList.length; index++) {
+        const file = fileList[index];
+        formDataApi.append('productImages', file);
+      }
+      formDataApi.append('ID_Category', data.ID_Category);
+      formDataApi.append('title', data.title);
+      formDataApi.append('description', data.description);
+      formDataApi.append('discount', data.discount);
+      formDataApi.append('quantity', data.quantity);
+      formDataApi.append('price', data.price);
+      handleSubmitForm(formDataApi, formData?.ID_Product);
+    }
   };
 
   return (
@@ -86,6 +102,28 @@ function FormProduct({ formData, handleSubmitForm, title }) {
             error={errors.quantity}
           />
         </div>
+        <div className={cx('form-group')}>
+          <Input
+            label="Mô tả sản phẩm"
+            formControl="description"
+            placeholder="Nhập mô tả sản phẩm"
+            register={register}
+            required={requiredField()}
+            error={errors.description}
+          />
+        </div>
+        {!formData?.ID_Product && (
+          <div className={cx('form-group')}>
+            <Input
+              label="Hình ảnh sản phẩm"
+              type="file"
+              isMultiple={true}
+              formControl="productImages"
+              register={register}
+              error={errors.productImages}
+            />
+          </div>
+        )}
         <div className={cx('action')}>
           <button type="submit" className="create-button">
             {title}
