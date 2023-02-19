@@ -26,4 +26,11 @@ const phoneNumber = () => {
   };
 };
 
-export { requiredField, minLengthField, maxLengthField, emailField, phoneNumber };
+const positiveNumber = () => {
+  return {
+    value: /^\+?(0|[1-9]\d*)$/,
+    message: 'Giá trị phải là số nguyên dương',
+  };
+};
+
+export { requiredField, minLengthField, maxLengthField, emailField, phoneNumber, positiveNumber };

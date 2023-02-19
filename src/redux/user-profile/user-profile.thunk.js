@@ -1,4 +1,4 @@
-import { TOKEN } from '~/shared/constants';
+import { TOKEN } from '~/shared/constants/local-storage-key';
 import { ErrorNotify, SuccessNotify } from '~/shared/utils/notify';
 
 const { default: userService } = require('@services/user.service');
@@ -16,11 +16,12 @@ const loginAccount = (authInfo) => {
       .login(authInfo)
       .then((res) => {
         localStorage.setItem(TOKEN, JSON.stringify(authInfo));
-        dispatch(fetchUserProfileSuccess(res.data));
+        dispatch(fetchUserProfileSuccess(res.data.user));
         SuccessNotify('Đăng nhập thành công');
       })
       .catch((error) => {
         dispatch(fetchUserProfileFailure(error));
+        console.log(error);
         ErrorNotify('Đăng nhập thất bại');
       });
   };
@@ -28,9 +29,30 @@ const loginAccount = (authInfo) => {
 
 const logout = () => {
   return function (dispatch) {
-    dispatch(endSession());
-    localStorage.removeItem(TOKEN);
+    userService
+      .logout()
+      .then(() => {
+        dispatch(endSession());
+        localStorage.removeItem(TOKEN);
+        SuccessNotify('Đăng xuất thành công');
+      })
+      .catch(() => {
+        ErrorNotify('Đã xảy ra lỗi');
+      });
   };
 };
 
-export { loginAccount, logout };
+const registerAccount = (authInfo) => {
+  return function () {
+    userService
+      .register(authInfo)
+      .then(() => {
+        SuccessNotify('Đăng ký thành công');
+      })
+      .catch(() => {
+        ErrorNotify('Đã xảy ra lỗi');
+      });
+  };
+};
+
+export { loginAccount, logout, registerAccount };

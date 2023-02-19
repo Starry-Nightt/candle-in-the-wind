@@ -6,51 +6,50 @@ import { decreaseItemInCart, increaseItemInCart, removeItemInCart } from '~/redu
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
-import { DollarCurrency } from '~/shared/utils/currency';
+import { VNDCurrency } from '~/shared/utils/currency';
 
 const cx = classNames.bind(style);
 
 function CartItem({ item }) {
-  const { thumbnail, title, description, price, quantity, stock, id, brand } = item;
+  const { title, description, price, quantity, ID_Product, discount } = item;
   const [canShowAlert, setCanShowAlert] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const onIncQuantity = () => {
-    if (quantity < stock) {
-      dispatch(increaseItemInCart(id));
-    } else setCanShowAlert(true);
+    dispatch(increaseItemInCart(ID_Product));
   };
 
   const onDecQuantity = () => {
     if (quantity > 0) {
-      dispatch(decreaseItemInCart(id));
+      dispatch(decreaseItemInCart(ID_Product));
     }
     if (canShowAlert) setCanShowAlert(false);
   };
 
   const onViewItem = () => {
-    navigate(`/products/all/${id}`);
+    navigate(`/products/all/${ID_Product}`);
   };
 
   return (
-    <div className="row py-3 bg-white">
+    <div className="row py-3 bg-white relative">
       <div className="col l-5 m-5 c-5">
         <div className="flex">
           <div className={cx('item-image')} onClick={onViewItem}>
-            <img src={thumbnail} alt="" />
+            <img src={item?.Images?.[0]?.content} alt="" />
           </div>
           <div className={cx('item-info')}>
             <h4 className={cx('item-title')} onClick={onViewItem}>
               {title}
             </h4>
-            <p className={cx('item-brand')}>{brand}</p>
             <p className={cx('item-desc')}>{description}</p>
           </div>
         </div>
       </div>
-      <div className="col l-2 m-2 c-2 flex align-center justify-center">
-        <span className={cx('item-price')}>{DollarCurrency(price)}</span>
+      <div className="col l-2 m-2 c-2 ">
+        <div className="flex align-center justify-center text-center full-height">
+          <span className={cx('item-price')}>{VNDCurrency(price - discount)}</span>
+        </div>
       </div>
       <div className="col l-3 m-3 c-3 flex align-center justify-center">
         <div className={cx('quantity')}>
@@ -59,22 +58,16 @@ function CartItem({ item }) {
             <span>{quantity}</span>
             <button onClick={onIncQuantity}>+</button>
           </div>
-          <div className="text-center">
-            {canShowAlert ? (
-              <p
-                className="text-error text-xs font-semibold"
-                style={{ transform: 'translateY(6px)' }}
-              >
-                Còn {stock} sản phẩm
-              </p>
-            ) : null}
-          </div>
         </div>
       </div>
-      <div className="col l-2 m-2 c-2 flex align-center justify-center relative">
-        <span className={cx('item-price-final')}>{DollarCurrency(price * quantity)}</span>
-        <div className={cx('remove-icon')} onClick={() => dispatch(removeItemInCart(id))}>
-          <FontAwesomeIcon icon={faXmark} />
+      <div className="col l-2 m-2 c-2 ">
+        <div className="flex align-center justify-center text-center full-height">
+          <span className={cx('item-price-final')}>
+            {VNDCurrency((price - discount) * quantity)}
+          </span>
+          <div className={cx('remove-icon')} onClick={() => dispatch(removeItemInCart(ID_Product))}>
+            <FontAwesomeIcon icon={faXmark} />
+          </div>
         </div>
       </div>
     </div>

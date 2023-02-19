@@ -13,6 +13,7 @@ function Input({
   error,
   value,
   radioButton,
+  isMultiple,
 }) {
   return (
     <>
@@ -23,6 +24,7 @@ function Input({
           placeholder={placeholder}
           {...register(formControl, { required, minLength, maxLength, pattern })}
           value={value}
+          multiple={isMultiple}
         />
       </section>
       <p className={`${style.error}`}>{error?.message}</p>

@@ -42,12 +42,16 @@
 .item-price-final {
   color: $primary-color;
   font-weight: 700;
-  font-size: 18px;
+  font-size: 16px;
+  margin-right: 8px;
 }
 
 .quantity {
   display: flex;
   flex-direction: column;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
   .quantity-action {
     display: flex;
 

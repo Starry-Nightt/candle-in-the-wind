@@ -1,8 +1,10 @@
 import { toast } from 'react-toastify';
 
-export const SuccessNotify = (text, duration = 5000) => {
+const position = 'bottom-right';
+
+export const SuccessNotify = (text, duration = 3000) => {
   toast.success(text, {
-    position: 'top-right',
+    position: position,
     autoClose: duration,
     hideProgressBar: false,
     closeOnClick: true,
@@ -13,9 +15,9 @@ export const SuccessNotify = (text, duration = 5000) => {
   });
 };
 
-export const InfoNotify = (text, duration = 5000) => {
+export const InfoNotify = (text, duration = 3000) => {
   toast.info(text, {
-    position: 'top-right',
+    position: position,
     autoClose: duration,
     hideProgressBar: false,
     closeOnClick: true,
@@ -26,9 +28,9 @@ export const InfoNotify = (text, duration = 5000) => {
   });
 };
 
-export const WarningNotify = (text, duration = 5000) => {
+export const WarningNotify = (text, duration = 3000) => {
   toast.warn(text, {
-    position: 'top-right',
+    position: position,
     autoClose: duration,
     hideProgressBar: false,
     closeOnClick: true,
@@ -39,9 +41,9 @@ export const WarningNotify = (text, duration = 5000) => {
   });
 };
 
-export const ErrorNotify = (text, duration = 5000) => {
+export const ErrorNotify = (text, duration = 3000) => {
   toast.error(text, {
-    position: 'top-right',
+    position: position,
     autoClose: duration,
     hideProgressBar: false,
     closeOnClick: true,

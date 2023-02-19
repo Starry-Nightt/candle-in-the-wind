@@ -3,14 +3,17 @@ import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { loginAccount } from '~/redux/user-profile/user-profile.thunk';
-import { requiredField, minLengthField, maxLengthField } from '@utils/validator';
+import { requiredField, minLengthField, emailField } from '@utils/validator';
 import Input from '@components/input/input';
 import style from './login.module.scss';
 import AuthWrapper from '../auth-wrapper/auth-wrapper';
+import { ADMIN_ROLE } from '~/shared/constants/role';
+import { useCookies } from 'react-cookie';
+import userService from '~/shared/services/user.service';
 
 function Login() {
   const userProfile = useSelector((state) => state.userProfile);
-  const { isLoggedIn, error } = userProfile;
+  const { isLoggedIn, error, role } = userProfile;
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
@@ -20,19 +23,35 @@ function Login() {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      username: 'kminchelle',
-      password: '0lelplR',
+      email: '',
+      password: '',
     },
   });
 
+  const [cookies, setCookies] = useCookies(['user']);
+
   const [errorMsg, setErrorMsg] = useState('');
 
-  const login = (detail) => {
+  const login = async (detail) => {
     dispatch(loginAccount(detail));
+    try {
+      const response = await userService.login(detail);
+      setCookies('accessToken', response.data.accessToken, { path: '/' });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const isAdmin = () => {
+    return role === ADMIN_ROLE;
   };
 
   useEffect(() => {
     if (isLoggedIn) {
+      if (isAdmin()) {
+        navigate('/admin');
+        return;
+      }
       const from = location.state?.from?.pathname || '/';
       navigate(from, { replace: true });
     }
@@ -45,7 +64,7 @@ function Login() {
     }
     const status = error?.response?.status;
     if (status === 429) setErrorMsg('No server response');
-    else if (status === 400) setErrorMsg('Tài khoản hoặc mật khẩu không đúng');
+    else if (status === 400 || status === 500) setErrorMsg('Tài khoản hoặc mật khẩu không đúng');
     else setErrorMsg('Vui lòng kiểm tra kết nối internet');
   }, [error]);
 
@@ -56,13 +75,12 @@ function Login() {
         {errorMsg && errorMsg.length && <p className={`${style.alert}`}>{errorMsg}</p>}
         <div className={`${style.formGroup}`}>
           <Input
-            formControl="username"
-            placeholder="Tên tài khoản"
+            formControl="email"
+            placeholder="Email"
             register={register}
             required={requiredField()}
-            minLength={minLengthField(6)}
-            maxLength={maxLengthField(15)}
-            error={errors.username}
+            pattern={emailField()}
+            error={errors.email}
           />
         </div>
         <div className={`${style.formGroup}`}>
@@ -72,7 +90,7 @@ function Login() {
             type="password"
             register={register}
             required={requiredField()}
-            minLength={minLengthField(6)}
+            minLength={minLengthField(4)}
             error={errors.password}
           />
         </div>

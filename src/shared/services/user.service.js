@@ -1,8 +1,16 @@
-import appClient from '@utils/appClient';
+import appAPI from '~/shared/utils/appAPI';
 
 class UserService {
   login = (authInfo) => {
-    return appClient().post('/auth/login', authInfo);
+    return appAPI().post('/auth/login', authInfo);
+  };
+
+  logout = () => {
+    return appAPI().post('auth/logout');
+  };
+
+  register = (authInfo) => {
+    return appAPI().post('auth/register', authInfo);
   };
 }
 

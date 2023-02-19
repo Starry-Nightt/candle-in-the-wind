@@ -26,7 +26,7 @@ function ProductDetailImage({ images }) {
             {images.map((item, idx) => {
               return (
                 <SwiperSlide key={idx}>
-                  <img src={item} alt="" />
+                  <img src={item?.content} alt="" />
                 </SwiperSlide>
               );
             })}
@@ -43,7 +43,7 @@ function ProductDetailImage({ images }) {
               return (
                 <SwiperSlide key={idx}>
                   <div className="thumb-swiper-thumbnail">
-                    <img src={item} alt="" />
+                    <img src={item?.content} alt="" />
                   </div>
                 </SwiperSlide>
               );
