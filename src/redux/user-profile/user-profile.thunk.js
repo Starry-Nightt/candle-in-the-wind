@@ -1,4 +1,5 @@
 import { TOKEN } from '~/shared/constants/local-storage-key';
+import { USER_ROLE } from '~/shared/constants/role';
 import { ErrorNotify, SuccessNotify } from '~/shared/utils/notify';
 import { clearCart } from '../cart/cart.action';
 import { loadCart } from '../cart/cart.thunk';
@@ -20,7 +21,7 @@ const loginAccount = (authInfo) => {
         sessionStorage.setItem(TOKEN, JSON.stringify(authInfo));
         dispatch(fetchUserProfileSuccess(res.data.user));
         SuccessNotify('Đăng nhập thành công');
-        dispatch(loadCart());
+        if (res.data.user.ID_Role === USER_ROLE) dispatch(loadCart());
       })
       .catch((error) => {
         dispatch(fetchUserProfileFailure(error));
