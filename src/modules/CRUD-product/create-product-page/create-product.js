@@ -1,13 +1,16 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { createProductAsync } from '~/redux/product/product.thunk';
 import FormProduct from '../form-product/form-product';
 
 function CreateProductPage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onCreateProduct = (data) => {
     dispatch(createProductAsync(data));
+    navigate('/admin');
   };
 
   return (

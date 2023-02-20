@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { addItemToCart } from '~/redux/cart/cart.action';
+import { addProductToCartThunk } from '~/redux/cart/cart.thunk';
 import { checkoutItem } from '~/redux/checkout/checkout.action';
 import { VNDCurrency } from '~/shared/utils/currency';
 import style from './product-detail-info.module.scss';
@@ -17,7 +17,7 @@ function ProductDetailInfo({ product }) {
   };
   const onDecreaseQuantity = () => {
     setNumber((prev) => {
-      if (prev > 0) return prev - 1;
+      if (prev > 1) return prev - 1;
       return prev;
     });
   };
@@ -28,7 +28,7 @@ function ProductDetailInfo({ product }) {
   };
 
   const onAddToCart = () => {
-    dispatch(addItemToCart(product, number));
+    dispatch(addProductToCartThunk(product, number));
   };
 
   const onPurchase = () => {

@@ -10,19 +10,34 @@ import Spinner from './shared/components/spinner/spinner';
 import { hideLayer, showLayer } from './redux/layer/layer.action';
 import 'react-toastify/dist/ReactToastify.css';
 import { ADMIN_ROLE } from './shared/constants/role';
+import { TOKEN } from './shared/constants/local-storage-key';
+import { loginAccount } from './redux/user-profile/user-profile.thunk';
+import { useCookies } from 'react-cookie';
+import userService from './shared/services/user.service';
 
 function App() {
   const userProfile = useSelector((state) => state.userProfile);
   const { loading, role } = userProfile;
   const dispatch = useDispatch();
+  const [cookies, setCookies] = useCookies(['user']);
 
-  // useEffect(() => {
-  // const token = localStorage.getItem(TOKEN);
-  // if (token) {
-  //   const authInfo = JSON.parse(token);
-  //   dispatch(loginAccount(authInfo));
-  // }
-  // }, []);
+  const login = async (detail) => {
+    dispatch(loginAccount(detail));
+    try {
+      const response = await userService.login(detail);
+      setCookies('accessToken', response.data.accessToken, { path: '/' });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    const token = sessionStorage.getItem(TOKEN);
+    if (token) {
+      const authInfo = JSON.parse(token);
+      login(authInfo);
+    }
+  }, []);
 
   useEffect(() => {
     if (loading) {

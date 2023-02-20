@@ -2,20 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Paginator from '~/shared/components/paginator/paginator';
 import Spinner from '~/shared/components/spinner/spinner';
-import { loadAllOrder } from '~/redux/order/order.thunk';
-import OrderTable from '../order-table/order-table';
+import { loadOrderUser } from '~/redux/order/order.thunk';
+import OrderUserList from './order-user-list/order-user-list';
 
-const ORDER_PER_PAGE = 8;
+const ORDER_PER_PAGE = 5;
 
-function ViewOrderPage() {
+function Order() {
   const { loading, error, order } = useSelector((state) => state.order);
   const [totalPage, setTotalPage] = useState();
+
   const [currentPage, setCurrentPage] = useState(1);
   const [displayOrder, setDisplayOrder] = useState([]);
   const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(loadAllOrder());
+    dispatch(loadOrderUser());
   }, []);
 
   useEffect(() => {
@@ -44,29 +44,23 @@ function ViewOrderPage() {
       setDisplayOrder(orderList);
     }
   }, [currentPage]);
-
   return (
-    <>
-      <div className="flex space-between">
-        <h2 className="text-primary text-xl section-title">Quản lí đơn hàng</h2>
-      </div>
-      <div>
-        {error && <h3>Error</h3>}
-        {loading ? (
-          <Spinner />
-        ) : (
-          <>
-            <OrderTable orders={displayOrder} />
-            <Paginator
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              numberPage={totalPage}
-            />
-          </>
-        )}
-      </div>
-    </>
+    <div>
+      {error && <h3>Error</h3>}
+      {loading ? (
+        <Spinner />
+      ) : (
+        <>
+          <OrderUserList orders={displayOrder} />
+          <Paginator
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            numberPage={totalPage}
+          />
+        </>
+      )}
+    </div>
   );
 }
 
-export default ViewOrderPage;
+export default Order;
