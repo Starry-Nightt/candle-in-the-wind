@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { updateProductAsync } from '~/redux/product/product.thunk';
 import Spinner from '~/shared/components/spinner/spinner';
 import productService from '~/shared/services/product.service';
@@ -11,6 +11,7 @@ function EditProductPage() {
   const [productData, setProductData] = useState();
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
@@ -22,6 +23,7 @@ function EditProductPage() {
 
   const onEditProduct = (id, data) => {
     dispatch(updateProductAsync(id, data));
+    navigate('/admin');
   };
 
   return (

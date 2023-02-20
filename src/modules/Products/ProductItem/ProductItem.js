@@ -2,9 +2,8 @@ import Tippy from '@tippyjs/react';
 import classNames from 'classnames/bind';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { addItemToCart } from '~/redux/cart/cart.action';
+import { addProductToCartThunk } from '~/redux/cart/cart.thunk';
 import { VNDCurrency } from '~/shared/utils/currency';
-
 import styles from './ProductItem.module.scss';
 
 const cx = classNames.bind(styles);
@@ -14,7 +13,7 @@ function ProductItem({ data }) {
   const navigate = useNavigate();
 
   const onAddItemToCart = (item) => {
-    dispatch(addItemToCart(item, 1));
+    dispatch(addProductToCartThunk(item, 1));
   };
 
   const onViewDetailProduct = (id) => {

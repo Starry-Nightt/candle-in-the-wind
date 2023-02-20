@@ -25,6 +25,7 @@ import CreateOrderPage from '~/modules/CRUD-order/create-order-page/create-order
 import CreatePostPage from '~/modules/CRUD-post/create-post-page/create-post-page';
 import ViewPostPage from '~/modules/CRUD-post/view-post-page/view-post-page';
 import EditProductPage from '~/modules/CRUD-product/edit-product-page/edit-product-page';
+import Order from '~/modules/order/order';
 
 function Router() {
   return (
@@ -42,14 +43,15 @@ function Router() {
           <Route path="/products/:productId" element={<ProductDetail />}></Route>
           <Route path="/products/search/:keyword" element={<ProductSearchResult />}></Route>
           <Route path="/register" element={<Register />}></Route>
-          <Route path="/cart" element={<CartPage />}></Route>
 
           {/* Protected Routes */}
           <Route element={<RequireAuth />}>
+            <Route path="/cart" element={<CartPage />}></Route>
             <Route path="/forum" element={<Forum />}></Route>
             <Route path="/cart-purchase" element={<Checkout />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/reset-password" element={<ResetPassword />}></Route>
+            <Route path="/order-history" element={<Order />}></Route>
           </Route>
         </Route>
       </Route>

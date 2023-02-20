@@ -5,12 +5,13 @@ import CheckoutForm from './checkout-form/checkout-form';
 import CheckoutMethod from './checkout-method/checkout-method';
 import CheckoutProduct from './checkout-product/checkout-product';
 import { useForm } from 'react-hook-form';
-import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { checkoutThunk } from '~/redux/checkout/checkout.thunk';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(style);
 
 function Checkout() {
-  const { items } = useSelector((state) => state.checkout);
   const {
     register,
     handleSubmit,
@@ -25,8 +26,12 @@ function Checkout() {
       method: null,
     },
   });
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handle = (data) => {
-    if (items && items.length > 0) console.log({ ...data, items });
+    // if (items && items.length > 0) console.log({ ...data, items });
+    dispatch(checkoutThunk());
+    navigate('/home');
   };
   return (
     <div>
@@ -47,7 +52,7 @@ function Checkout() {
           <div className={cx('order-summary')}>
             <CheckoutProduct>
               <button type="submit" className={cx('confirm-button')}>
-                Xác nhận thanh toán
+                Đặt hàng
               </button>
             </CheckoutProduct>
           </div>

@@ -1,6 +1,3 @@
-import { CART } from '~/shared/constants/local-storage-key';
-import { SuccessNotify } from '~/shared/utils/notify';
-
 const {
   FETCH_CART_REQUEST,
   FETCH_CART_SUCCESS,
@@ -14,10 +11,8 @@ const {
 
 const initialState = {
   loading: false,
-  cartItems: localStorage.getItem(CART) ? JSON.parse(localStorage.getItem(CART)).cartItems : [],
-  cartQuantity: localStorage.getItem(CART)
-    ? JSON.parse(localStorage.getItem(CART)).cartQuantity
-    : 0,
+  cartItems: [],
+  cartQuantity: 0,
   error: undefined,
 };
 
@@ -36,8 +31,8 @@ const cartReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: undefined,
-        cartItems: action.payload.products,
-        cartQuantity: action.payload.totalQuantity,
+        cartItems: action.payload.Products,
+        cartQuantity: action.payload.sum_quantity,
       };
     case FETCH_CART_FAILURE:
       return {
@@ -68,8 +63,6 @@ const cartReducer = (state = initialState, action) => {
           cartQuantity: state.cartQuantity + quantity,
         };
       }
-      localStorage.setItem(CART, JSON.stringify(newState));
-      SuccessNotify('Thêm vào giỏ hàng thành công');
       return newState;
     }
 
@@ -80,7 +73,6 @@ const cartReducer = (state = initialState, action) => {
         ...state,
         cartQuantity: state.cartQuantity + 1,
       };
-      localStorage.setItem(CART, JSON.stringify(newState));
       return newState;
     }
     case DECREASE_ITEM_IN_CART: {
@@ -100,11 +92,9 @@ const cartReducer = (state = initialState, action) => {
           cartQuantity: state.cartQuantity - 1 >= 0 ? state.cartQuantity - 1 : 0,
         };
       }
-      localStorage.setItem(CART, JSON.stringify(newState));
       return newState;
     }
     case CLEAR_CART:
-      localStorage.setItem(CART, JSON.stringify({ ...initialState }));
       return {
         ...initialState,
       };
@@ -116,7 +106,6 @@ const cartReducer = (state = initialState, action) => {
         cartItems: state.cartItems.filter((item) => item.ID_Product !== tmp.ID_Product),
         cartQuantity: state.cartQuantity - tmp.quantity,
       };
-      localStorage.setItem(CART, newState);
       return newState;
     }
     default:

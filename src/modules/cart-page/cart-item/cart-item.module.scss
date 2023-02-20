@@ -52,25 +52,10 @@
   height: 100%;
   align-items: center;
   justify-content: center;
-  .quantity-action {
-    display: flex;
-
-    button,
-    span {
-      height: 36px;
-      width: 28px;
-      border: 1px solid $dim-color;
-      flex: 1;
-    }
-    span {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      user-select: none;
-    }
-    button {
-      cursor: pointer;
-    }
+  span {
+    font-size: 20px;
+    color: $primary-color;
+    font-weight: 600;
   }
 }
 

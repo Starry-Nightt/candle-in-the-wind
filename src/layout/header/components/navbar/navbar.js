@@ -12,9 +12,13 @@ function Navbar(props) {
       viewValue: 'Trang chủ',
     },
     {
-      path: 'forum',
-      viewValue: 'Diễn đàn trao đổi',
+      path: 'order-history',
+      viewValue: 'Đơn hàng đã đặt',
     },
+    // {
+    //   path: 'forum',
+    //   viewValue: 'Diễn đàn trao đổi',
+    // },
   ];
   const [loggedIn, setLoggedIn] = useState(false);
   const dispatch = useDispatch();

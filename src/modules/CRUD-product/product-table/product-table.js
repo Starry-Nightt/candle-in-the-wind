@@ -23,7 +23,7 @@ function ProductTable({ products }) {
             ? products.map((item, idx) => {
                 return <ProductTableItem key={idx} product={item} />;
               })
-            : ''}
+            : 'Không có dữ liệu'}
         </tbody>
       </table>
     </div>

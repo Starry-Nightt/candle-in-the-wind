@@ -1,5 +1,7 @@
 import { TOKEN } from '~/shared/constants/local-storage-key';
 import { ErrorNotify, SuccessNotify } from '~/shared/utils/notify';
+import { clearCart } from '../cart/cart.action';
+import { loadCart } from '../cart/cart.thunk';
 
 const { default: userService } = require('@services/user.service');
 const {
@@ -15,13 +17,13 @@ const loginAccount = (authInfo) => {
     userService
       .login(authInfo)
       .then((res) => {
-        localStorage.setItem(TOKEN, JSON.stringify(authInfo));
+        sessionStorage.setItem(TOKEN, JSON.stringify(authInfo));
         dispatch(fetchUserProfileSuccess(res.data.user));
         SuccessNotify('Đăng nhập thành công');
+        dispatch(loadCart());
       })
       .catch((error) => {
         dispatch(fetchUserProfileFailure(error));
-        console.log(error);
         ErrorNotify('Đăng nhập thất bại');
       });
   };
@@ -33,7 +35,8 @@ const logout = () => {
       .logout()
       .then(() => {
         dispatch(endSession());
-        localStorage.removeItem(TOKEN);
+        sessionStorage.removeItem(TOKEN);
+        dispatch(clearCart());
         SuccessNotify('Đăng xuất thành công');
       })
       .catch(() => {
