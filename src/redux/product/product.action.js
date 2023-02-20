@@ -45,8 +45,8 @@ const updateProduct = (id, data) => {
   return {
     type: UPDATE_PRODUCT,
     payload: {
-      id,
-      data,
+      id: id,
+      data: data,
     },
   };
 };

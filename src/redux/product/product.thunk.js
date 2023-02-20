@@ -16,7 +16,6 @@ const loadProductByCategory = (categoryId = 'all') => {
       ProductService.getProductByCategory(categoryId)
         .then((response) => {
           dispatch(fetchProductSuccess(response.data));
-          console.log(response.data);
         })
         .catch((error) => dispatch(fetchProductFailure(error.data)));
     } else {
@@ -44,7 +43,7 @@ const loadProductByKeyword = (key) => {
 const createProductAsync = (product) => {
   return function (dispatch) {
     ProductService.createProduct(product)
-      .then(() => {
+      .then((res) => {
         dispatch(createProduct(product));
         SuccessNotify('Thêm mới sản phẩm thành công');
       })
@@ -71,11 +70,12 @@ const deleteProductAsync = (id) => {
 const updateProductAsync = (id, data) => {
   return function (dispatch) {
     ProductService.updateProduct(id, data)
-      .then(() => {
+      .then((res) => {
         dispatch(updateProduct(id, data));
         SuccessNotify('Cập nhật thành công');
       })
       .catch((err) => {
+        console.log(err);
         ErrorNotify('Đã có lỗi xảy ra');
       });
   };

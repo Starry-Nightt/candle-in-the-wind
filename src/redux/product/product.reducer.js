@@ -19,7 +19,7 @@ const productReducer = (state = initialProduct, action) => {
       return {
         ...state,
         loading: true,
-        product: null,
+        product: [],
         error: null,
       };
     case FETCH_PRODUCT_SUCCESS:
@@ -33,7 +33,7 @@ const productReducer = (state = initialProduct, action) => {
       return {
         ...state,
         loading: false,
-        product: null,
+        product: [],
         error: action.payload,
       };
     case CREATE_PRODUCT:
