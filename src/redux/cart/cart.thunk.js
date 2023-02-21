@@ -27,7 +27,6 @@ const addProductToCartThunk = (item, quantity) => {
       .addProductToCart(item.ID_Product, quantity)
       .then((res) => {
         dispatch(addItemToCart(item, quantity));
-        SuccessNotify('Thêm vào giỏ hàng thành công');
       })
       .catch((err) => {
         ErrorNotify('Bạn chưa đăng nhập');

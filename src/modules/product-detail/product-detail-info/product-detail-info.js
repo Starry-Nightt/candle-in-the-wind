@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { addProductToCartThunk } from '~/redux/cart/cart.thunk';
 import { checkoutItem } from '~/redux/checkout/checkout.action';
 import { VNDCurrency } from '~/shared/utils/currency';
+import { SuccessNotify } from '~/shared/utils/notify';
 import style from './product-detail-info.module.scss';
 
 function ProductDetailInfo({ product }) {
@@ -29,10 +30,12 @@ function ProductDetailInfo({ product }) {
 
   const onAddToCart = () => {
     dispatch(addProductToCartThunk(product, number));
+    SuccessNotify('Thêm vào giỏ hàng thành công');
   };
 
   const onPurchase = () => {
     dispatch(checkoutItem(product, number));
+    dispatch(addProductToCartThunk(product, number));
     navigate('/cart-purchase');
   };
 

@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { addProductToCartThunk } from '~/redux/cart/cart.thunk';
 import { VNDCurrency } from '~/shared/utils/currency';
+import { SuccessNotify } from '~/shared/utils/notify';
 import styles from './ProductItem.module.scss';
 
 const cx = classNames.bind(styles);
@@ -14,6 +15,7 @@ function ProductItem({ data }) {
 
   const onAddItemToCart = (item) => {
     dispatch(addProductToCartThunk(item, 1));
+    SuccessNotify('Thêm vào giỏ hàng thành công');
   };
 
   const onViewDetailProduct = (id) => {
