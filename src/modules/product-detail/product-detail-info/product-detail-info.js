@@ -33,6 +33,7 @@ function ProductDetailInfo({ product }) {
 
   const onPurchase = () => {
     dispatch(checkoutItem(product, number));
+    dispatch(addProductToCartThunk(product, number));
     navigate('/cart-purchase');
   };
 
